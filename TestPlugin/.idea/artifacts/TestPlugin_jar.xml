@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TestPlugin:jar">
+    <output-path>$USER_HOME$/Desktop/게임/마크서버/MIKMIKSERVER 1.19.4/plugins</output-path>
+    <root id="archive" name="TestPlugin.jar">
+      <element id="module-output" name="TestPlugin" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/config.yml" />
+    </root>
+  </artifact>
+</component>

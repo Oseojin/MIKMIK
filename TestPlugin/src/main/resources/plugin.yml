@@ -1,0 +1,23 @@
+name: TestPlugin
+version: '${project.version}'
+main: com.habu.testplugin.TestPlugin
+api-version: '1.19'
+commands:
+  shopnpcapply:
+    description: apply shop function to npc
+  check:
+    description: 수표 발행
+    aliases: 수표
+  statcheck:
+    description: statcheck
+  switchcheckblock:
+    description: turn on/off block id Check
+  setplayergold:
+    description: set player gold
+  setplayerjob:
+    description: set player job
+  setplayertitle:
+    description: set player title
+  calloperator:
+    description: 운영자 호출
+    aliases: 호출
