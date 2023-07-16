@@ -28,7 +28,6 @@ public class Farmer implements Listener
         put(Material.POTATOES, Material.POTATO);
         put(Material.BEETROOTS, Material.BEETROOT);
         put(Material.MELON, Material.MELON_SLICE);
-        put(Material.PUMPKIN, Material.PUMPKIN);
         put(Material.SWEET_BERRY_BUSH, Material.SWEET_BERRIES);
         put(Material.COCOA, Material.COCOA_BEANS);
         put(Material.NETHER_WART, Material.NETHER_WART);

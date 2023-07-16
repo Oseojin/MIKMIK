@@ -159,14 +159,14 @@ public class ConfigManager
 
         // 농부
         farmershopConfig.addDefault("farmer_selecter.price", 1000);
-        farmershopConfig.addDefault("wheat.price", 5);
-        farmershopConfig.addDefault("carrot.price", 2);
-        farmershopConfig.addDefault("potato.price", 2);
-        farmershopConfig.addDefault("beetroot.price", 6);
-        farmershopConfig.addDefault("melon.price", 10);
-        farmershopConfig.addDefault("pumpkin.price", 30);
-        farmershopConfig.addDefault("sweet_berries.price", 3);
-        farmershopConfig.addDefault("cocoa_beans.price", 10);
+        farmershopConfig.addDefault("wheat.price", 7);
+        farmershopConfig.addDefault("carrot.price", 4);
+        farmershopConfig.addDefault("potato.price", 4);
+        farmershopConfig.addDefault("beetroot.price", 10);
+        farmershopConfig.addDefault("melon.price", 16);
+        farmershopConfig.addDefault("pumpkin.price", 60);
+        farmershopConfig.addDefault("sweet_berries.price", 4);
+        farmershopConfig.addDefault("cocoa_beans.price", 13);
         farmershopConfig.addDefault("nether_wart.price", 50);
 
         farmershopConfig.addDefault("farmer_selecter.volume", 0);

@@ -78,19 +78,21 @@ public class WoodCutter implements Listener
 
         for(int i = 0; i < num; i++)
         {
+            // 인황 > 황금 > 사과 // 등급
+            // 5   >  10 >  85  // 단일 확률
+            // 95  >  85 >  0   // 실 확률
+
             int randItem = random.nextInt(100);
 
-            if(randItem >= 91 - num) // 기본(E) 10%, 최대(S) 20%
+            if(randItem >= 95 - num) // 기본(E) 5%, 최대(S) 15%
             {
                 apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
-                // ItemMeta appleMeta = apple.getItemMeta();
-                // appleMeta.setLore(Arrays.asList("나무에서 매우 오래 숙성된 사과"));
             }
-            else if (randItem >= 61 - num) // 기본(E) 30%, 최대(S) 40%
+            else if (randItem >= 85 - num) // 기본(E) 10%, 최대(S) 20%
             {
                 apple = new ItemStack(Material.GOLDEN_APPLE, 1);
             }
-            else if (randItem >= -2 + (num * 2)) // 기본(E) 60%, 최대(S) 40%
+            else if (randItem >= -2 + (num * 2)) // 기본(E) 85%, 최대(S) 65%
             {
                 apple = new ItemStack(Material.APPLE, 1);
             }
@@ -147,7 +149,7 @@ public class WoodCutter implements Listener
             if(tree.contains(event.getBlock().getType()))
             {
                 int randomNum = random.nextInt(10);
-                if(randomNum >= 7) // 30% 확률로 나무가방 획득
+                if(randomNum >= 8) // 10% 확률로 나무가방 획득
                 {
                     String rate = RandomBag();
                     player.sendMessage("나무에서 " + "[" + rate.toUpperCase() + "]" + "등급 가방이 떨어졌습니다!");
