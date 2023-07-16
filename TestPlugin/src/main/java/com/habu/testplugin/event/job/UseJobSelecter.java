@@ -33,26 +33,34 @@ public class UseJobSelecter implements Listener
                 if(useItem.isSimilar(ItemManager.item_FisherSelecter))
                 {
                     PlayerManager.SetJob(player, 1);
+                    PlayerManager.SetTitle(player, 1);
                     TestPlugin.getConfigManager().saveConfig("player");
-                    player.getInventory().removeItem(useItem);
+                    int amount = useItem.getAmount() - 1;
+                    useItem.setAmount(amount);
                 }
                 else if(useItem.isSimilar(ItemManager.item_MinerSelecter))
                 {
                     PlayerManager.SetJob(player, 2);
+                    PlayerManager.SetTitle(player, 2);
                     TestPlugin.getConfigManager().saveConfig("player");
-                    player.getInventory().removeItem(useItem);
+                    int amount = useItem.getAmount() - 1;
+                    useItem.setAmount(amount);
                 }
                 else if(useItem.isSimilar(ItemManager.item_FarmerSelecter))
                 {
                     PlayerManager.SetJob(player, 3);
+                    PlayerManager.SetTitle(player, 3);
                     TestPlugin.getConfigManager().saveConfig("player");
-                    player.getInventory().removeItem(useItem);
+                    int amount = useItem.getAmount() - 1;
+                    useItem.setAmount(amount);
                 }
                 else if(useItem.isSimilar(ItemManager.item_WoodCutterSelecter))
                 {
                     PlayerManager.SetJob(player, 4);
+                    PlayerManager.SetTitle(player, 4);
                     TestPlugin.getConfigManager().saveConfig("player");
-                    player.getInventory().removeItem(useItem);
+                    int amount = useItem.getAmount() - 1;
+                    useItem.setAmount(amount);
                 }
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
@@ -68,8 +76,10 @@ public class UseJobSelecter implements Listener
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
                     PlayerManager.SetJob(player, 0);
+                    PlayerManager.SetTitle(player, 0);
                     TestPlugin.getConfigManager().saveConfig("player");
-                    player.getInventory().removeItem(useItem);
+                    int amount = useItem.getAmount() - 1;
+                    useItem.setAmount(amount);
                 }
             }
         }

@@ -46,6 +46,22 @@ public class PlayerManager
                 title = "백수";
                 prefix = "[백수]";
                 break;
+            case 1:
+                title = ChatColor.AQUA + "물고기" + ChatColor.WHITE;
+                prefix = ChatColor.AQUA + "[물고기]" + ChatColor.WHITE;
+                break;
+            case 2:
+                title = ChatColor.YELLOW + "곡괭이" + ChatColor.WHITE;
+                prefix = ChatColor.YELLOW + "[곡괭이]" + ChatColor.WHITE;
+                break;
+            case 3:
+                title = ChatColor.GREEN + "밀" + ChatColor.WHITE;
+                prefix = ChatColor.GREEN + "[밀]" + ChatColor.WHITE;
+                break;
+            case 4:
+                title = ChatColor.GOLD + "장작" + ChatColor.WHITE;
+                prefix = ChatColor.GOLD + "[장작]" + ChatColor.WHITE;
+                break;
             default:
                 title = "???";
                 prefix = "[???]";
