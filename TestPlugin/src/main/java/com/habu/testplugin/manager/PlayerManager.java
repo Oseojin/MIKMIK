@@ -63,8 +63,8 @@ public class PlayerManager
                 prefix = ChatColor.GOLD + "[장작]" + ChatColor.WHITE;
                 break;
             case 5:
-                title = ChatColor.DARK_GREEN + "활" + ChatColor.WHITE;
-                prefix = ChatColor.DARK_GREEN + "[활]" + ChatColor.WHITE;
+                title = ChatColor.RED + "활" + ChatColor.WHITE;
+                prefix = ChatColor.RED + "[활]" + ChatColor.WHITE;
                 break;
             default:
                 title = "???";
