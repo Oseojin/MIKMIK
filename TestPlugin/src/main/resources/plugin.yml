@@ -14,6 +14,8 @@ commands:
     description: turn on/off block id Check
   setplayergold:
     description: set player gold
+  addplayergold:
+    description: add player gold
   setplayerjob:
     description: set player job
   setplayertitle:

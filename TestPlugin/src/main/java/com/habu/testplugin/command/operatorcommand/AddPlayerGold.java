@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SetPlayerTitle implements CommandExecutor
+public class AddPlayerGold implements CommandExecutor
 {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args)
@@ -21,7 +21,7 @@ public class SetPlayerTitle implements CommandExecutor
         {
             if(args.length < 2)
             {
-                player.sendMessage(ChatColor.RED + "/setplayertitle [플레이어이름] [칭호번호]");
+                player.sendMessage(ChatColor.RED + "/addplayergold [플레이어이름] [금액]");
             }
             List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
             for(int i = 0; i < playerList.size(); i++)
@@ -29,7 +29,7 @@ public class SetPlayerTitle implements CommandExecutor
                 if(playerList.get(i).getName().equals(args[0]))
                 {
                     Player targetPlayer = playerList.get(i);
-                    PlayerManager.SetTitle(targetPlayer, Integer.parseInt(args[1]));
+                    PlayerManager.AddGold(targetPlayer, Integer.parseInt(args[1]));
                     player.sendMessage( ChatColor.AQUA + "성공적으로 반영되었습니다.");
                     return false;
                 }

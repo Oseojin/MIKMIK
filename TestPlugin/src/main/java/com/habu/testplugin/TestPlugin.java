@@ -1,6 +1,7 @@
 package com.habu.testplugin;
 
 import com.habu.testplugin.command.*;
+import com.habu.testplugin.command.operatorcommand.AddPlayerGold;
 import com.habu.testplugin.command.operatorcommand.SetPlayerGold;
 import com.habu.testplugin.command.operatorcommand.SetPlayerJob;
 import com.habu.testplugin.command.operatorcommand.SetPlayerTitle;
@@ -93,6 +94,7 @@ public final class TestPlugin extends JavaPlugin
         getCommand("switchcheckblock").setExecutor(new BlockCheckCommand());
         getCommand("shopnpcapply").setExecutor(new NPCSHOPAPPLY());
         getCommand("setplayergold").setExecutor(new SetPlayerGold());
+        getCommand("addplayergold").setExecutor(new AddPlayerGold());
         getCommand("setplayerjob").setExecutor(new SetPlayerJob());
         getCommand("setplayertitle").setExecutor(new SetPlayerTitle());
     }

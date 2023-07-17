@@ -21,7 +21,7 @@ public class SetPlayerJob implements CommandExecutor
         {
             if(args.length < 2)
             {
-                player.sendMessage(ChatColor.RED + "/setgold [플레이어이름] [직업번호]");
+                player.sendMessage(ChatColor.RED + "/setplayerjob [플레이어이름] [직업번호]");
             }
             List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
             for(int i = 0; i < playerList.size(); i++)
