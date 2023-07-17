@@ -1,4 +1,4 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.randomshop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -11,14 +11,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class FisherSelectShop implements InventoryHolder
+public class RandomSpawnEgg implements InventoryHolder
 {
     final Inventory inv;
-    static String configName = "fishershop"; // 여기
+    static String configName = "randomshop";
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
@@ -32,9 +31,16 @@ public class FisherSelectShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_FisherSelecter.getType(), "fisher_selecter"); // 여기
+        itemNamePare.put(ItemManager.gui_SpawnEgg.getType(), "random_spawn");
 
-        sellItem.add(ItemManager.gui_FisherSelecter); // 여기
+        sellItem.add(ItemManager.gui_SpawnEgg);
+    }
+
+    public RandomSpawnEgg()
+    {
+        inv = Bukkit.createInventory(null, 27, "RandomSpawnEggShop");
+        initItemSetting();
+        reloadAllItems();
     }
 
     private void reloadAllItems()
@@ -64,33 +70,9 @@ public class FisherSelectShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        List<String> lore = new ArrayList<>();
-        for(int i = 0; i < itemMeta.getLore().size() - 1; i++)
-        {
-            lore.add(itemMeta.getLore().get(i));
-        }
-         lore.add(ChatColor.GOLD + "[판매가] " + price);
-        itemMeta.setLore(lore);
+        String lore0 = itemStack.getLore().get(0);
+        itemMeta.setLore(Arrays.asList(lore0, ChatColor.GOLD + "[판매가] " + price));
         itemStack.setItemMeta(itemMeta);
-    }
-
-    public FisherSelectShop()
-    {
-        inv = Bukkit.createInventory(null, 27, "FisherSelectShop"); // 여기
-        initItemSetting();
-        reloadAllItems();
-    }
-
-    public static void SellItem(Material itemMaterial, int amount)
-    {
-        if(itemNamePare.containsKey(itemMaterial))
-        {
-            String itemName = itemNamePare.get(itemMaterial);
-            String volumepath = itemName + ".volume";
-            int volume = shopConfig.getInt(volumepath) + amount;
-            shopConfig.set(volumepath, volume);
-            TestPlugin.getConfigManager().saveConfig(configName);
-        }
     }
 
     public static Integer GetPrice(Material itemMaterial)
@@ -99,7 +81,8 @@ public class FisherSelectShop implements InventoryHolder
         {
             String itemName = itemNamePare.get(itemMaterial);
             String path = itemName + ".price";
-            return shopConfig.getInt(path);
+            int price = shopConfig.getInt(path);
+            return price;
         }
         return -2;
     }
@@ -110,8 +93,8 @@ public class FisherSelectShop implements InventoryHolder
     }
 
     @Override
-    public @NotNull Inventory getInventory()
+    public Inventory getInventory()
     {
-        return null;
+        return inv;
     }
 }

@@ -1,7 +1,13 @@
 package com.habu.testplugin.event;
 
+import com.habu.testplugin.manager.NPCNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.*;
+import com.habu.testplugin.shop.jobshop.FarmerShop;
+import com.habu.testplugin.shop.jobshop.FisherShop;
+import com.habu.testplugin.shop.jobshop.MinerShop;
+import com.habu.testplugin.shop.jobshop.WoodCutterShop;
+import com.habu.testplugin.shop.randomshop.RandomSpawnEgg;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -22,7 +28,7 @@ public class PlayerInteractNPC implements Listener
         {
             String npcName = entity.getName();
             String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
-            if(npcName.equals(ChatColor.AQUA + "바다 상점"))
+            if(npcName.equals(NPCNameManager.FisherShopNPCName))
             {
                 if(playerJob.equals("[낚시꾼]"))
                 {
@@ -34,7 +40,7 @@ public class PlayerInteractNPC implements Listener
                     player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.AQUA + " [낚시꾼]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
                 }
             }
-            else if(npcName.equals(ChatColor.GREEN + "작물 상점"))
+            else if(npcName.equals(NPCNameManager.FarmerShopNPCName))
             {
                 if(playerJob.equals("[농부]"))
                 {
@@ -46,7 +52,7 @@ public class PlayerInteractNPC implements Listener
                     player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.GREEN + " [농부]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
                 }
             }
-            else if(npcName.equals(ChatColor.YELLOW + "광물 상점"))
+            else if(npcName.equals(NPCNameManager.MinerShopNPCName))
             {
                 if(playerJob.equals("[광부]"))
                 {
@@ -58,7 +64,7 @@ public class PlayerInteractNPC implements Listener
                     player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.YELLOW + " [광부]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
                 }
             }
-            else if(npcName.equals(ChatColor.GOLD + "나무 상점"))
+            else if(npcName.equals(NPCNameManager.WoodCutterShopNPCName))
             {
                 if(playerJob.equals("[나무꾼]"))
                 {
@@ -70,12 +76,12 @@ public class PlayerInteractNPC implements Listener
                     player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.GOLD + " [나무꾼]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
                 }
             }
-            else if(npcName.equals(ChatColor.WHITE + "잡화 상점"))
+            else if(npcName.equals(NPCNameManager.GeneralShopNPCName))
             {
                 GeneralShop inv = new GeneralShop();
                 inv.open(player);
             }
-            else if(npcName.equals(ChatColor.LIGHT_PURPLE + "[랜덤스폰알]"))
+            else if(npcName.equals(NPCNameManager.RandomSpawnEggShopNPCName))
             {
                 RandomSpawnEgg inv = new RandomSpawnEgg();
                 inv.open(player);

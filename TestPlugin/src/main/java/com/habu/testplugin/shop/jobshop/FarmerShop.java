@@ -1,4 +1,4 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.jobshop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -17,19 +17,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FisherShop implements InventoryHolder
+public class FarmerShop implements InventoryHolder
 {
     final Inventory inv;
-    static String configName = "fishershop";
+    static String configName = "farmershop";
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
-                    , {1,2,2,2,2,0,0,0,1}
-                    , {1,0,0,0,0,0,0,0,1}
-                    , {1,0,0,0,0,0,0,0,1}
-                    , {1,0,0,0,0,0,0,0,1}
-                    , {1,1,1,1,1,1,1,1,1} };
+            , {1,2,2,2,2,2,2,2,1}
+            , {1,2,2,0,0,0,0,0,1}
+            , {1,0,0,0,0,0,0,0,1}
+            , {1,0,0,0,0,0,0,0,1}
+            , {1,1,1,1,1,1,1,1,1} };
 
     private Queue<ItemStack> sellItem = new LinkedList<ItemStack>();
 
@@ -37,20 +37,31 @@ public class FisherShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_FisherCod.getType(), "cod");
-        itemNamePare.put(ItemManager.gui_FisherSalmon.getType(), "salmon");
-        itemNamePare.put(ItemManager.gui_FisherTropical_Fish.getType(), "tropical_fish");
-        itemNamePare.put(ItemManager.gui_FisherPufferfish.getType(), "pufferfish");
+        itemNamePare.put(ItemManager.gui_FarmerWheat.getType(), "wheat");
+        itemNamePare.put(ItemManager.gui_FarmerCarrot.getType(), "carrot");
+        itemNamePare.put(ItemManager.gui_FarmerPotato.getType(), "potato");
+        itemNamePare.put(ItemManager.gui_FarmerBeetroot.getType(), "beetroot");
+        itemNamePare.put(ItemManager.gui_FarmerMelon.getType(), "melon");
+        itemNamePare.put(ItemManager.gui_FarmerPumpkin.getType(), "pumpkin");
+        itemNamePare.put(ItemManager.gui_FarmerSweet_Berries.getType(), "sweet_berries");
+        itemNamePare.put(ItemManager.gui_FarmerCoCoa_Beans.getType(), "cocoa_beans");
+        itemNamePare.put(ItemManager.gui_FarmerNether_Wart.getType(), "nether_wart");
 
-        sellItem.add(ItemManager.gui_FisherCod);
-        sellItem.add(ItemManager.gui_FisherSalmon);
-        sellItem.add(ItemManager.gui_FisherTropical_Fish);
-        sellItem.add(ItemManager.gui_FisherPufferfish);
+
+        sellItem.add(ItemManager.gui_FarmerWheat);
+        sellItem.add(ItemManager.gui_FarmerCarrot);
+        sellItem.add(ItemManager.gui_FarmerPotato);
+        sellItem.add(ItemManager.gui_FarmerBeetroot);
+        sellItem.add(ItemManager.gui_FarmerMelon);
+        sellItem.add(ItemManager.gui_FarmerPumpkin);
+        sellItem.add(ItemManager.gui_FarmerSweet_Berries);
+        sellItem.add(ItemManager.gui_FarmerCoCoa_Beans);
+        sellItem.add(ItemManager.gui_FarmerNether_Wart);
     }
 
-    public FisherShop()
+    public FarmerShop()
     {
-        inv = Bukkit.createInventory(null, 54, "FisherShop");
+        inv = Bukkit.createInventory(null, 54, "FarmerShop");
         initItemSetting();
         reloadAllItems();
     }
@@ -82,7 +93,7 @@ public class FisherShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가]", ChatColor.GREEN + "[작은] " + price, ChatColor.AQUA + "[보통] " + price * 2, ChatColor.GOLD + "[큰] " + price * 5, ChatColor.RED + "[거대한] " + price * 100));
+        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가] " + price));
         itemStack.setItemMeta(itemMeta);
     }
 

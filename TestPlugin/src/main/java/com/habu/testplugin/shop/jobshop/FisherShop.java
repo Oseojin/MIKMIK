@@ -1,4 +1,4 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.jobshop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -17,20 +17,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class WoodCutterShop implements InventoryHolder
+public class FisherShop implements InventoryHolder
 {
-
     final Inventory inv;
-    static String configName = "woodcuttershop";
+    static String configName = "fishershop";
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
-            , {1,2,2,2,2,2,2,2,1}
-            , {1,2,2,2,2,2,2,0,1}
-            , {1,0,0,0,0,0,0,0,1}
-            , {1,0,0,0,0,0,0,0,1}
-            , {1,1,1,1,1,1,1,1,1} };
+                    , {1,2,2,2,2,0,0,0,1}
+                    , {1,0,0,0,0,0,0,0,1}
+                    , {1,0,0,0,0,0,0,0,1}
+                    , {1,0,0,0,0,0,0,0,1}
+                    , {1,1,1,1,1,1,1,1,1} };
 
     private Queue<ItemStack> sellItem = new LinkedList<ItemStack>();
 
@@ -38,39 +37,20 @@ public class WoodCutterShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_WoodCutterOak.getType(), "oak");
-        itemNamePare.put(ItemManager.gui_WoodCutterSpruce.getType(), "spruce");
-        itemNamePare.put(ItemManager.gui_WoodCutterBirch.getType(), "birch");
-        itemNamePare.put(ItemManager.gui_WoodCutterJungle.getType(), "jungle");
-        itemNamePare.put(ItemManager.gui_WoodCutterAcacia.getType(), "acacia");
-        itemNamePare.put(ItemManager.gui_WoodCutterDark_Oak.getType(), "dark_oak");
-        itemNamePare.put(ItemManager.gui_WoodCutterMangrove.getType(), "mangrove");
-        itemNamePare.put(ItemManager.gui_WoodCutterCrimson_Stem.getType(), "crimson_stem");
-        itemNamePare.put(ItemManager.gui_WoodCutterMushroom_Stem.getType(), "mushroom_stem");
-        itemNamePare.put(ItemManager.gui_WoodCutterWarped_Stem.getType(), "warped_stem");
-        itemNamePare.put(ItemManager.gui_WoodCutterApple.getType(), "apple");
-        itemNamePare.put(ItemManager.gui_WoodCutterGolden_Apple.getType(), "golden_apple");
-        itemNamePare.put(ItemManager.gui_WoodCutterEnchanted_Golden_Apple.getType(), "enchanted_golden_apple");
+        itemNamePare.put(ItemManager.gui_FisherCod.getType(), "cod");
+        itemNamePare.put(ItemManager.gui_FisherSalmon.getType(), "salmon");
+        itemNamePare.put(ItemManager.gui_FisherTropical_Fish.getType(), "tropical_fish");
+        itemNamePare.put(ItemManager.gui_FisherPufferfish.getType(), "pufferfish");
 
-
-        sellItem.add(ItemManager.gui_WoodCutterOak);
-        sellItem.add(ItemManager.gui_WoodCutterSpruce);
-        sellItem.add(ItemManager.gui_WoodCutterBirch);
-        sellItem.add(ItemManager.gui_WoodCutterJungle);
-        sellItem.add(ItemManager.gui_WoodCutterAcacia);
-        sellItem.add(ItemManager.gui_WoodCutterDark_Oak);
-        sellItem.add(ItemManager.gui_WoodCutterMangrove);
-        sellItem.add(ItemManager.gui_WoodCutterCrimson_Stem);
-        sellItem.add(ItemManager.gui_WoodCutterMushroom_Stem);
-        sellItem.add(ItemManager.gui_WoodCutterWarped_Stem);
-        sellItem.add(ItemManager.gui_WoodCutterApple);
-        sellItem.add(ItemManager.gui_WoodCutterGolden_Apple);
-        sellItem.add(ItemManager.gui_WoodCutterEnchanted_Golden_Apple);
+        sellItem.add(ItemManager.gui_FisherCod);
+        sellItem.add(ItemManager.gui_FisherSalmon);
+        sellItem.add(ItemManager.gui_FisherTropical_Fish);
+        sellItem.add(ItemManager.gui_FisherPufferfish);
     }
 
-    public WoodCutterShop()
+    public FisherShop()
     {
-        inv = Bukkit.createInventory(null, 54, "WoodCutterShop");
+        inv = Bukkit.createInventory(null, 54, "FisherShop");
         initItemSetting();
         reloadAllItems();
     }
@@ -102,7 +82,7 @@ public class WoodCutterShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가] " + price));
+        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가]", ChatColor.GREEN + "[작은] " + price, ChatColor.AQUA + "[보통] " + price * 2, ChatColor.GOLD + "[큰] " + price * 5, ChatColor.RED + "[거대한] " + price * 100));
         itemStack.setItemMeta(itemMeta);
     }
 

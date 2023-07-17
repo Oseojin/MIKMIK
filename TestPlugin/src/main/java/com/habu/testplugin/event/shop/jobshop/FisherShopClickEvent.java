@@ -2,10 +2,7 @@ package com.habu.testplugin.event.shop.jobshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.FisherShop;
-import com.habu.testplugin.shop.MinerShop;
-import com.habu.testplugin.shop.WoodCutterShop;
-import org.bukkit.Bukkit;
+import com.habu.testplugin.shop.jobshop.FisherShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

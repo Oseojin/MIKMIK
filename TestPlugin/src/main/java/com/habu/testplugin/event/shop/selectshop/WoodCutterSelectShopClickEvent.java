@@ -2,7 +2,7 @@ package com.habu.testplugin.event.shop.selectshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.WoodCutterSelectShop;
+import com.habu.testplugin.shop.selectshop.WoodCutterSelectShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

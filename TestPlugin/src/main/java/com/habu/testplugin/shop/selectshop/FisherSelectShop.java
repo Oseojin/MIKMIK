@@ -1,4 +1,4 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.selectshop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -15,16 +15,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class FarmerSelectShop implements InventoryHolder
+public class FisherSelectShop implements InventoryHolder
 {
     final Inventory inv;
-    static String configName = "farmershop"; // 여기
+    static String configName = "fishershop"; // 여기
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
-                    , {1,0,0,0,2,0,0,0,1}
-                    , {1,1,1,1,1,1,1,1,1} };
+            , {1,0,0,0,2,0,0,0,1}
+            , {1,1,1,1,1,1,1,1,1} };
 
     private Queue<ItemStack> sellItem = new LinkedList<ItemStack>();
 
@@ -32,9 +32,9 @@ public class FarmerSelectShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_FarmerSelecter.getType(), "farmer_selecter"); // 여기
+        itemNamePare.put(ItemManager.gui_FisherSelecter.getType(), "fisher_selecter"); // 여기
 
-        sellItem.add(ItemManager.gui_FarmerSelecter); // 여기
+        sellItem.add(ItemManager.gui_FisherSelecter); // 여기
     }
 
     private void reloadAllItems()
@@ -69,14 +69,14 @@ public class FarmerSelectShop implements InventoryHolder
         {
             lore.add(itemMeta.getLore().get(i));
         }
-        lore.add(ChatColor.GOLD + "[판매가] " + price);
+         lore.add(ChatColor.GOLD + "[판매가] " + price);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }
 
-    public FarmerSelectShop()
+    public FisherSelectShop()
     {
-        inv = Bukkit.createInventory(null, 27, "FarmerSelectShop"); // 여기
+        inv = Bukkit.createInventory(null, 27, "FisherSelectShop"); // 여기
         initItemSetting();
         reloadAllItems();
     }

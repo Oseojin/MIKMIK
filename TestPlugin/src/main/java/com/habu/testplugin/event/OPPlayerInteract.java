@@ -1,5 +1,6 @@
 package com.habu.testplugin.event;
 
+import com.habu.testplugin.manager.NPCNameManager;
 import net.kyori.adventure.text.EntityNBTComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
@@ -44,61 +45,67 @@ public class OPPlayerInteract implements Listener
         {
             case "바다상점":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.AQUA + "바다 상점");
+                npc.setCustomName(NPCNameManager.FisherShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "광물상점":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.YELLOW + "광물 상점");
+                npc.setCustomName(NPCNameManager.MinerShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "작물상점":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.GREEN + "작물 상점");
+                npc.setCustomName(NPCNameManager.FarmerShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "나무상점":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.GOLD + "나무 상점");
+                npc.setCustomName(NPCNameManager.WoodCutterShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "잡화상점":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.WHITE + "잡화 상점");
+                npc.setCustomName(NPCNameManager.GeneralShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "랜덤스폰알상점":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.LIGHT_PURPLE + "[랜덤스폰알]");
+                npc.setCustomName(NPCNameManager.RandomSpawnEggShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "낚시꾼전직":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.AQUA + "[낚시꾼]" + ChatColor.WHITE + " 인생");
+                npc.setCustomName(NPCNameManager.FisherSelectShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "광부전직":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.YELLOW + "[광부]" + ChatColor.WHITE + " 인생");
+                npc.setCustomName(NPCNameManager.MinerSelectShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "농부전직":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.GREEN + "[농부]" + ChatColor.WHITE + " 인생");
+                npc.setCustomName(NPCNameManager.FarmerSelectShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
             case "나무꾼전직":
                 npc.setSilent(true);
-                npc.setCustomName(ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE + " 인생");
+                npc.setCustomName(NPCNameManager.WoodCutterSelectShopNPCName);
+                npc.setCustomNameVisible(true);
+                npc.setInvulnerable(true);
+                break;
+            case "사냥꾼전직":
+                npc.setSilent(true);
+                npc.setCustomName(NPCNameManager.HunterSelectShopNPCName);
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;

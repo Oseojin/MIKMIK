@@ -4,6 +4,7 @@ import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.GeneralShop;
+import com.habu.testplugin.shop.randomshop.RandomSpawnEgg;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
@@ -125,7 +126,7 @@ public class RandomSpawnEggShopClickEvent implements Listener
                     countMap.put(uuid, 60);
                 }
                 Material material = clickedItem.getType();
-                int price = GeneralShop.GetPrice(material);
+                int price = RandomSpawnEgg.GetPrice(material);
                 if(playerInv.firstEmpty() == -1)
                 {
                     player.sendMessage("인벤토리 공간을 최소 1칸 비워주세요.");

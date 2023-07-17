@@ -26,6 +26,7 @@ public class ConfigManager
         configSet.put("minershop", new ConfigMaker(path, "minershop.yml"));
         configSet.put("farmershop", new ConfigMaker(path, "farmershop.yml"));
         configSet.put("woodcuttershop", new ConfigMaker(path, "woodcuttershop.yml"));
+        configSet.put("huntershop", new ConfigMaker(path, "huntershop.yml"));
         loadSettings();
         saveConfigs();
     }
@@ -90,6 +91,8 @@ public class ConfigManager
         FileConfiguration minershopConfig = getConfig("minershop");
         FileConfiguration farmershopConfig = getConfig("farmershop");
         FileConfiguration woodcuttershopConfig = getConfig("woodcuttershop");
+        FileConfiguration hunterhopConfig = getConfig("huntershop");
+
 
         whitelistConfig.options().copyDefaults(true);
         getConfig("player").options().copyDefaults(true);
@@ -100,6 +103,7 @@ public class ConfigManager
         minershopConfig.options().copyDefaults(true);
         farmershopConfig.options().copyDefaults(true);
         woodcuttershopConfig.options().copyDefaults(true);
+        hunterhopConfig.options().copyDefaults(true);
 
         messageConfig.addDefault("join-message.display-message", true);
         messageConfig.addDefault("join-message.message", "&7{playername} 님이 접속하였습니다.");
@@ -200,7 +204,7 @@ public class ConfigManager
         woodcuttershopConfig.addDefault("golden_apple.price", 70);
         woodcuttershopConfig.addDefault("enchanted_golden_apple.price", 200);
 
-        farmershopConfig.addDefault("woodcutter_selecter.volume", 0);
+        woodcuttershopConfig.addDefault("woodcutter_selecter.volume", 0);
         woodcuttershopConfig.addDefault("oak.volume", 0);
         woodcuttershopConfig.addDefault("spruce.volume", 0);
         woodcuttershopConfig.addDefault("birch.volume", 0);
@@ -214,5 +218,8 @@ public class ConfigManager
         woodcuttershopConfig.addDefault("apple.volume", 0);
         woodcuttershopConfig.addDefault("golden_apple.volume", 0);
         woodcuttershopConfig.addDefault("enchanted_golden_apple.volume", 0);
+
+        // 사냥꾼
+        hunterhopConfig.addDefault("hunter_selecter.price", 5000);
     }
 }

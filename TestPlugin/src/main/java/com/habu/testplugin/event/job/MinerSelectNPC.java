@@ -1,8 +1,7 @@
 package com.habu.testplugin.event.job;
 
-import com.habu.testplugin.shop.FisherSelectShop;
-import com.habu.testplugin.shop.MinerSelectShop;
-import org.bukkit.ChatColor;
+import com.habu.testplugin.manager.NPCNameManager;
+import com.habu.testplugin.shop.selectshop.MinerSelectShop;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -21,7 +20,7 @@ public class MinerSelectNPC implements Listener
         if(entity.getType().equals(EntityType.MINECART_FURNACE))
         {
             String npcName = entity.getName();
-            if(npcName.equals(ChatColor.YELLOW + "[광부]" + ChatColor.WHITE + " 인생"))
+            if(npcName.equals(NPCNameManager.MinerSelectShopNPCName))
             {
                 MinerSelectShop minerSelectShop = new MinerSelectShop();
                 minerSelectShop.open(player);

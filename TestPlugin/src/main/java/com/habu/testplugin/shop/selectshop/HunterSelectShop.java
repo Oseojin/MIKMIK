@@ -1,4 +1,4 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.selectshop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -15,16 +15,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class WoodCutterSelectShop implements InventoryHolder
+public class HunterSelectShop implements InventoryHolder
 {
     final Inventory inv;
-    static String configName = "woodcuttershop"; // 여기
+    static String configName = "fishershop"; // 여기
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
-                    , {1,0,0,0,2,0,0,0,1}
-                    , {1,1,1,1,1,1,1,1,1} };
+            , {1,0,0,0,2,0,0,0,1}
+            , {1,1,1,1,1,1,1,1,1} };
 
     private Queue<ItemStack> sellItem = new LinkedList<ItemStack>();
 
@@ -32,9 +32,9 @@ public class WoodCutterSelectShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_WoodCutterSelecter.getType(), "woodcutter_selecter"); // 여기
+        itemNamePare.put(ItemManager.gui_HunterSelecter.getType(), "hunter_selecter"); // 여기
 
-        sellItem.add(ItemManager.gui_WoodCutterSelecter); // 여기
+        sellItem.add(ItemManager.gui_HunterSelecter); // 여기
     }
 
     private void reloadAllItems()
@@ -74,9 +74,9 @@ public class WoodCutterSelectShop implements InventoryHolder
         itemStack.setItemMeta(itemMeta);
     }
 
-    public WoodCutterSelectShop()
+    public HunterSelectShop()
     {
-        inv = Bukkit.createInventory(null, 27, "WoodCutterSelectShop"); // 여기
+        inv = Bukkit.createInventory(null, 27, "HunterSelectShop"); // 여기
         initItemSetting();
         reloadAllItems();
     }

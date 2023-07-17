@@ -2,7 +2,7 @@ package com.habu.testplugin.event.shop.selectshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.selectshop.MinerSelectShop;
+import com.habu.testplugin.shop.selectshop.FarmerSelectShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,11 +15,11 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class MinerSelectShopClickEvent implements Listener
+public class HunterSelectShopClickEvent implements Listener
 {
     private static HashMap<Material, ItemStack> itemMap = new HashMap<Material, ItemStack>()
     {{
-        put(Material.PAPER, ItemManager.item_MinerSelecter); // 여기
+        put(Material.PAPER, ItemManager.item_HunterSelecter); // 여기
     }};
 
     @EventHandler
@@ -33,7 +33,7 @@ public class MinerSelectShopClickEvent implements Listener
 
         String title = ChatColor.stripColor(event.getView().getTitle());
 
-        if(title.equalsIgnoreCase("MinerSelectShop")) // 여기
+        if(title.equalsIgnoreCase("HunterSelectShop")) // 여기
         {
             event.setCancelled(true);
             Inventory playerInv = player.getInventory();
@@ -43,7 +43,7 @@ public class MinerSelectShopClickEvent implements Listener
             if (!clickedItem.equals(ItemManager.gui_GrayGlassPane))
             {
                 Material material = clickedItem.getType();
-                int price = MinerSelectShop.GetPrice(material); // 여기
+                int price = FarmerSelectShop.GetPrice(material); // 여기
                 if(playerInv.firstEmpty() == -1)
                 {
                     player.sendMessage("인벤토리 공간을 최소 1칸 비워주세요.");

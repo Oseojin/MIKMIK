@@ -2,11 +2,7 @@ package com.habu.testplugin.event.shop.jobshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.FarmerSelectShop;
-import com.habu.testplugin.shop.MinerShop;
-import com.habu.testplugin.shop.WoodCutterSelectShop;
-import com.habu.testplugin.shop.WoodCutterShop;
-import org.bukkit.Bukkit;
+import com.habu.testplugin.shop.jobshop.WoodCutterShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,7 +12,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 public class WoodCutterShopClickEvent implements Listener

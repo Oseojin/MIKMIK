@@ -1,4 +1,4 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.jobshop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -17,16 +17,17 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FarmerShop implements InventoryHolder
+public class WoodCutterShop implements InventoryHolder
 {
+
     final Inventory inv;
-    static String configName = "farmershop";
+    static String configName = "woodcuttershop";
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
             , {1,2,2,2,2,2,2,2,1}
-            , {1,2,2,0,0,0,0,0,1}
+            , {1,2,2,2,2,2,2,0,1}
             , {1,0,0,0,0,0,0,0,1}
             , {1,0,0,0,0,0,0,0,1}
             , {1,1,1,1,1,1,1,1,1} };
@@ -37,31 +38,39 @@ public class FarmerShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_FarmerWheat.getType(), "wheat");
-        itemNamePare.put(ItemManager.gui_FarmerCarrot.getType(), "carrot");
-        itemNamePare.put(ItemManager.gui_FarmerPotato.getType(), "potato");
-        itemNamePare.put(ItemManager.gui_FarmerBeetroot.getType(), "beetroot");
-        itemNamePare.put(ItemManager.gui_FarmerMelon.getType(), "melon");
-        itemNamePare.put(ItemManager.gui_FarmerPumpkin.getType(), "pumpkin");
-        itemNamePare.put(ItemManager.gui_FarmerSweet_Berries.getType(), "sweet_berries");
-        itemNamePare.put(ItemManager.gui_FarmerCoCoa_Beans.getType(), "cocoa_beans");
-        itemNamePare.put(ItemManager.gui_FarmerNether_Wart.getType(), "nether_wart");
+        itemNamePare.put(ItemManager.gui_WoodCutterOak.getType(), "oak");
+        itemNamePare.put(ItemManager.gui_WoodCutterSpruce.getType(), "spruce");
+        itemNamePare.put(ItemManager.gui_WoodCutterBirch.getType(), "birch");
+        itemNamePare.put(ItemManager.gui_WoodCutterJungle.getType(), "jungle");
+        itemNamePare.put(ItemManager.gui_WoodCutterAcacia.getType(), "acacia");
+        itemNamePare.put(ItemManager.gui_WoodCutterDark_Oak.getType(), "dark_oak");
+        itemNamePare.put(ItemManager.gui_WoodCutterMangrove.getType(), "mangrove");
+        itemNamePare.put(ItemManager.gui_WoodCutterCrimson_Stem.getType(), "crimson_stem");
+        itemNamePare.put(ItemManager.gui_WoodCutterMushroom_Stem.getType(), "mushroom_stem");
+        itemNamePare.put(ItemManager.gui_WoodCutterWarped_Stem.getType(), "warped_stem");
+        itemNamePare.put(ItemManager.gui_WoodCutterApple.getType(), "apple");
+        itemNamePare.put(ItemManager.gui_WoodCutterGolden_Apple.getType(), "golden_apple");
+        itemNamePare.put(ItemManager.gui_WoodCutterEnchanted_Golden_Apple.getType(), "enchanted_golden_apple");
 
 
-        sellItem.add(ItemManager.gui_FarmerWheat);
-        sellItem.add(ItemManager.gui_FarmerCarrot);
-        sellItem.add(ItemManager.gui_FarmerPotato);
-        sellItem.add(ItemManager.gui_FarmerBeetroot);
-        sellItem.add(ItemManager.gui_FarmerMelon);
-        sellItem.add(ItemManager.gui_FarmerPumpkin);
-        sellItem.add(ItemManager.gui_FarmerSweet_Berries);
-        sellItem.add(ItemManager.gui_FarmerCoCoa_Beans);
-        sellItem.add(ItemManager.gui_FarmerNether_Wart);
+        sellItem.add(ItemManager.gui_WoodCutterOak);
+        sellItem.add(ItemManager.gui_WoodCutterSpruce);
+        sellItem.add(ItemManager.gui_WoodCutterBirch);
+        sellItem.add(ItemManager.gui_WoodCutterJungle);
+        sellItem.add(ItemManager.gui_WoodCutterAcacia);
+        sellItem.add(ItemManager.gui_WoodCutterDark_Oak);
+        sellItem.add(ItemManager.gui_WoodCutterMangrove);
+        sellItem.add(ItemManager.gui_WoodCutterCrimson_Stem);
+        sellItem.add(ItemManager.gui_WoodCutterMushroom_Stem);
+        sellItem.add(ItemManager.gui_WoodCutterWarped_Stem);
+        sellItem.add(ItemManager.gui_WoodCutterApple);
+        sellItem.add(ItemManager.gui_WoodCutterGolden_Apple);
+        sellItem.add(ItemManager.gui_WoodCutterEnchanted_Golden_Apple);
     }
 
-    public FarmerShop()
+    public WoodCutterShop()
     {
-        inv = Bukkit.createInventory(null, 54, "FarmerShop");
+        inv = Bukkit.createInventory(null, 54, "WoodCutterShop");
         initItemSetting();
         reloadAllItems();
     }

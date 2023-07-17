@@ -1,15 +1,13 @@
 package com.habu.testplugin.event.job;
 
-import com.habu.testplugin.shop.FisherSelectShop;
-import com.habu.testplugin.shop.WoodCutterSelectShop;
-import org.bukkit.ChatColor;
+import com.habu.testplugin.manager.NPCNameManager;
+import com.habu.testplugin.shop.selectshop.WoodCutterSelectShop;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.material.Wood;
 
 public class WoodCutterSelectNPC implements Listener
 {
@@ -22,7 +20,7 @@ public class WoodCutterSelectNPC implements Listener
         if(entity.getType().equals(EntityType.PANDA))
         {
             String npcName = entity.getName();
-            if(npcName.equals(ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE + " 인생"))
+            if(npcName.equals(NPCNameManager.WoodCutterSelectShopNPCName))
             {
                 WoodCutterSelectShop woodCutterSelectShop = new WoodCutterSelectShop();
                 woodCutterSelectShop.open(player);

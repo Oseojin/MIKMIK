@@ -1,8 +1,7 @@
 package com.habu.testplugin.event.job;
 
-import com.habu.testplugin.shop.FarmerSelectShop;
-import com.habu.testplugin.shop.FisherSelectShop;
-import org.bukkit.ChatColor;
+import com.habu.testplugin.manager.NPCNameManager;
+import com.habu.testplugin.shop.selectshop.FarmerSelectShop;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -21,7 +20,7 @@ public class FarmerSelectNPC implements Listener
         if(entity.getType().equals(EntityType.COW))
         {
             String npcName = entity.getName();
-            if(npcName.equals(ChatColor.GREEN + "[농부]" + ChatColor.WHITE + " 인생"))
+            if(npcName.equals(NPCNameManager.FarmerSelectShopNPCName))
             {
                 FarmerSelectShop farmerSelectShop = new FarmerSelectShop();
                 farmerSelectShop.open(player);

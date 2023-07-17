@@ -1,7 +1,6 @@
-package com.habu.testplugin.shop;
+package com.habu.testplugin.shop.selectshop;
 
 import com.habu.testplugin.TestPlugin;
-import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.manager.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,22 +11,20 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class MinerShop implements InventoryHolder
+public class MinerSelectShop implements InventoryHolder
 {
     final Inventory inv;
-    static String configName = "minershop";
+    static String configName = "minershop"; // 여기
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
-            , {1,2,2,2,2,2,2,2,1}
-            , {1,2,2,2,2,0,0,0,1}
-            , {1,0,0,0,0,0,0,0,1}
-            , {1,0,0,0,0,0,0,0,1}
-            , {1,1,1,1,1,1,1,1,1} };
+                    , {1,0,0,0,2,0,0,0,1}
+                    , {1,1,1,1,1,1,1,1,1} };
 
     private Queue<ItemStack> sellItem = new LinkedList<ItemStack>();
 
@@ -35,41 +32,14 @@ public class MinerShop implements InventoryHolder
 
     private void initItemSetting()
     {
-        itemNamePare.put(ItemManager.gui_MinerCoal.getType(), "coal");
-        itemNamePare.put(ItemManager.gui_MinerCopper.getType(), "copper");
-        itemNamePare.put(ItemManager.gui_MinerIron.getType(), "iron");
-        itemNamePare.put(ItemManager.gui_MinerGold.getType(), "gold");
-        itemNamePare.put(ItemManager.gui_MinerLapis_Lazuli.getType(), "lapis_lazuli");
-        itemNamePare.put(ItemManager.gui_MinerRedstone.getType(), "redstone");
-        itemNamePare.put(ItemManager.gui_MinerDiamond.getType(), "diamond");
-        itemNamePare.put(ItemManager.gui_MinerEmerald.getType(), "emerald");
-        itemNamePare.put(ItemManager.gui_MinerQuartz.getType(), "quartz");
-        itemNamePare.put(ItemManager.gui_MinerAmethyst_Shard.getType(), "amethyst_shard");
-        itemNamePare.put(ItemManager.gui_MinerNetherite.getType(), "netherite");
+        itemNamePare.put(ItemManager.gui_MinerSelecter.getType(), "miner_selecter"); // 여기
 
-        sellItem.add(ItemManager.gui_MinerCoal);
-        sellItem.add(ItemManager.gui_MinerCopper);
-        sellItem.add(ItemManager.gui_MinerIron);
-        sellItem.add(ItemManager.gui_MinerGold);
-        sellItem.add(ItemManager.gui_MinerLapis_Lazuli);
-        sellItem.add(ItemManager.gui_MinerRedstone);
-        sellItem.add(ItemManager.gui_MinerDiamond);
-        sellItem.add(ItemManager.gui_MinerEmerald);
-        sellItem.add(ItemManager.gui_MinerQuartz);
-        sellItem.add(ItemManager.gui_MinerAmethyst_Shard);
-        sellItem.add(ItemManager.gui_MinerNetherite);
-    }
-
-    public MinerShop()
-    {
-        inv = Bukkit.createInventory(null, 54, "MinerShop");
-        initItemSetting();
-        reloadAllItems();
+        sellItem.add(ItemManager.gui_MinerSelecter); // 여기
     }
 
     private void reloadAllItems()
     {
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 3; i++)
         {
             for(int j = 0; j < 9; j++)
             {
@@ -94,8 +64,21 @@ public class MinerShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가] " + price));
+        List<String> lore = new ArrayList<>();
+        for(int i = 0; i < itemMeta.getLore().size() - 1; i++)
+        {
+            lore.add(itemMeta.getLore().get(i));
+        }
+        lore.add(ChatColor.GOLD + "[판매가] " + price);
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
+    }
+
+    public MinerSelectShop()
+    {
+        inv = Bukkit.createInventory(null, 27, "MinerSelectShop"); // 여기
+        initItemSetting();
+        reloadAllItems();
     }
 
     public static void SellItem(Material itemMaterial, int amount)
@@ -127,8 +110,8 @@ public class MinerShop implements InventoryHolder
     }
 
     @Override
-    public Inventory getInventory()
+    public @NotNull Inventory getInventory()
     {
-        return inv;
+        return null;
     }
 }
