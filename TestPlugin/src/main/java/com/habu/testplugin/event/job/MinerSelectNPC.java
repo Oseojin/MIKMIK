@@ -17,7 +17,7 @@ public class MinerSelectNPC implements Listener
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
 
-        if(entity.getType().equals(EntityType.BAT))
+        if(entity.getType().equals(EntityType.IRON_GOLEM))
         {
             String npcName = entity.getName();
             if(npcName.equals(NPCNameManager.MinerSelectShopNPCName))
