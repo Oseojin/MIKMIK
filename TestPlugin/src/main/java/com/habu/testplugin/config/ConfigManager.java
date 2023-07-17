@@ -118,7 +118,7 @@ public class ConfigManager
         generalshopConfig.addDefault("area_protect.price", 50000);
         generalshopConfig.addDefault("door_lock.price", 5000);
         generalshopConfig.addDefault("inventory_save.price", 2500);
-        generalshopConfig.addDefault("whitelist_adder.price", 25000);
+        generalshopConfig.addDefault("whitelist_adder.price", 15000);
         generalshopConfig.addDefault("job_initialization.price", 10000);
         generalshopConfig.addDefault("return_village.price", 2500);
 
@@ -167,15 +167,15 @@ public class ConfigManager
 
         // 농부
         farmershopConfig.addDefault("farmer_selecter.price", 1000);
-        farmershopConfig.addDefault("wheat.price", 7);
-        farmershopConfig.addDefault("carrot.price", 4);
-        farmershopConfig.addDefault("potato.price", 4);
-        farmershopConfig.addDefault("beetroot.price", 10);
-        farmershopConfig.addDefault("melon.price", 16);
-        farmershopConfig.addDefault("pumpkin.price", 60);
-        farmershopConfig.addDefault("sweet_berries.price", 4);
-        farmershopConfig.addDefault("cocoa_beans.price", 13);
-        farmershopConfig.addDefault("nether_wart.price", 50);
+        farmershopConfig.addDefault("wheat.price", 4);
+        farmershopConfig.addDefault("carrot.price", 2);
+        farmershopConfig.addDefault("potato.price", 2);
+        farmershopConfig.addDefault("beetroot.price", 6);
+        farmershopConfig.addDefault("melon.price", 10);
+        farmershopConfig.addDefault("pumpkin.price", 36);
+        farmershopConfig.addDefault("sweet_berries.price", 2);
+        farmershopConfig.addDefault("cocoa_beans.price", 8);
+        farmershopConfig.addDefault("nether_wart.price", 30);
 
         farmershopConfig.addDefault("farmer_selecter.volume", 0);
         farmershopConfig.addDefault("wheat.volume", 0);
@@ -220,6 +220,6 @@ public class ConfigManager
         woodcuttershopConfig.addDefault("enchanted_golden_apple.volume", 0);
 
         // 사냥꾼
-        hunterhopConfig.addDefault("hunter_selecter.price", 5000);
+        hunterhopConfig.addDefault("hunter_selecter.price", 10000);
     }
 }

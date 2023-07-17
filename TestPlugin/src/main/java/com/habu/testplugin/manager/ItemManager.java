@@ -121,6 +121,6 @@ public class ItemManager
     public static final ItemStack gui_WoodCutterEnchanted_Golden_Apple = buildItem(Material.ENCHANTED_GOLDEN_APPLE, 1, ChatColor.WHITE + "마법이 부여된 황금 사과", ChatColor.WHITE + "판매가: ");
 
     // 사냥꾼
-    public static final ItemStack gui_HunterSelecter = buildItem(Material.PAPER, 1, ChatColor.GOLD + "사냥 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 사냥꾼의 자격을 얻을 수 있다.", ChatColor.DARK_GREEN + "[사냥꾼]", ChatColor.WHITE + "몬스터를 죽이면 종류에 따라 골드 획득", ChatColor.WHITE + "몬스터를 죽이면 확률적으로 효과 부여 화살 획득", ChatColor.WHITE + "활 데미지 강화", ChatColor.WHITE + "판매가: ");
+    public static final ItemStack gui_HunterSelecter = buildItem(Material.PAPER, 1, ChatColor.GOLD + "사냥 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 사냥꾼의 자격을 얻을 수 있다.", ChatColor.DARK_GREEN + "[사냥꾼]", ChatColor.WHITE + "몬스터를 죽이면 종류에 따라 골드 획득", ChatColor.WHITE + "몬스터 처치시 화살 1개 획득", ChatColor.WHITE + "몬스터 처치시 확률적으로 효과 부여 화살 드랍", ChatColor.WHITE + "활 데미지 강화", ChatColor.LIGHT_PURPLE + "사냥꾼의 화살은 엔더맨도 피할 수 없습니다...", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_HunterSelecter = buildItem(Material.PAPER, 1, ChatColor.GOLD + "사냥 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 사냥꾼의 자격을 얻을 수 있다.");
 }

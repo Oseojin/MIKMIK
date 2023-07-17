@@ -18,7 +18,7 @@ public class HunterSelectNPC implements Listener
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
 
-        if(entity.getType().equals(EntityType.STRAY))
+        if(entity.getType().equals(EntityType.FOX))
         {
             String npcName = entity.getName();
             if(npcName.equals(NPCNameManager.HunterSelectShopNPCName))

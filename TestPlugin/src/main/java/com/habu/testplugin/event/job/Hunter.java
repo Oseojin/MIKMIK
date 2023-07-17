@@ -2,6 +2,7 @@ package com.habu.testplugin.event.job;
 
 import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.PlayerManager;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -33,49 +34,49 @@ public class Hunter implements Listener
 
     HashMap<EntityType, Integer> entityGold = new HashMap<EntityType, Integer>()
     {{
-        put(EntityType.CAVE_SPIDER, 5);
-        put(EntityType.ENDERMAN, 5);
-        put(EntityType.SPIDER, 5);
-        put(EntityType.ZOMBIFIED_PIGLIN, 5);
-        put(EntityType.PIGLIN, 5);
-        put(EntityType.BLAZE, 5);
-        put(EntityType.CREEPER, 5);
-        put(EntityType.DROWNED, 5);
-        put(EntityType.ELDER_GUARDIAN, 5);
-        put(EntityType.ENDERMITE, 5);
-        put(EntityType.EVOKER, 5);
-        put(EntityType.GHAST, 5);
-        put(EntityType.GUARDIAN, 5);
-        put(EntityType.HUSK, 5);
-        put(EntityType.MAGMA_CUBE, 5);
-        put(EntityType.IRON_GOLEM, 5);
-        put(EntityType.WOLF, 5);
-        put(EntityType.BEE, 5);
-        put(EntityType.LLAMA, 5);
-        put(EntityType.TRADER_LLAMA, 5);
-        put(EntityType.PANDA, 5);
-        put(EntityType.GOAT, 5);
-        put(EntityType.POLAR_BEAR, 5);
-        put(EntityType.PHANTOM, 5);
-        put(EntityType.PILLAGER, 5);
-        put(EntityType.RAVAGER, 5);
-        put(EntityType.SHULKER, 5);
-        put(EntityType.SILVERFISH, 5);
-        put(EntityType.SKELETON, 5);
-        put(EntityType.SKELETON_HORSE, 5);
-        put(EntityType.SLIME, 5);
-        put(EntityType.STRAY, 5);
-        put(EntityType.VEX, 5);
-        put(EntityType.VINDICATOR, 5);
-        put(EntityType.WITCH, 5);
-        put(EntityType.WITHER_SKELETON, 5);
-        put(EntityType.ZOMBIE, 5);
-        put(EntityType.ZOMBIE_VILLAGER, 5);
-        put(EntityType.HOGLIN, 5);
-        put(EntityType.ZOGLIN, 5);
-        put(EntityType.WARDEN, 5);
-        put(EntityType.ENDER_DRAGON, 5);
-        put(EntityType.WITHER, 5);
+        put(EntityType.WOLF, 8);
+        put(EntityType.LLAMA, 11);
+        put(EntityType.TRADER_LLAMA, 12);
+        put(EntityType.PANDA, 16);
+        put(EntityType.BEE, 8);
+        put(EntityType.GOAT, 8);
+        put(EntityType.SPIDER, 9);
+        put(EntityType.CAVE_SPIDER, 9);
+        put(EntityType.POLAR_BEAR, 19);
+        put(EntityType.ZOMBIE, 11);
+        put(EntityType.ZOMBIE_VILLAGER, 11);
+        put(EntityType.HUSK, 12);
+        put(EntityType.DROWNED, 15);
+        put(EntityType.SKELETON, 12);
+        put(EntityType.WITHER_SKELETON, 67);
+        put(EntityType.STRAY, 13);
+        put(EntityType.SLIME, 6);
+        put(EntityType.MAGMA_CUBE, 8);
+        put(EntityType.GUARDIAN, 22);
+        put(EntityType.ELDER_GUARDIAN, 2549);
+        put(EntityType.VINDICATOR, 19);
+        put(EntityType.EVOKER, 17);
+        put(EntityType.VEX, 15);
+        put(EntityType.PILLAGER, 14);
+        put(EntityType.RAVAGER, 2559);
+        put(EntityType.CREEPER, 42);
+        put(EntityType.GHAST, 518);
+        put(EntityType.PHANTOM, 12);
+        put(EntityType.PIGLIN, 13);
+        put(EntityType.PIGLIN_BRUTE, 535);
+        put(EntityType.WARDEN, 50317);
+        put(EntityType.SILVERFISH, 7);
+        put(EntityType.BLAZE, 68);
+        put(EntityType.WITCH, 69);
+        put(EntityType.ENDERMITE, 8);
+        put(EntityType.SHULKER, 23);
+        put(EntityType.HOGLIN, 24);
+        put(EntityType.ZOGLIN, 24);
+        put(EntityType.ZOMBIFIED_PIGLIN, 15);
+        put(EntityType.ENDERMAN, 77);
+        put(EntityType.IRON_GOLEM, 115);
+        put(EntityType.WITHER, 75270);
+        put(EntityType.ENDER_DRAGON, 200186);
     }};
 
     @EventHandler
@@ -90,21 +91,30 @@ public class Hunter implements Listener
             String playerJob = PlayerManager.GetJob(player);
             if(playerJob.equals(JobNameManager.HunterName))
             {
-                int randNum = random.nextInt(arrowList.size());
                 PlayerManager.AddGold(player, entityGold.get(entity.getType()));
-                ItemStack arrow = new ItemStack(Material.TIPPED_ARROW, 1);
-                PotionMeta arrowEffect = (PotionMeta) arrow.getItemMeta();
-                int randomUpgrade = random.nextInt(10);
-                boolean upgraded = false;
-                if(randomUpgrade >= 0 && arrowList.get(randNum).isUpgradeable())
+                int randNum = random.nextInt(10) + 1;
+                if(randNum > 8)
                 {
-                    upgraded = true;
+                    int randArrow = random.nextInt(arrowList.size());
+                    ItemStack arrow = new ItemStack(Material.TIPPED_ARROW, 1);
+                    PotionMeta arrowEffect = (PotionMeta) arrow.getItemMeta();
+                    int randomUpgrade = random.nextInt(10);
+                    boolean upgraded = false;
+                    if(randomUpgrade >= 0 && arrowList.get(randArrow).isUpgradeable())
+                    {
+                        upgraded = true;
+                    }
+                    PotionData effectData = new PotionData(arrowList.get(randArrow), false, upgraded);
+                    arrowEffect.setBasePotionData(effectData);
+                    arrow.setItemMeta(arrowEffect);
+                    player.getWorld().dropItem(deathLoc, arrow);
+                    player.sendMessage(ChatColor.GOLD + "특수 화살이 드랍되었습니다!");
                 }
-                player.sendMessage(arrowList.get(randNum) + "");
-                PotionData effectData = new PotionData(arrowList.get(randNum), false, upgraded);
-                arrowEffect.setBasePotionData(effectData);
-                arrow.setItemMeta(arrowEffect);
-                player.getWorld().dropItem(deathLoc, arrow);
+                else
+                {
+                    ItemStack arrow = new ItemStack(Material.ARROW, 1);
+                    player.getInventory().addItem(arrow);
+                }
             }
         }
     }
@@ -112,7 +122,7 @@ public class Hunter implements Listener
     @EventHandler
     public void ShootArrow(EntityShootBowEvent event)
     {
-        if(event.getEntity() instanceof Player)
+        if(event.getEntity() instanceof Player && event.getProjectile() instanceof Arrow)
         {
             Player player = (Player) event.getEntity();
             Arrow arrow = (Arrow) event.getProjectile();
@@ -121,7 +131,6 @@ public class Hunter implements Listener
                 arrow.setCritical(true);
                 Vector arrowVec = arrow.getVelocity().multiply(3D);
                 arrow.setVelocity(arrowVec);
-                arrow.setDamage(10);
             }
         }
     }
@@ -129,11 +138,12 @@ public class Hunter implements Listener
     @EventHandler
     public void HitArrowToEntity(ProjectileHitEvent event)
     {
-        if(event.getEntity().getShooter() instanceof Player)
+        if(event.getEntity().getShooter() instanceof Player && event.getEntity() instanceof Arrow)
         {
             Player player = (Player) event.getEntity().getShooter();
             Arrow arrow = (Arrow) event.getEntity();
             Entity hitEntity = event.getHitEntity();
+
             if(PlayerManager.GetJob(player).equals(JobNameManager.HunterName))
             {
                 if (hitEntity instanceof LivingEntity)
