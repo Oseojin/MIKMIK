@@ -1,7 +1,8 @@
 package com.habu.testplugin.event.job;
 
 import com.habu.testplugin.manager.NPCNameManager;
-import com.habu.testplugin.shop.selectshop.MinerSelectShop;
+import com.habu.testplugin.shop.selectshop.FisherSelectShop;
+import com.habu.testplugin.shop.selectshop.HunterSelectShop;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -9,7 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
-public class MinerSelectNPC implements Listener
+public class HunterSelectNPC implements Listener
 {
     @EventHandler
     public void ClickNPC(PlayerInteractEntityEvent event)
@@ -17,13 +18,13 @@ public class MinerSelectNPC implements Listener
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
 
-        if(entity.getType().equals(EntityType.BAT))
+        if(entity.getType().equals(EntityType.STRAY))
         {
             String npcName = entity.getName();
-            if(npcName.equals(NPCNameManager.MinerSelectShopNPCName))
+            if(npcName.equals(NPCNameManager.HunterSelectShopNPCName))
             {
-                MinerSelectShop minerSelectShop = new MinerSelectShop();
-                minerSelectShop.open(player);
+                HunterSelectShop hunterSelectShop = new HunterSelectShop();
+                hunterSelectShop.open(player);
             }
         }
     }

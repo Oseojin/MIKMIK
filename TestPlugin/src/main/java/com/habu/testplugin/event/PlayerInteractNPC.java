@@ -1,5 +1,6 @@
 package com.habu.testplugin.event;
 
+import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.NPCNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.*;
@@ -27,53 +28,53 @@ public class PlayerInteractNPC implements Listener
         if(entity.getType().equals(EntityType.VILLAGER))
         {
             String npcName = entity.getName();
-            String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
+            String playerJob = PlayerManager.GetJob(player);
             if(npcName.equals(NPCNameManager.FisherShopNPCName))
             {
-                if(playerJob.equals("[낚시꾼]"))
+                if(playerJob.equals(JobNameManager.FisherName))
                 {
                     FisherShop inv = new FisherShop();
                     inv.open(player);
                 }
                 else
                 {
-                    player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.AQUA + " [낚시꾼]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
-                }
-            }
-            else if(npcName.equals(NPCNameManager.FarmerShopNPCName))
-            {
-                if(playerJob.equals("[농부]"))
-                {
-                    FarmerShop inv = new FarmerShop();
-                    inv.open(player);
-                }
-                else
-                {
-                    player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.GREEN + " [농부]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
+                    player.sendMessage(npcName + ChatColor.WHITE + "은" + JobNameManager.FisherName + "만 이용할 수 있습니다.");
                 }
             }
             else if(npcName.equals(NPCNameManager.MinerShopNPCName))
             {
-                if(playerJob.equals("[광부]"))
+                if(playerJob.equals(JobNameManager.MinerName))
                 {
                     MinerShop inv = new MinerShop();
                     inv.open(player);
                 }
                 else
                 {
-                    player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.YELLOW + " [광부]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
+                    player.sendMessage(npcName + ChatColor.WHITE + "은" + JobNameManager.MinerName + "만 이용할 수 있습니다.");
+                }
+            }
+            else if(npcName.equals(NPCNameManager.FarmerShopNPCName))
+            {
+                if(playerJob.equals(JobNameManager.FarmerName))
+                {
+                    FarmerShop inv = new FarmerShop();
+                    inv.open(player);
+                }
+                else
+                {
+                    player.sendMessage(npcName + ChatColor.WHITE + "은" + JobNameManager.FarmerName + "만 이용할 수 있습니다.");
                 }
             }
             else if(npcName.equals(NPCNameManager.WoodCutterShopNPCName))
             {
-                if(playerJob.equals("[나무꾼]"))
+                if(playerJob.equals(JobNameManager.WoodCutterName))
                 {
                     WoodCutterShop inv = new WoodCutterShop();
                     inv.open(player);
                 }
                 else
                 {
-                    player.sendMessage(npcName + ChatColor.WHITE + "은" + ChatColor.GOLD + " [나무꾼]" + ChatColor.WHITE + "만 이용할 수 있습니다.");
+                    player.sendMessage(npcName + ChatColor.WHITE + "은" + JobNameManager.WoodCutterName + "만 이용할 수 있습니다.");
                 }
             }
             else if(npcName.equals(NPCNameManager.GeneralShopNPCName))

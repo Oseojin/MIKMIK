@@ -100,22 +100,22 @@ public class PlayerManager
         switch (jobNum)
         {
             case 0:
-                jobName = ChatColor.WHITE + "[무직]" + ChatColor.WHITE;
+                jobName = JobNameManager.JobLessName;
                 break;
             case 1:
-                jobName = ChatColor.AQUA + "[낚시꾼]" + ChatColor.WHITE;
+                jobName = JobNameManager.FisherName;
                 break;
             case 2:
-                jobName = ChatColor.YELLOW + "[광부]" + ChatColor.WHITE;
+                jobName = JobNameManager.MinerName;
                 break;
             case 3:
-                jobName = ChatColor.GREEN + "[농부]" + ChatColor.WHITE;
+                jobName = JobNameManager.FarmerName;
                 break;
             case 4:
-                jobName = ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE;
+                jobName = JobNameManager.WoodCutterName;
                 break;
             case 5:
-                jobName = ChatColor.DARK_GREEN + "[사냥꾼]" + ChatColor.WHITE;
+                jobName = JobNameManager.HunterName;
                 break;
             default:
                 jobName = "???";

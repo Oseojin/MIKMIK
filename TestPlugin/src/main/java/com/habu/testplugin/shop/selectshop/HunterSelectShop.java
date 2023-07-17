@@ -18,7 +18,7 @@ import java.util.*;
 public class HunterSelectShop implements InventoryHolder
 {
     final Inventory inv;
-    static String configName = "fishershop"; // 여기
+    static String configName = "huntershop"; // 여기
     private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
 
     private int[][] invBasic =

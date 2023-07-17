@@ -55,6 +55,9 @@ public class NPCSHOPAPPLY implements CommandExecutor
                         case "나무꾼전직":
                             sender.sendMessage("나무꾼 전직");
                             break;
+                        case "사냥꾼전직":
+                            sender.sendMessage("사냥꾼 전직");
+                            break;
                         default:
                             sender.sendMessage("정확한 번호를 입력해주세요.");
                             return false;

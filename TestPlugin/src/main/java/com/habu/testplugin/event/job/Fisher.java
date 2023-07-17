@@ -1,6 +1,7 @@
 package com.habu.testplugin.event.job;
 
 import com.habu.testplugin.event.ChatEvent;
+import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.Bukkit;
@@ -272,8 +273,8 @@ public class Fisher implements Listener
         UUID uuid = player.getUniqueId();
         ItemStack itemStack = player.getItemInHand();
 
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
-        if(playerJob.equals("[낚시꾼]") && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.FisherName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
             CustomStack stack = CustomStack.byItemStack(itemStack);
             if(stack != null)
@@ -306,8 +307,8 @@ public class Fisher implements Listener
         UUID uuid = player.getUniqueId();
 
         FishHook hook = event.getHook();
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
-        if(playerJob.equals("[낚시꾼]"))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.FisherName))
             hook.setWaitTime(60, 300);
 
         if(event.getState() == PlayerFishEvent.State.REEL_IN) // 낚시 찌를 너무 빨리 당긴 경우
@@ -324,7 +325,7 @@ public class Fisher implements Listener
         }
         else if(event.getState() == PlayerFishEvent.State.CAUGHT_FISH) // 물고기를 잡은 경우
         {
-            if(playerJob.equals("[낚시꾼]"))
+            if(playerJob.equals(JobNameManager.FisherName))
             {
                 Item dropItem = (Item) event.getCaught();
                 ItemStack dropItemStack = dropItem.getItemStack();

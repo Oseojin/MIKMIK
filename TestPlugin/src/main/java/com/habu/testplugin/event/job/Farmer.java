@@ -1,5 +1,6 @@
 package com.habu.testplugin.event.job;
 
+import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -104,9 +105,9 @@ public class Farmer implements Listener
         Action action = event.getAction();
         UUID uuid = player.getUniqueId();
         Block block = event.getClickedBlock();
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
 
-        if(playerJob.equals("[농부]"))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.FarmerName))
         {
             if(action.equals(Action.RIGHT_CLICK_BLOCK) && interactableCrop.contains(block.getType()))
             {
@@ -128,9 +129,9 @@ public class Farmer implements Listener
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         Block block = event.getBlock();
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
 
-        if(playerJob.equals("[농부]"))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.FarmerName))
         {
 
             if(ageableCrop.contains(block.getType()))

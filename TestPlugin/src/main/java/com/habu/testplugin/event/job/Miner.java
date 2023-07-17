@@ -1,5 +1,6 @@
 package com.habu.testplugin.event.job;
 
+import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.ChatColor;
@@ -78,8 +79,8 @@ public class Miner implements Listener
         Player player = event.getPlayer();
         List<Item> dropItem = event.getItems();
 
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
-        if(playerJob.equals("[광부]"))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.MinerName))
         {
             for(int index = 0; index < dropItem.size(); index++)
             {

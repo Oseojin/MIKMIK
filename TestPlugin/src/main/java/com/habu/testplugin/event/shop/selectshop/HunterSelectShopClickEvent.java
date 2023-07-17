@@ -3,6 +3,7 @@ package com.habu.testplugin.event.shop.selectshop;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.selectshop.FarmerSelectShop;
+import com.habu.testplugin.shop.selectshop.HunterSelectShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -43,7 +44,7 @@ public class HunterSelectShopClickEvent implements Listener
             if (!clickedItem.equals(ItemManager.gui_GrayGlassPane))
             {
                 Material material = clickedItem.getType();
-                int price = FarmerSelectShop.GetPrice(material); // 여기
+                int price = HunterSelectShop.GetPrice(material); // 여기
                 if(playerInv.firstEmpty() == -1)
                 {
                     player.sendMessage("인벤토리 공간을 최소 1칸 비워주세요.");

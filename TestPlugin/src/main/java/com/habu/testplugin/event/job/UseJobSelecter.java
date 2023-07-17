@@ -19,6 +19,14 @@ import java.util.List;
 public class UseJobSelecter implements Listener
 {
 
+    List<ItemStack> jobSelecters = new ArrayList<>(Arrays.asList(
+            ItemManager.item_FisherSelecter,
+            ItemManager.item_MinerSelecter,
+            ItemManager.item_FarmerSelecter,
+            ItemManager.item_WoodCutterSelecter,
+            ItemManager.item_HunterSelecter
+    ));
+
     @EventHandler
     public void UseSelecter(PlayerInteractEvent event)
     {
@@ -62,6 +70,14 @@ public class UseJobSelecter implements Listener
                     int amount = useItem.getAmount() - 1;
                     useItem.setAmount(amount);
                 }
+                else if(useItem.isSimilar(ItemManager.item_HunterSelecter))
+                {
+                    PlayerManager.SetJob(player, 5);
+                    PlayerManager.SetTitle(player, 5);
+                    TestPlugin.getConfigManager().saveConfig("player");
+                    int amount = useItem.getAmount() - 1;
+                    useItem.setAmount(amount);
+                }
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
                     player.sendMessage("직업 초기화는 직업을 가지고 있는 상태에서만 사용 가능합니다.");
@@ -69,7 +85,9 @@ public class UseJobSelecter implements Listener
             }
             else
             {
-                if(useItem.isSimilar(ItemManager.item_FisherSelecter) || useItem.isSimilar(ItemManager.item_MinerSelecter) || useItem.isSimilar(ItemManager.item_FarmerSelecter) || useItem.isSimilar(ItemManager.item_WoodCutterSelecter))
+                ItemStack copyUseItem = useItem.clone();
+                copyUseItem.setAmount(1);
+                if(jobSelecters.contains(copyUseItem))
                 {
                     player.sendMessage("직업 선택은 [무직] 상태에서만 가능합니다.");
                 }

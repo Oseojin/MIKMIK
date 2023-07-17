@@ -1,5 +1,6 @@
 package com.habu.testplugin.event.job;
 
+import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.ChatColor;
@@ -113,8 +114,8 @@ public class WoodCutter implements Listener
         UUID uuid = player.getUniqueId();
         ItemStack itemStack = player.getItemInHand();
 
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
-        if(playerJob.equals("[나무꾼]") && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.FarmerName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
             CustomStack stack = CustomStack.byItemStack(itemStack);
             if(stack != null)
@@ -143,8 +144,8 @@ public class WoodCutter implements Listener
     {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
-        if(playerJob.equals("[나무꾼]"))
+        String playerJob = PlayerManager.GetJob(player);
+        if(playerJob.equals(JobNameManager.WoodCutterName))
         {
             if(tree.contains(event.getBlock().getType()))
             {
