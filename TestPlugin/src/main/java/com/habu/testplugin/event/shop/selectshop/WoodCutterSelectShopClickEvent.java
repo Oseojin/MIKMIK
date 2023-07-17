@@ -37,7 +37,7 @@ public class WoodCutterSelectShopClickEvent implements Listener
         {
             if(inv.equals(player.getInventory()))
             {
-                if(event.isLeftClick() && event.isShiftClick())
+                if(event.isLeftClick())
                 {
                     event.setCancelled(true);
                     return;
