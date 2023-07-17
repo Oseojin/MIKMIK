@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -22,10 +23,17 @@ public class IssuingCheckCommand implements CommandExecutor
     {
         Player player = (Player) sender;
         UUID uuid = player.getUniqueId();
+        Inventory playerInv = player.getInventory();
 
         if(args.length == 0)
         {
             player.sendMessage("금액을 입력해주세요. ex) /수표 100");
+            return false;
+        }
+
+        if(playerInv.firstEmpty() == -1)
+        {
+            player.sendMessage("인벤토리 공간을 최소 1칸 비워주세요.");
             return false;
         }
 
