@@ -155,7 +155,7 @@ public class Hunter implements Listener
                     LivingEntity AssumedLivingEntity = (LivingEntity) hitEntity;
                     if (!AssumedLivingEntity.equals(player) && AssumedLivingEntity instanceof Enderman)
                     {
-                        double damage = arrow.getDamage() * 2;
+                        double damage = 10;
                         AssumedLivingEntity.damage(damage, player);
                         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0, 0);
                     }
