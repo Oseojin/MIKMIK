@@ -220,6 +220,6 @@ public class ConfigManager
         woodcuttershopConfig.addDefault("enchanted_golden_apple.volume", 0);
 
         // 사냥꾼
-        hunterhopConfig.addDefault("hunter_selecter.price", 10000);
+        hunterhopConfig.addDefault("hunter_selecter.price", 5000);
     }
 }
