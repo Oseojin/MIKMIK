@@ -9,6 +9,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -34,6 +35,8 @@ public class Miner implements Listener
         put(Material.AMETHYST_SHARD, "customitems:amethyst_shard_");
         put(Material.NETHERITE_SCRAP, "customitems:netherite_scrap");
     }};
+
+    HashMap<Player, Boolean> breakfurnace = new HashMap<Player, Boolean>();
 
     private String RandomMineral()
     {
@@ -74,13 +77,27 @@ public class Miner implements Listener
     }
 
     @EventHandler
+    public void MinerBreakFurnace(BlockBreakEvent event)
+    {
+        Player player = event.getPlayer();
+        if(PlayerManager.GetJob(player).equals(JobNameManager.MinerName))
+        {
+            if(event.getBlock().getType().equals(Material.FURNACE) || event.getBlock().getType().equals(Material.BLAST_FURNACE))
+            {
+                breakfurnace.put(player, true);
+            }
+        }
+    }
+
+
+    @EventHandler
     public void MinerDropBlock(BlockDropItemEvent event)
     {
         Player player = event.getPlayer();
         List<Item> dropItem = event.getItems();
 
         String playerJob = PlayerManager.GetJob(player);
-        if(playerJob.equals(JobNameManager.MinerName))
+        if(playerJob.equals(JobNameManager.MinerName) && !breakfurnace.containsKey(player))
         {
             for(int index = 0; index < dropItem.size(); index++)
             {
@@ -110,6 +127,10 @@ public class Miner implements Listener
                     dropItem.get(index).setItemStack(itemStack);
                 }
             }
+        }
+        else
+        {
+            breakfurnace.remove(player);
         }
     }
 

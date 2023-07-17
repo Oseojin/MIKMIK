@@ -115,7 +115,7 @@ public class WoodCutter implements Listener
         ItemStack itemStack = player.getItemInHand();
 
         String playerJob = PlayerManager.GetJob(player);
-        if(playerJob.equals(JobNameManager.FarmerName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
+        if(playerJob.equals(JobNameManager.WoodCutterName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
             CustomStack stack = CustomStack.byItemStack(itemStack);
             if(stack != null)
@@ -125,15 +125,8 @@ public class WoodCutter implements Listener
                 {
                     // 랜덤 아이템
                     RandomApple(player, bagList.get(itemId));
-                    if(itemStack.getAmount() >= 1)
-                    {
-                        int amount = itemStack.getAmount() - 1;
-                        itemStack.setAmount(amount);
-                    }
-                    else
-                    {
-                        player.getInventory().removeItem(itemStack);
-                    }
+                    int amount = itemStack.getAmount() - 1;
+                    itemStack.setAmount(amount);
                 }
             }
         }

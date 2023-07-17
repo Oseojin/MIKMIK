@@ -42,19 +42,19 @@ public class GeneralShopClickEvent implements Listener
         Inventory inv = event.getClickedInventory();
         if(inv == null)
             return;
-        if(inv.equals(player.getInventory()))
-        {
-            if(event.isLeftClick() && event.isShiftClick())
-            {
-                event.setCancelled(true);
-                return;
-            }
-        }
 
         String title = ChatColor.stripColor(event.getView().getTitle());
 
         if(title.equalsIgnoreCase("GeneralShop"))
         {
+            if(inv.equals(player.getInventory()))
+            {
+                if(event.isLeftClick() && event.isShiftClick())
+                {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
             event.setCancelled(true);
             Inventory playerInv = player.getInventory();
             ItemStack clickedItem = event.getCurrentItem();
