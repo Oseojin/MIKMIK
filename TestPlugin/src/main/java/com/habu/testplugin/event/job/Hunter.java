@@ -91,6 +91,10 @@ public class Hunter implements Listener
             String playerJob = PlayerManager.GetJob(player);
             if(playerJob.equals(JobNameManager.HunterName))
             {
+                if(entityGold.containsKey(entity.getType()))
+                {
+                    return;
+                }
                 PlayerManager.AddGold(player, entityGold.get(entity.getType()));
                 int randNum = random.nextInt(10) + 1;
                 if(randNum > 8)
