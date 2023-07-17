@@ -368,7 +368,7 @@ public class Fisher implements Listener
                     String size = RandomSize(randomSize);
                     dropItemStack.setLore(Arrays.asList(size + " 크기", ChatColor.AQUA + "(" + randomSize + "cm)"));
                     player.sendMessage(size + " 크기의 " + dropItemMeta.getDisplayName() + " (" + randomSize + "cm)" + "를 잡았습니다!");
-                    if(size.equalsIgnoreCase("거대한"))
+                    if(size.equals(ChatColor.RED + "거대한"))
                     {
                         Bukkit.broadcastMessage(ChatColor.GOLD + player.getName() + ChatColor.WHITE + "님이 " + size + " 크기의 " + ChatColor.AQUA + dropItemMeta.getDisplayName() + ChatColor.WHITE + "을 잡았습니다!!");
                     }
