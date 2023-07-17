@@ -117,14 +117,6 @@ public class RandomSpawnEggShopClickEvent implements Listener
                 return;
             if (clickedItem.isSimilar(ItemManager.gui_SpawnEgg))
             {
-                if(countMap.containsKey(uuid))
-                {
-                    return;
-                }
-                else
-                {
-                    countMap.put(uuid, 60);
-                }
                 Material material = clickedItem.getType();
                 int price = RandomSpawnEgg.GetPrice(material);
                 if(playerInv.firstEmpty() == -1)
@@ -137,6 +129,15 @@ public class RandomSpawnEggShopClickEvent implements Listener
                     {
                         player.sendMessage("돈이 부족합니다.");
                         return;
+                    }
+
+                    if(countMap.containsKey(uuid))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        countMap.put(uuid, 60);
                     }
 
                     int select = random.nextInt(spawneggs.size());
