@@ -28,8 +28,16 @@ public class MinerSelectShopClickEvent implements Listener
         Player player = (Player) event.getWhoClicked();
         UUID uuid = player.getUniqueId();
         Inventory inv = event.getClickedInventory();
-        if(inv == null || inv.equals(player.getInventory()))
+        if(inv == null)
             return;
+        if(inv.equals(player.getInventory()))
+        {
+            if(event.isLeftClick() && event.isShiftClick())
+            {
+                event.setCancelled(true);
+                return;
+            }
+        }
 
         String title = ChatColor.stripColor(event.getView().getTitle());
 

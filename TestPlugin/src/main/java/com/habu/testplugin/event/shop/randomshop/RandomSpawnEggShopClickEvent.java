@@ -113,8 +113,16 @@ public class RandomSpawnEggShopClickEvent implements Listener
             event.setCancelled(true);
             Inventory playerInv = player.getInventory();
             ItemStack clickedItem = event.getCurrentItem();
-            if(clickedItem == null)
+            if(inv == null)
                 return;
+            if(inv.equals(player.getInventory()))
+            {
+                if(event.isLeftClick() && event.isShiftClick())
+                {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
             if (clickedItem.isSimilar(ItemManager.gui_SpawnEgg))
             {
                 Material material = clickedItem.getType();
