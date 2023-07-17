@@ -62,6 +62,10 @@ public class PlayerManager
                 title = ChatColor.GOLD + "장작" + ChatColor.WHITE;
                 prefix = ChatColor.GOLD + "[장작]" + ChatColor.WHITE;
                 break;
+            case 5:
+                title = ChatColor.DARK_GRAY + "활" + ChatColor.WHITE;
+                prefix = ChatColor.DARK_GRAY+ "[활]" + ChatColor.WHITE;
+                break;
             default:
                 title = "???";
                 prefix = "[???]";
@@ -111,7 +115,7 @@ public class PlayerManager
                 jobName = ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE;
                 break;
             case 5:
-                jobName = "[사냥꾼]";
+                jobName = ChatColor.DARK_GREEN + "[사냥꾼]" + ChatColor.WHITE;
                 break;
             default:
                 jobName = "???";

@@ -1,9 +1,10 @@
-package com.habu.testplugin.event.shop;
+package com.habu.testplugin.event.shop.jobshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.FisherShop;
+import com.habu.testplugin.shop.FarmerSelectShop;
 import com.habu.testplugin.shop.MinerShop;
+import com.habu.testplugin.shop.WoodCutterSelectShop;
 import com.habu.testplugin.shop.WoodCutterShop;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,9 +16,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.UUID;
 
-public class MinerShopClickEvent implements Listener
+public class WoodCutterShopClickEvent implements Listener
 {
     @EventHandler
     public void onClickShop(InventoryClickEvent event)
@@ -30,7 +32,7 @@ public class MinerShopClickEvent implements Listener
 
         String title = ChatColor.stripColor(event.getView().getTitle());
 
-        if(title.equalsIgnoreCase("MinerShop"))
+        if(title.equalsIgnoreCase("WoodCutterShop"))
         {
             event.setCancelled(true);
             Inventory playerInv = player.getInventory();
@@ -40,7 +42,7 @@ public class MinerShopClickEvent implements Listener
             if (!clickedItem.equals(ItemManager.gui_GrayGlassPane))
             {
                 Material material = clickedItem.getType();
-                int price = MinerShop.GetPrice(material);
+                int price = WoodCutterShop.GetPrice(material);
 
                 if(playerInv.contains(material))
                 {
@@ -53,7 +55,7 @@ public class MinerShopClickEvent implements Listener
                     {
                         stack = SellAllItem(player, playerInv, material, uuid, price);
                     }
-                    MinerShop.SellItem(material, stack);
+                    WoodCutterShop.SellItem(material, stack);
                 }
             }
         }

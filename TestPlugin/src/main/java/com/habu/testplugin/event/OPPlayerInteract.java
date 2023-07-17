@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 public class OPPlayerInteract implements Listener
 {
     private static boolean on = false;
-    private static int jobshop = 0;
+    private static String shopType = "";
 
     public static boolean getSwitch()
     {
@@ -23,9 +23,9 @@ public class OPPlayerInteract implements Listener
         on = bool;
     }
 
-    public static void setJobNum(int num)
+    public static void setShopType(String name)
     {
-        jobshop = num;
+        shopType = name;
     }
 
 
@@ -40,57 +40,63 @@ public class OPPlayerInteract implements Listener
         if(!on)
             return;
 
-        switch (jobshop)
+        switch (shopType)
         {
-            case 1:
+            case "바다상점":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.AQUA + "바다 상점");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 2:
+            case "광물상점":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.YELLOW + "광물 상점");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 3:
+            case "작물상점":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.GREEN + "작물 상점");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 4:
+            case "나무상점":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.GOLD + "나무 상점");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 5:
+            case "잡화상점":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.WHITE + "잡화 상점");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 11:
+            case "랜덤스폰알상점":
+                npc.setSilent(true);
+                npc.setCustomName(ChatColor.LIGHT_PURPLE + "[랜덤스폰알]");
+                npc.setCustomNameVisible(true);
+                npc.setInvulnerable(true);
+                break;
+            case "낚시꾼전직":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.AQUA + "[낚시꾼]" + ChatColor.WHITE + " 인생");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 22:
+            case "광부전직":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.YELLOW + "[광부]" + ChatColor.WHITE + " 인생");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 33:
+            case "농부전직":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.GREEN + "[농부]" + ChatColor.WHITE + " 인생");
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
-            case 44:
+            case "나무꾼전직":
                 npc.setSilent(true);
                 npc.setCustomName(ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE + " 인생");
                 npc.setCustomNameVisible(true);

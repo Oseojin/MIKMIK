@@ -9,6 +9,15 @@ import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.event.*;
 import com.habu.testplugin.event.job.*;
 import com.habu.testplugin.event.shop.*;
+import com.habu.testplugin.event.shop.jobshop.FarmerShopClickEvent;
+import com.habu.testplugin.event.shop.jobshop.FisherShopClickEvent;
+import com.habu.testplugin.event.shop.jobshop.MinerShopClickEvent;
+import com.habu.testplugin.event.shop.jobshop.WoodCutterShopClickEvent;
+import com.habu.testplugin.event.shop.randomshop.RandomSpawnEggShopClickEvent;
+import com.habu.testplugin.event.shop.selectshop.FarmerSelectShopClickEvent;
+import com.habu.testplugin.event.shop.selectshop.FisherSelectShopClickEvent;
+import com.habu.testplugin.event.shop.selectshop.MinerSelectShopClickEvent;
+import com.habu.testplugin.event.shop.selectshop.WoodCutterSelectShopClickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TestPlugin extends JavaPlugin
@@ -55,11 +64,13 @@ public final class TestPlugin extends JavaPlugin
 
         getServer().getPluginManager().registerEvents(new PlayerInteractNPC(), this);
 
-        getServer().getPluginManager().registerEvents(new GeneralShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new FisherShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new MinerShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new FarmerShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new WoodCutterShopClickEvent(), this);
+
+        getServer().getPluginManager().registerEvents(new GeneralShopClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new RandomSpawnEggShopClickEvent(), this);
 
         // 운영자
         getServer().getPluginManager().registerEvents(new BlockTestEvent(), this);

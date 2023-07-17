@@ -1,4 +1,4 @@
-package com.habu.testplugin.event.shop;
+package com.habu.testplugin.event.shop.jobshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;

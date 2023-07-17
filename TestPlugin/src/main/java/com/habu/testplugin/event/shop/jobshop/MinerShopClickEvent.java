@@ -1,10 +1,9 @@
-package com.habu.testplugin.event.shop;
+package com.habu.testplugin.event.shop.jobshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.FarmerSelectShop;
+import com.habu.testplugin.shop.FisherShop;
 import com.habu.testplugin.shop.MinerShop;
-import com.habu.testplugin.shop.WoodCutterSelectShop;
 import com.habu.testplugin.shop.WoodCutterShop;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,10 +15,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.UUID;
 
-public class WoodCutterShopClickEvent implements Listener
+public class MinerShopClickEvent implements Listener
 {
     @EventHandler
     public void onClickShop(InventoryClickEvent event)
@@ -32,7 +30,7 @@ public class WoodCutterShopClickEvent implements Listener
 
         String title = ChatColor.stripColor(event.getView().getTitle());
 
-        if(title.equalsIgnoreCase("WoodCutterShop"))
+        if(title.equalsIgnoreCase("MinerShop"))
         {
             event.setCancelled(true);
             Inventory playerInv = player.getInventory();
@@ -42,7 +40,7 @@ public class WoodCutterShopClickEvent implements Listener
             if (!clickedItem.equals(ItemManager.gui_GrayGlassPane))
             {
                 Material material = clickedItem.getType();
-                int price = WoodCutterShop.GetPrice(material);
+                int price = MinerShop.GetPrice(material);
 
                 if(playerInv.contains(material))
                 {
@@ -55,7 +53,7 @@ public class WoodCutterShopClickEvent implements Listener
                     {
                         stack = SellAllItem(player, playerInv, material, uuid, price);
                     }
-                    WoodCutterShop.SellItem(material, stack);
+                    MinerShop.SellItem(material, stack);
                 }
             }
         }

@@ -44,6 +44,9 @@ public class ItemManager
 
     public static final ItemStack gui_GrayGlassPane = buildItem(Material.GRAY_STAINED_GLASS_PANE, 1, ChatColor.GRAY + "", "");
 
+    // 스폰알 뽑기
+    public static final ItemStack gui_SpawnEgg = buildGeneralItem(Material.PIG_SPAWN_EGG, ChatColor.RED + "몹 스폰 알 랜덤 뽑기", Enchantment.DURABILITY, 10, ChatColor.WHITE + "클릭하면 랜덤 뽑기를 시작합니다.");
+
     // 잡화상점
     public static final ItemStack item_AreaProtect = buildGeneralItem(Material.BRICK, "&b&l보호 지역 &7&l생성 아이템", Enchantment.DURABILITY, 10, "&9&l[ 우클릭 블럭 ] &f&l해당 블럭을 기준으로 보호 지역이 생성됩니다.");
     public static final ItemStack gui_AreaProtect = buildGeneralItem(Material.BRICK, "&b&l보호 지역 &7&l생성 아이템", Enchantment.DURABILITY, 10, "&9&l[ 우클릭 블럭 ] &f&l해당 블럭을 기준으로 보호 지역이 생성됩니다.");

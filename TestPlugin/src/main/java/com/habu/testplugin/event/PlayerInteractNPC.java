@@ -75,6 +75,11 @@ public class PlayerInteractNPC implements Listener
                 GeneralShop inv = new GeneralShop();
                 inv.open(player);
             }
+            else if(npcName.equals(ChatColor.LIGHT_PURPLE + "[랜덤스폰알]"))
+            {
+                RandomSpawnEgg inv = new RandomSpawnEgg();
+                inv.open(player);
+            }
         }
     }
 }

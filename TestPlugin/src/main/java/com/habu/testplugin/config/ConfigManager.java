@@ -1,10 +1,8 @@
 package com.habu.testplugin.config;
 
 import com.habu.testplugin.TestPlugin;
-import com.habu.testplugin.shop.WoodCutterShop;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.HashMap;
 
@@ -23,6 +21,7 @@ public class ConfigManager
         configSet.put("message", new ConfigMaker(path, "message.yml"));
         configSet.put("player", new ConfigMaker(path, "player.yml"));
         configSet.put("generalshop", new ConfigMaker(path, "generalshop.yml"));
+        configSet.put("randomshop", new ConfigMaker(path, "randomshop.yml"));
         configSet.put("fishershop", new ConfigMaker(path, "fishershop.yml"));
         configSet.put("minershop", new ConfigMaker(path, "minershop.yml"));
         configSet.put("farmershop", new ConfigMaker(path, "farmershop.yml"));
@@ -86,6 +85,7 @@ public class ConfigManager
         FileConfiguration whitelistConfig = getConfig("whitelist");
         FileConfiguration messageConfig = getConfig("message");
         FileConfiguration generalshopConfig = getConfig("generalshop");
+        FileConfiguration randomshopConfig = getConfig("randomshop");
         FileConfiguration fishershopConfig = getConfig("fishershop");
         FileConfiguration minershopConfig = getConfig("minershop");
         FileConfiguration farmershopConfig = getConfig("farmershop");
@@ -95,6 +95,7 @@ public class ConfigManager
         getConfig("player").options().copyDefaults(true);
         messageConfig.options().copyDefaults(true);
         generalshopConfig.options().copyDefaults(true);
+        randomshopConfig.options().copyDefaults(true);
         fishershopConfig.options().copyDefaults(true);
         minershopConfig.options().copyDefaults(true);
         farmershopConfig.options().copyDefaults(true);
@@ -116,6 +117,9 @@ public class ConfigManager
         generalshopConfig.addDefault("whitelist_adder.price", 25000);
         generalshopConfig.addDefault("job_initialization.price", 10000);
         generalshopConfig.addDefault("return_village.price", 2500);
+
+        // 랜덤상점
+        randomshopConfig.addDefault("random_spawn.price", 25000);
 
         // 낚시꾼
         fishershopConfig.addDefault("fisher_selecter.price", 1000);
