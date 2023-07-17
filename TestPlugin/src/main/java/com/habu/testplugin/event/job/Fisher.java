@@ -276,6 +276,11 @@ public class Fisher implements Listener
         String playerJob = PlayerManager.GetJob(player);
         if(playerJob.equals(JobNameManager.FisherName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
+            if(player.getInventory().firstEmpty() == -1)
+            {
+                player.sendMessage("인벤토리 공간을 최소 1칸 비워주세요.");
+                return;
+            }
             CustomStack stack = CustomStack.byItemStack(itemStack);
             if(stack != null)
             {

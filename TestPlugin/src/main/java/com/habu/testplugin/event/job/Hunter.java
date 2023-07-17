@@ -91,7 +91,7 @@ public class Hunter implements Listener
             String playerJob = PlayerManager.GetJob(player);
             if(playerJob.equals(JobNameManager.HunterName))
             {
-                if(entityGold.containsKey(entity.getType()))
+                if(!entityGold.containsKey(entity.getType()))
                 {
                     return;
                 }
