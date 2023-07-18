@@ -35,7 +35,9 @@ public class PlayerUseItemEvent implements Listener
         ItemStack itemStack = player.getItemInHand();
         if(!action.equals(Action.RIGHT_CLICK_BLOCK) && !action.equals(Action.RIGHT_CLICK_AIR))
             return;
-        if(itemStack.getType() == null || !usingItem.contains(itemStack))
+        if(itemStack.getType() == null)
+            return;
+        if(itemStack.getLore() == null)
             return;
         if(itemStack.getType().equals(Material.ENCHANTED_BOOK) && itemStack.getLore().get(0).equals(ChatColor.WHITE + "모루를 통해 쿠폰의 이름을 초대하고자 하는 사람의 닉네임으로 바꾼 후 우클릭하면 초대할 수 있다."))
         {

@@ -31,7 +31,7 @@ public class PlayerInteractNPC implements Listener
             String playerJob = PlayerManager.GetJob(player);
             if(npcName.equals(NPCNameManager.FisherShopNPCName))
             {
-                if(playerJob.equals(JobNameManager.FisherName))
+                if(playerJob.equals(JobNameManager.FisherName) || playerJob.equals(JobNameManager.OperatorName))
                 {
                     FisherShop inv = new FisherShop();
                     inv.open(player);
@@ -43,7 +43,7 @@ public class PlayerInteractNPC implements Listener
             }
             else if(npcName.equals(NPCNameManager.MinerShopNPCName))
             {
-                if(playerJob.equals(JobNameManager.MinerName))
+                if(playerJob.equals(JobNameManager.MinerName) || playerJob.equals(JobNameManager.OperatorName))
                 {
                     MinerShop inv = new MinerShop();
                     inv.open(player);
@@ -55,7 +55,7 @@ public class PlayerInteractNPC implements Listener
             }
             else if(npcName.equals(NPCNameManager.FarmerShopNPCName))
             {
-                if(playerJob.equals(JobNameManager.FarmerName))
+                if(playerJob.equals(JobNameManager.FarmerName) || playerJob.equals(JobNameManager.OperatorName))
                 {
                     FarmerShop inv = new FarmerShop();
                     inv.open(player);
@@ -67,7 +67,7 @@ public class PlayerInteractNPC implements Listener
             }
             else if(npcName.equals(NPCNameManager.WoodCutterShopNPCName))
             {
-                if(playerJob.equals(JobNameManager.WoodCutterName))
+                if(playerJob.equals(JobNameManager.WoodCutterName) || playerJob.equals(JobNameManager.OperatorName))
                 {
                     WoodCutterShop inv = new WoodCutterShop();
                     inv.open(player);

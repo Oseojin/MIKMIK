@@ -39,32 +39,32 @@ public class PlayerManager
         switch (titleNum)
         {
             case -1:
-                title = ChatColor.AQUA + "운영자" + ChatColor.WHITE;
-                prefix = ChatColor.AQUA + "[운영자]" + ChatColor.WHITE;
+                title = TitleNameManager.Operator;
+                prefix = TitleNameManager.Operator;
                 break;
             case 0:
-                title = "백수";
-                prefix = "[백수]";
+                title = TitleNameManager.JobLess;
+                prefix = TitleNameManager.JobLess;
                 break;
             case 1:
-                title = ChatColor.BLUE + "물고기" + ChatColor.WHITE;
-                prefix = ChatColor.BLUE + "[물고기]" + ChatColor.WHITE;
+                title = TitleNameManager.Fisher1;
+                prefix = TitleNameManager.Fisher1;
                 break;
             case 2:
-                title = ChatColor.YELLOW + "곡괭이" + ChatColor.WHITE;
-                prefix = ChatColor.YELLOW + "[곡괭이]" + ChatColor.WHITE;
+                title = TitleNameManager.Miner1;
+                prefix = TitleNameManager.Miner1;
                 break;
             case 3:
-                title = ChatColor.GREEN + "밀" + ChatColor.WHITE;
-                prefix = ChatColor.GREEN + "[밀]" + ChatColor.WHITE;
+                title = TitleNameManager.Farmer1;
+                prefix = TitleNameManager.Farmer1;
                 break;
             case 4:
-                title = ChatColor.GOLD + "장작" + ChatColor.WHITE;
-                prefix = ChatColor.GOLD + "[장작]" + ChatColor.WHITE;
+                title = TitleNameManager.WoodCutter1;
+                prefix = TitleNameManager.WoodCutter1;
                 break;
             case 5:
-                title = ChatColor.RED + "활" + ChatColor.WHITE;
-                prefix = ChatColor.RED + "[활]" + ChatColor.WHITE;
+                title = TitleNameManager.Hunter1;
+                prefix = TitleNameManager.Hunter1;
                 break;
             default:
                 title = "???";
@@ -99,6 +99,9 @@ public class PlayerManager
 
         switch (jobNum)
         {
+            case -1:
+                jobName = JobNameManager.OperatorName;
+                break;
             case 0:
                 jobName = JobNameManager.JobLessName;
                 break;

@@ -93,10 +93,10 @@ public final class TestPlugin extends JavaPlugin
         getCommand("statcheck").setExecutor(new StatChecker());
         getCommand("switchcheckblock").setExecutor(new BlockCheckCommand());
         getCommand("shopnpcapply").setExecutor(new NPCSHOPAPPLY());
-        getCommand("setplayergold").setExecutor(new SetPlayerGold());
-        getCommand("addplayergold").setExecutor(new AddPlayerGold());
-        getCommand("setplayerjob").setExecutor(new SetPlayerJob());
-        getCommand("setplayertitle").setExecutor(new SetPlayerTitle());
+        getCommand("goldsetplayer").setExecutor(new SetPlayerGold());
+        getCommand("goldaddplayer").setExecutor(new AddPlayerGold());
+        getCommand("jobsetplayer").setExecutor(new SetPlayerJob());
+        getCommand("titlesetplayer").setExecutor(new SetPlayerTitle());
     }
 
     @Override

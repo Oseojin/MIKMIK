@@ -12,13 +12,13 @@ commands:
     description: statcheck
   switchcheckblock:
     description: turn on/off block id Check
-  setplayergold:
+  goldsetplayer:
     description: set player gold
-  addplayergold:
+  goldaddplayer:
     description: add player gold
-  setplayerjob:
+  jobsetplayer:
     description: set player job
-  setplayertitle:
+  titlesetplayer:
     description: set player title
   calloperator:
     description: 운영자 호출
