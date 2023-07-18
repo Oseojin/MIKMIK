@@ -72,7 +72,7 @@ public class FisherShopClickEvent implements Listener
         switch (size)
         {
             case "거대한":
-                magnification = 100;
+                magnification = 500;
                 break;
             case "큰":
                 magnification = 5;

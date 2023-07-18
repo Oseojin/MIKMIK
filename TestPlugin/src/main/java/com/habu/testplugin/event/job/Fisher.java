@@ -233,7 +233,7 @@ public class Fisher implements Listener
         // 95   >>> 75    > 15     > 0    // 실 구현
         String size = "";
 
-        if(doubleSize >= 120)
+        if(doubleSize >= 130)
         {
             size = ChatColor.RED + "거대한";
         }
