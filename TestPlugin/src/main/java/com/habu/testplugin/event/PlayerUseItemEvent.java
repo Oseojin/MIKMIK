@@ -17,10 +17,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PlayerUseItemEvent implements Listener
 {
     Location villageLocation = new Location(Bukkit.getWorlds().get(0), 273.5f, 67.0f, -315.5f);
+
+    List<ItemStack> usingItem = new ArrayList<ItemStack>(Arrays.asList(ItemManager.item_WhiteListAdder, ItemManager.item_ReturnVillage));
+
     @EventHandler
     public void PlayerUseItem(PlayerInteractEvent event)
     {
@@ -29,7 +35,7 @@ public class PlayerUseItemEvent implements Listener
         ItemStack itemStack = player.getItemInHand();
         if(!action.equals(Action.RIGHT_CLICK_BLOCK) && !action.equals(Action.RIGHT_CLICK_AIR))
             return;
-        if(itemStack.getType() == null || itemStack.getType().equals(ItemManager.gui_GrayGlassPane))
+        if(itemStack.getType() == null || !usingItem.contains(itemStack))
             return;
         if(itemStack.getType().equals(Material.ENCHANTED_BOOK) && itemStack.getLore().get(0).equals(ChatColor.WHITE + "모루를 통해 쿠폰의 이름을 초대하고자 하는 사람의 닉네임으로 바꾼 후 우클릭하면 초대할 수 있다."))
         {
