@@ -140,16 +140,16 @@ public class ConfigManager
 
         // 광부
         minershopConfig.addDefault("miner_selecter.price", 1000);
-        minershopConfig.addDefault("coal.price", 1);
-        minershopConfig.addDefault("copper.price", 3);
-        minershopConfig.addDefault("iron.price", 4);
-        minershopConfig.addDefault("gold.price", 10);
-        minershopConfig.addDefault("lapis_lazuli.price", 6);
-        minershopConfig.addDefault("redstone.price", 3);
-        minershopConfig.addDefault("diamond.price", 80);
-        minershopConfig.addDefault("emerald.price", 90);
-        minershopConfig.addDefault("amethyst_shard.price", 120);
-        minershopConfig.addDefault("quartz.price", 12);
+        minershopConfig.addDefault("coal.price", 3);
+        minershopConfig.addDefault("copper.price", 8);
+        minershopConfig.addDefault("iron.price", 15);
+        minershopConfig.addDefault("gold.price", 25);
+        minershopConfig.addDefault("lapis_lazuli.price", 15);
+        minershopConfig.addDefault("redstone.price", 8);
+        minershopConfig.addDefault("diamond.price", 200);
+        minershopConfig.addDefault("emerald.price", 375);
+        minershopConfig.addDefault("amethyst_shard.price", 300);
+        minershopConfig.addDefault("quartz.price", 30);
         minershopConfig.addDefault("netherite.price", 4000);
 
         minershopConfig.addDefault("miner_selecter.volume", 0);
