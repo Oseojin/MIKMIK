@@ -31,6 +31,7 @@ public final class TestPlugin extends JavaPlugin
         getServer().getPluginManager().registerEvents(new InventorySave(), this);
         getServer().getPluginManager().registerEvents(new PlayerUseItemEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerTeleport(), this);
+        getServer().getPluginManager().registerEvents(new CraftBanEvent(), this);
 
         // 직업
         getServer().getPluginManager().registerEvents(new UseJobSelecter(), this);

@@ -94,7 +94,13 @@ public class MinerShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가] " + price));
+        List<String> lore = new ArrayList<>();
+        for(int i = 0; i < itemMeta.getLore().size() - 1; i++)
+        {
+            lore.add(itemMeta.getLore().get(i));
+        }
+        lore.add(ChatColor.GOLD + "[판매가] " + price);
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }
 

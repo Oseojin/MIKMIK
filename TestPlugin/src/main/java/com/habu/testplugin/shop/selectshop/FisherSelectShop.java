@@ -69,7 +69,7 @@ public class FisherSelectShop implements InventoryHolder
         {
             lore.add(itemMeta.getLore().get(i));
         }
-         lore.add(ChatColor.GOLD + "[판매가] " + price);
+        lore.add(ChatColor.GOLD + "[판매가] " + price);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }

@@ -48,7 +48,6 @@ public class InventorySave implements Listener
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         Inventory playerInv = player.getInventory();
-        player.sendMessage("사망");
 
         if(playerInv.containsAtLeast(ItemManager.item_InventorySave, 1))
         {
@@ -60,7 +59,7 @@ public class InventorySave implements Listener
                     continue;
                 if(invItem.isSimilar(ItemManager.item_InventorySave) && !findSaveItem)
                 {
-                    player.sendMessage("아이템 소거");
+                    player.sendMessage(ChatColor.AQUA + "인벤토리 보호 쿠폰이 사라집니다.");
 
                     int amount = invItem.getAmount() - 1;
                     invItem.setAmount(amount);
@@ -87,6 +86,7 @@ public class InventorySave implements Listener
             {
                 player.getWorld().dropItem(player.getLocation(), IssuingCheckCommand.IssuingCheck(gold));
                 PlayerManager.SetGold(player, 0);
+                player.sendMessage(ChatColor.DARK_RED + "약탈자에게 모든 돈을 빼앗겼습니다!");
             }
         }
         else
@@ -94,6 +94,7 @@ public class InventorySave implements Listener
             if(gold > 0)
             {
                 int halfGold = Math.round(PlayerManager.GetGold(player) / 2);
+                player.sendMessage(ChatColor.RED + "" + (PlayerManager.GetGold(player) - halfGold) + "골드가 사라졌습니다...");
                 PlayerManager.SetGold(player, halfGold);
             }
         }

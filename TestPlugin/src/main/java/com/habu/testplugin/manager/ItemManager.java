@@ -45,22 +45,22 @@ public class ItemManager
     public static final ItemStack gui_GrayGlassPane = buildItem(Material.GRAY_STAINED_GLASS_PANE, 1, ChatColor.GRAY + "", "");
 
     // 스폰알 뽑기
-    public static final ItemStack gui_SpawnEgg = buildGeneralItem(Material.PIG_SPAWN_EGG, ChatColor.RED + "몹 스폰 알 랜덤 뽑기", Enchantment.DURABILITY, 10, ChatColor.WHITE + "클릭하면 랜덤 뽑기를 시작합니다.");
+    public static final ItemStack gui_SpawnEgg = buildGeneralItem(Material.PIG_SPAWN_EGG, ChatColor.RED + "몹 스폰 알 랜덤 뽑기", Enchantment.DURABILITY, 10, ChatColor.WHITE + "클릭하면 랜덤 뽑기를 시작합니다.", ChatColor.WHITE + "판매가: ");
 
     // 잡화상점
     public static final ItemStack item_AreaProtect = buildGeneralItem(Material.BRICK, "&b&l보호 지역 &7&l생성 아이템", Enchantment.DURABILITY, 10, "&9&l[ 우클릭 블럭 ] &f&l해당 블럭을 기준으로 보호 지역이 생성됩니다.");
-    public static final ItemStack gui_AreaProtect = buildGeneralItem(Material.BRICK, "&b&l보호 지역 &7&l생성 아이템", Enchantment.DURABILITY, 10, "&9&l[ 우클릭 블럭 ] &f&l해당 블럭을 기준으로 보호 지역이 생성됩니다.");
+    public static final ItemStack gui_AreaProtect = buildGeneralItem(Material.BRICK, "&b&l보호 지역 &7&l생성 아이템", Enchantment.DURABILITY, 10, "&9&l[ 우클릭 블럭 ] &f&l해당 블럭을 기준으로 보호 지역이 생성됩니다.", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_DoorLock = buildGeneralItem(Material.TRIPWIRE_HOOK,"&b&l문 &7&l잠금장치", "§b§l[ 문에 우클릭 ] §f§l우클릭 한 문이 잠가집니다.");
-    public static final ItemStack gui_DoorLock = buildGeneralItem(Material.TRIPWIRE_HOOK,"&b&l문 &7&l잠금장치", "§b§l[ 문에 우클릭 ] §f§l우클릭 한 문이 잠가집니다.");
+    public static final ItemStack gui_DoorLock = buildGeneralItem(Material.TRIPWIRE_HOOK,"&b&l문 &7&l잠금장치", "§b§l[ 문에 우클릭 ] §f§l우클릭 한 문이 잠가집니다.", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_InventorySave = buildGeneralItem(Material.NETHER_STAR, ChatColor.AQUA + "인벤토리 보호 쿠폰", Enchantment.DURABILITY, 10,  ChatColor.WHITE + "인벤토리에 소지 하고 있으면 죽어도 아이템을 잃지 않는다.");
-    public static final ItemStack gui_InventorySave = buildItem(Material.NETHER_STAR, 1, ChatColor.AQUA + "인벤토리 보호 쿠폰",  ChatColor.WHITE + "인벤토리에 소지 하고 있으면 죽어도 아이템을 잃지 않는다.");
+    public static final ItemStack gui_InventorySave = buildItem(Material.NETHER_STAR, 1, ChatColor.AQUA + "인벤토리 보호 쿠폰",  ChatColor.WHITE + "인벤토리에 소지 하고 있으면 죽어도 아이템을 잃지 않는다.", ChatColor.RED + "단, 보유중인 골드와 수표는 보호되지 않는다.", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_JobInitializer = buildGeneralItem(Material.PAPER, ChatColor.AQUA + "직업 초기화", Enchantment.DURABILITY, 10, ChatColor.WHITE + "손에 들고 우클릭하면 백수가 될 수 있다.");
-    public static final ItemStack gui_JobInitializer = buildItem(Material.PAPER, 1, ChatColor.AQUA + "직업 초기화", ChatColor.WHITE + "손에 들고 우클릭하면 백수가 될 수 있다.");
+    public static final ItemStack gui_JobInitializer = buildItem(Material.PAPER, 1, ChatColor.AQUA + "직업 초기화", ChatColor.WHITE + "손에 들고 우클릭하면 백수가 될 수 있다.", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_ReturnVillage = buildGeneralItem(Material.BOOK, ChatColor.AQUA + "마을 귀환서", Enchantment.DURABILITY, 10, ChatColor.WHITE + "사용하면 5초뒤 마을로 이동된다.");
-    public static final ItemStack gui_ReturnVillage = buildItem(Material.BOOK, 1, ChatColor.AQUA + "마을 귀환서", ChatColor.WHITE + "사용하면 5초뒤 마을로 이동된다.");
+    public static final ItemStack gui_ReturnVillage = buildItem(Material.BOOK, 1, ChatColor.AQUA + "마을 귀환서", ChatColor.WHITE + "사용하면 5초뒤 마을로 이동된다.", ChatColor.WHITE + "판매가: ");
 
     public static final ItemStack item_WhiteListAdder = buildGeneralItem(Material.ENCHANTED_BOOK, ChatColor.AQUA + "서버 초대 쿠폰", Enchantment.DURABILITY, 10, ChatColor.WHITE + "모루를 통해 쿠폰의 이름을 초대하고자 하는 사람의 닉네임으로 바꾼 후 우클릭하면 초대할 수 있다.");
-    public static final ItemStack gui_WhiteListAdder = buildItem(Material.ENCHANTED_BOOK, 1, ChatColor.AQUA + "서버 초대 쿠폰", ChatColor.WHITE + "모루를 통해 쿠폰의 이름을 초대하고자 하는 사람의 닉네임으로 바꾼 후 우클릭하면 초대할 수 있다.");
+    public static final ItemStack gui_WhiteListAdder = buildItem(Material.ENCHANTED_BOOK, 1, ChatColor.AQUA + "서버 초대 쿠폰", ChatColor.WHITE + "모루를 통해 쿠폰의 이름을 초대하고자 하는 사람의 닉네임으로 바꾼 후 우클릭하면 초대할 수 있다.", ChatColor.WHITE + "판매가: ");
 
     // 낚시꾼
     public static final ItemStack gui_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.", ChatColor.AQUA + "[낚시꾼]", ChatColor.WHITE + "크기 별 물고기 획득 가능", ChatColor.WHITE + "일정 확률로 낚시 주머니 획득 가능", ChatColor.WHITE + "바다 상점 이용 가능", ChatColor.WHITE + "판매가: ");

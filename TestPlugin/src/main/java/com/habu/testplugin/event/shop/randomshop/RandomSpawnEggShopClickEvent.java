@@ -168,8 +168,6 @@ public class RandomSpawnEggShopClickEvent implements Listener
                                 }
                                 else
                                 {
-                                    player.sendMessage(select+ "");
-
                                     ItemStack randomSpawnEgg = new ItemStack(spawneggs.get(select), 1);
                                     inv.setItem(13, randomSpawnEgg);
                                     PurchaseItem(player, spawneggs.get(select), uuid, price);
@@ -203,6 +201,5 @@ public class RandomSpawnEggShopClickEvent implements Listener
         ItemStack itemStack = new ItemStack(material, 1);
         player.getInventory().addItem(itemStack);
         PlayerManager.UseGold(player, price);
-        player.sendMessage(itemStack.getItemMeta().getDisplayName() + ChatColor.WHITE + "를 " + price + " 골드에 구매하였습니다.");
     }
 }

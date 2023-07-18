@@ -70,8 +70,13 @@ public class RandomSpawnEgg implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        String lore0 = itemStack.getLore().get(0);
-        itemMeta.setLore(Arrays.asList(lore0, ChatColor.GOLD + "[판매가] " + price));
+        List<String> lore = new ArrayList<>();
+        for(int i = 0; i < itemMeta.getLore().size() - 1; i++)
+        {
+            lore.add(itemMeta.getLore().get(i));
+        }
+        lore.add(ChatColor.GOLD + "[판매가] " + price);
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }
 

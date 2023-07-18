@@ -82,7 +82,7 @@ public class FisherShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가]", ChatColor.GREEN + "[작은] " + price, ChatColor.AQUA + "[보통] " + price * 2, ChatColor.GOLD + "[큰] " + price * 5, ChatColor.RED + "[거대한] " + price * 100));
+        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가]", ChatColor.GREEN + "[작은] " + price, ChatColor.AQUA + "[보통] " + price * 2, ChatColor.YELLOW + "[큰] " + price * 5, ChatColor.RED + "[거대한] " + price * 100));
         itemStack.setItemMeta(itemMeta);
     }
 

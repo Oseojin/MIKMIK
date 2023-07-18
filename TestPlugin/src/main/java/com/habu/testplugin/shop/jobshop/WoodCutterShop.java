@@ -12,10 +12,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class WoodCutterShop implements InventoryHolder
 {
@@ -102,7 +99,13 @@ public class WoodCutterShop implements InventoryHolder
         ItemMeta itemMeta = itemStack.getItemMeta();
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
-        itemMeta.setLore(Arrays.asList(ChatColor.GOLD + "[판매가] " + price));
+        List<String> lore = new ArrayList<>();
+        for(int i = 0; i < itemMeta.getLore().size() - 1; i++)
+        {
+            lore.add(itemMeta.getLore().get(i));
+        }
+        lore.add(ChatColor.GOLD + "[판매가] " + price);
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }
 
