@@ -3,15 +3,12 @@ package com.habu.testplugin.event;
 import com.habu.testplugin.command.IssuingCheckCommand;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
@@ -21,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class InventorySave implements Listener
+public class PlayerDeathEvent implements Listener
 {
     public Map<UUID, ItemStack[]> inventories = new HashMap();
     public Map<UUID, ItemStack[]> armor = new HashMap();
@@ -43,13 +40,13 @@ public class InventorySave implements Listener
     }
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent event)
+    public void onDeath(org.bukkit.event.entity.PlayerDeathEvent event)
     {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         Inventory playerInv = player.getInventory();
 
-        if(playerInv.containsAtLeast(ItemManager.item_InventorySave, 1))
+        if(playerInv.containsAtLeast(ItemManager.item_InventorySave, 1) || playerInv.containsAtLeast(ItemManager.item_InventorySave_Deleted, 1))
         {
             boolean findSaveItem = false;
             for(int i = 0; i < playerInv.getSize(); i++)

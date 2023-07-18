@@ -58,6 +58,7 @@ public class ItemManager
     public static final ItemStack gui_AreaProtect = buildGeneralItem(Material.BRICK, "&b&l보호 지역 &7&l생성 아이템", Enchantment.DURABILITY, 10, "&9&l[ 우클릭 블럭 ] &f&l해당 블럭을 기준으로 보호 지역이 생성됩니다.", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_DoorLock = buildGeneralItem(Material.TRIPWIRE_HOOK,"&b&l문 &7&l잠금장치", "§b§l[ 문에 우클릭 ] §f§l우클릭 한 문이 잠가집니다.");
     public static final ItemStack gui_DoorLock = buildGeneralItem(Material.TRIPWIRE_HOOK,"&b&l문 &7&l잠금장치", "§b§l[ 문에 우클릭 ] §f§l우클릭 한 문이 잠가집니다.", ChatColor.WHITE + "판매가: ");
+    public static final ItemStack item_InventorySave_Deleted = buildGeneralItem(Material.NETHER_STAR, ChatColor.AQUA + "인벤토리 보호 쿠폰", Enchantment.DURABILITY, 10,  ChatColor.WHITE + "인벤토리에 소지 하고 있으면 죽어도 아이템을 잃지 않는다.");
     public static final ItemStack item_InventorySave = buildGeneralItem(Material.NETHER_STAR, ChatColor.AQUA + "인벤토리 보호 쿠폰", Enchantment.DURABILITY, 10,  ChatColor.WHITE + "인벤토리에 소지 하고 있으면 죽어도 아이템을 잃지 않는다.", ChatColor.RED + "단, 보유중인 골드와 수표는 보호되지 않는다.");
     public static final ItemStack gui_InventorySave = buildItem(Material.NETHER_STAR, 1, ChatColor.AQUA + "인벤토리 보호 쿠폰",  ChatColor.WHITE + "인벤토리에 소지 하고 있으면 죽어도 아이템을 잃지 않는다.", ChatColor.RED + "단, 보유중인 골드와 수표는 보호되지 않는다.", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_JobInitializer = buildGeneralItem(Material.PAPER, ChatColor.AQUA + "직업 초기화", Enchantment.DURABILITY, 10, ChatColor.WHITE + "손에 들고 우클릭하면 백수가 될 수 있다.");

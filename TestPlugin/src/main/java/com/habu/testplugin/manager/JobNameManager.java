@@ -11,4 +11,5 @@ public class JobNameManager
     public static String FarmerName = ChatColor.GREEN + "[농부]" + ChatColor.WHITE;
     public static String WoodCutterName = ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE;
     public static String HunterName = ChatColor.RED + "[사냥꾼]" + ChatColor.WHITE;
+
 }
