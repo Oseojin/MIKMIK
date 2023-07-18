@@ -29,7 +29,7 @@ public class CallOperator implements CommandExecutor
             }
         }
 
-    player.sendMessage(ChatColor.RED + "운영자가 부재중입니다.");
+        player.sendMessage(ChatColor.RED + "운영자가 부재중입니다.");
 
         return false;
     }

@@ -1,7 +1,6 @@
 package com.habu.testplugin.event.job;
 
 import com.habu.testplugin.manager.NPCNameManager;
-import com.habu.testplugin.shop.selectshop.FisherSelectShop;
 import com.habu.testplugin.shop.selectshop.HunterSelectShop;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;

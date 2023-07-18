@@ -50,6 +50,12 @@ public class ItemManager
 
     public static final ItemStack gui_GrayGlassPane = buildItem(Material.GRAY_STAINED_GLASS_PANE, 1, ChatColor.GRAY + "", "");
 
+    // 코인 투자
+    public static final ItemStack gui_PungsanDogCoin = buildItem(Material.BONE, 1, CoinManager.PungsanDogCoinName);
+    public static final ItemStack gui_MoleCoin = buildItem(Material.DIAMOND_SHOVEL, 1, CoinManager.MoleCoinName);
+    public static final ItemStack gui_BeetCoin = buildItem(Material.BEETROOT, 1, CoinManager.BeetCoinName);
+    public static final ItemStack gui_KimchiCoin = buildItem(Material.ROTTEN_FLESH, 1, CoinManager.KimchiCoinName);
+
     // 스폰알 뽑기
     public static final ItemStack gui_SpawnEgg = buildGeneralItem(Material.PIG_SPAWN_EGG, ChatColor.RED + "몹 스폰 알 랜덤 뽑기", Enchantment.DURABILITY, 10, ChatColor.WHITE + "클릭하면 랜덤 뽑기를 시작합니다.", ChatColor.WHITE + "판매가: ");
 

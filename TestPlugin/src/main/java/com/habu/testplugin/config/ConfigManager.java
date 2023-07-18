@@ -21,6 +21,7 @@ public class ConfigManager
         configSet.put("message", new ConfigMaker(path, "message.yml"));
         configSet.put("player", new ConfigMaker(path, "player.yml"));
         configSet.put("generalshop", new ConfigMaker(path, "generalshop.yml"));
+        configSet.put("coinshop", new ConfigMaker(path, "coinshop.yml"));
         configSet.put("randomshop", new ConfigMaker(path, "randomshop.yml"));
         configSet.put("fishershop", new ConfigMaker(path, "fishershop.yml"));
         configSet.put("minershop", new ConfigMaker(path, "minershop.yml"));
@@ -86,6 +87,7 @@ public class ConfigManager
         FileConfiguration whitelistConfig = getConfig("whitelist");
         FileConfiguration messageConfig = getConfig("message");
         FileConfiguration generalshopConfig = getConfig("generalshop");
+        FileConfiguration coinshopConfig = getConfig("coinshop");
         FileConfiguration randomshopConfig = getConfig("randomshop");
         FileConfiguration fishershopConfig = getConfig("fishershop");
         FileConfiguration minershopConfig = getConfig("minershop");
@@ -98,6 +100,7 @@ public class ConfigManager
         getConfig("player").options().copyDefaults(true);
         messageConfig.options().copyDefaults(true);
         generalshopConfig.options().copyDefaults(true);
+        coinshopConfig.options().copyDefaults(true);
         randomshopConfig.options().copyDefaults(true);
         fishershopConfig.options().copyDefaults(true);
         minershopConfig.options().copyDefaults(true);
@@ -121,6 +124,24 @@ public class ConfigManager
         generalshopConfig.addDefault("whitelist_adder.price", 15000);
         generalshopConfig.addDefault("job_initialization.price", 10000);
         generalshopConfig.addDefault("return_village.price", 2500);
+
+        // 코인상점
+        coinshopConfig.addDefault("pungsandog_coin.delisting", false);
+        coinshopConfig.addDefault("pungsandog_coin.maxvariation", 50);
+        coinshopConfig.addDefault("pungsandog_coin.price", 100);
+        coinshopConfig.addDefault("pungsandog_coin.basic_price", 100);
+        coinshopConfig.addDefault("mole_coin.delisting", false);
+        coinshopConfig.addDefault("mole_coin.maxvariation", 500);
+        coinshopConfig.addDefault("mole_coin.price", 1000);
+        coinshopConfig.addDefault("mole_coin.basic_price", 1000);
+        coinshopConfig.addDefault("beet_coin.delisting", false);
+        coinshopConfig.addDefault("beet_coin.maxvariation", 1000);
+        coinshopConfig.addDefault("beet_coin.price", 2500);
+        coinshopConfig.addDefault("beet_coin.basic_price", 2500);
+        coinshopConfig.addDefault("kimchi_coin.delisting", false);
+        coinshopConfig.addDefault("kimchi_coin.maxvariation", 2500);
+        coinshopConfig.addDefault("kimchi_coin.price", 5000);
+        coinshopConfig.addDefault("kimchi_coin.basic_price", 5000);
 
         // 랜덤상점
         randomshopConfig.addDefault("random_spawn.price", 25000);
@@ -190,19 +211,19 @@ public class ConfigManager
 
         // 나무꾼
         woodcuttershopConfig.addDefault("woodcutter_selecter.price", 1000);
-        woodcuttershopConfig.addDefault("oak.price", 4);
-        woodcuttershopConfig.addDefault("spruce.price", 4);
-        woodcuttershopConfig.addDefault("birch.price", 4);
-        woodcuttershopConfig.addDefault("jungle.price", 4);
-        woodcuttershopConfig.addDefault("acacia.price", 4);
-        woodcuttershopConfig.addDefault("dark_oak.price", 4);
-        woodcuttershopConfig.addDefault("mangrove.price", 4);
-        woodcuttershopConfig.addDefault("crimson_stem.price", 6);
-        woodcuttershopConfig.addDefault("mushroom_stem.price", 5);
-        woodcuttershopConfig.addDefault("warped_stem.price", 7);
-        woodcuttershopConfig.addDefault("apple.price", 12);
-        woodcuttershopConfig.addDefault("golden_apple.price", 70);
-        woodcuttershopConfig.addDefault("enchanted_golden_apple.price", 200);
+        woodcuttershopConfig.addDefault("oak.price", 5);
+        woodcuttershopConfig.addDefault("spruce.price", 5);
+        woodcuttershopConfig.addDefault("birch.price", 5);
+        woodcuttershopConfig.addDefault("jungle.price", 5);
+        woodcuttershopConfig.addDefault("acacia.price", 5);
+        woodcuttershopConfig.addDefault("dark_oak.price", 5);
+        woodcuttershopConfig.addDefault("mangrove.price", 5);
+        woodcuttershopConfig.addDefault("crimson_stem.price", 8);
+        woodcuttershopConfig.addDefault("mushroom_stem.price", 7);
+        woodcuttershopConfig.addDefault("warped_stem.price", 10);
+        woodcuttershopConfig.addDefault("apple.price", 20);
+        woodcuttershopConfig.addDefault("golden_apple.price", 100);
+        woodcuttershopConfig.addDefault("enchanted_golden_apple.price", 500);
 
         woodcuttershopConfig.addDefault("woodcutter_selecter.volume", 0);
         woodcuttershopConfig.addDefault("oak.volume", 0);

@@ -3,7 +3,8 @@ package com.habu.testplugin.event;
 import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.NPCNameManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.*;
+import com.habu.testplugin.shop.CoinShop;
+import com.habu.testplugin.shop.GeneralShop;
 import com.habu.testplugin.shop.jobshop.FarmerShop;
 import com.habu.testplugin.shop.jobshop.FisherShop;
 import com.habu.testplugin.shop.jobshop.MinerShop;
@@ -85,6 +86,11 @@ public class PlayerInteractNPC implements Listener
             else if(npcName.equals(NPCNameManager.RandomSpawnEggShopNPCName))
             {
                 RandomSpawnEgg inv = new RandomSpawnEgg();
+                inv.open(player);
+            }
+            else if(npcName.equals(NPCNameManager.CoinShopNPCName))
+            {
+                CoinShop inv = new CoinShop();
                 inv.open(player);
             }
         }

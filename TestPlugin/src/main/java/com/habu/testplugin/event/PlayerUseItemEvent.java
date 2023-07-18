@@ -25,8 +25,6 @@ public class PlayerUseItemEvent implements Listener
 {
     Location villageLocation = new Location(Bukkit.getWorlds().get(0), 273.5f, 67.0f, -315.5f);
 
-    List<ItemStack> usingItem = new ArrayList<ItemStack>(Arrays.asList(ItemManager.item_WhiteListAdder, ItemManager.item_ReturnVillage));
-
     @EventHandler
     public void PlayerUseItem(PlayerInteractEvent event)
     {
@@ -47,7 +45,7 @@ public class PlayerUseItemEvent implements Listener
                 player.sendMessage(ChatColor.DARK_AQUA + "사람 이름이 이거라구요..? 다시 생각해봐요..!");
                 return;
             }
-            player.sendMessage(ChatColor.GREEN + inviteName + "님이 서버에 초대되었습니다!");
+            Bukkit.broadcastMessage(ChatColor.GREEN + inviteName + "님이 서버에 초대되었습니다!");
             TestPlugin.getConfigManager().getConfig("whitelist").addDefault("players."+inviteName.toLowerCase(), true);
             TestPlugin.getConfigManager().saveConfig("whitelist");
             player.getInventory().removeItem(itemStack);

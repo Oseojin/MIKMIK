@@ -2,7 +2,6 @@ package com.habu.testplugin.event.shop.selectshop;
 
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.selectshop.FarmerSelectShop;
 import com.habu.testplugin.shop.selectshop.HunterSelectShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

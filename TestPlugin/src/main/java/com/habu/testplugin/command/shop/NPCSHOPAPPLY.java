@@ -43,6 +43,9 @@ public class NPCSHOPAPPLY implements CommandExecutor
                         case "랜덤스폰알상점":
                             sender.sendMessage("랜덤 스폰알 상점");
                             break;
+                        case "코인거래소":
+                            sender.sendMessage("코인 거래소");
+                            break;
                         case "낚시꾼전직":
                             sender.sendMessage("낚시꾼 전직");
                             break;

@@ -79,6 +79,12 @@ public class OPPlayerInteract implements Listener
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
+            case "코인거래소":
+                npc.setSilent(true);
+                npc.setCustomName(NPCNameManager.CoinShopNPCName);
+                npc.setCustomNameVisible(true);
+                npc.setInvulnerable(true);
+                break;
             case "낚시꾼전직":
                 npc.setSilent(true);
                 npc.setCustomName(NPCNameManager.FisherSelectShopNPCName);

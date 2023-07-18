@@ -1,10 +1,7 @@
 package com.habu.testplugin;
 
 import com.habu.testplugin.command.*;
-import com.habu.testplugin.command.operatorcommand.AddPlayerGold;
-import com.habu.testplugin.command.operatorcommand.SetPlayerGold;
-import com.habu.testplugin.command.operatorcommand.SetPlayerJob;
-import com.habu.testplugin.command.operatorcommand.SetPlayerTitle;
+import com.habu.testplugin.command.operatorcommand.*;
 import com.habu.testplugin.command.shop.*;
 import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.event.*;
@@ -74,6 +71,7 @@ public final class TestPlugin extends JavaPlugin
 
         getServer().getPluginManager().registerEvents(new GeneralShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new RandomSpawnEggShopClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new CoinShopClickEvent(), this);
 
         // 운영자
         getServer().getPluginManager().registerEvents(new BlockTestEvent(), this);
@@ -98,6 +96,7 @@ public final class TestPlugin extends JavaPlugin
         getCommand("goldaddplayer").setExecutor(new AddPlayerGold());
         getCommand("jobsetplayer").setExecutor(new SetPlayerJob());
         getCommand("titlesetplayer").setExecutor(new SetPlayerTitle());
+        getCommand("mycoin").setExecutor(new CheckCoin());
     }
 
     @Override

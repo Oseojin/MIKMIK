@@ -174,6 +174,49 @@ public class PlayerManager
         PlayerScoreboardManager.reloadScboard(player);
     }
 
+    public static void SetCoin(Player player, String coin, Integer amount)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players."+uuid+coin;
+        PlayerConfig.set(path, amount);
+        SavePlayerConfig();
+    }
+
+    public static int GetCoin(Player player, String coin)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players."+uuid+coin;
+        if(PlayerConfig.getInt(path) == 0)
+        {
+            PlayerConfig.set(path, 0);
+        }
+        return PlayerConfig.getInt(path);
+    }
+
+    public static void AddCoin(Player player, String coin, Integer amount)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players."+uuid+coin;
+        if(PlayerConfig.getInt(path) == 0)
+        {
+            PlayerConfig.set(path, 0);
+        }
+        int currCoin = PlayerConfig.getInt(path);
+        currCoin += amount;
+        PlayerConfig.set(path, currCoin);
+        SavePlayerConfig();
+    }
+
+    public static void SellCoin(Player player, String coin, Integer amount)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players."+uuid+coin;
+        int currCoin = PlayerConfig.getInt(path);
+        currCoin -= amount;
+        PlayerConfig.set(path, currCoin);
+        SavePlayerConfig();
+    }
+
     private static void SavePlayerConfig()
     {
         TestPlugin.getConfigManager().saveConfig("player");

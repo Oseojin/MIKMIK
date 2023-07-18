@@ -20,6 +20,9 @@ commands:
     description: set player job
   titlesetplayer:
     description: set player title
+  mycoin:
+    description: 코인 개수 확인
+    aliases: 코인
   calloperator:
     description: 운영자 호출
     aliases: 호출

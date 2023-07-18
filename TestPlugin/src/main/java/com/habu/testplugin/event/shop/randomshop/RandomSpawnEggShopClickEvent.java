@@ -3,18 +3,15 @@ package com.habu.testplugin.event.shop.randomshop;
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.GeneralShop;
 import com.habu.testplugin.shop.randomshop.RandomSpawnEgg;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
