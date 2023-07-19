@@ -209,7 +209,7 @@ public class ConfigManager
         farmershopConfig.addDefault("carrot.price", 2);
         farmershopConfig.addDefault("potato.price", 2);
         farmershopConfig.addDefault("beetroot.price", 6);
-        farmershopConfig.addDefault("melon.price", 10);
+        farmershopConfig.addDefault("melon.price", 4);
         farmershopConfig.addDefault("pumpkin.price", 36);
         farmershopConfig.addDefault("sweet_berries.price", 2);
         farmershopConfig.addDefault("cocoa_beans.price", 8);
