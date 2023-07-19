@@ -188,7 +188,7 @@ public class ConfigManager
         minershopConfig.addDefault("emerald.price", 120);
         minershopConfig.addDefault("amethyst_shard.price", 300);
         minershopConfig.addDefault("quartz.price", 30);
-        minershopConfig.addDefault("netherite.price", 4000);
+        minershopConfig.addDefault("netherite.price", 10000);
 
         minershopConfig.addDefault("miner_selecter.volume", 0);
         minershopConfig.addDefault("coal.volume", 0);
