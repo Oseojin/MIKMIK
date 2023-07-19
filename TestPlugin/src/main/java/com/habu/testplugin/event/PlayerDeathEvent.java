@@ -46,7 +46,7 @@ public class PlayerDeathEvent implements Listener
         UUID uuid = player.getUniqueId();
         Inventory playerInv = player.getInventory();
 
-        if(playerInv.containsAtLeast(ItemManager.item_InventorySave, 1) || playerInv.containsAtLeast(ItemManager.item_InventorySave_Deleted, 1))
+        if(playerInv.containsAtLeast(ItemManager.item_InventorySave, 1) || playerInv.containsAtLeast(ItemManager.item_InventorySave_Deleted, 1) || player.getInventory().getItemInOffHand().isSimilar(ItemManager.item_InventorySave) || player.getInventory().getItemInOffHand().isSimilar(ItemManager.item_InventorySave_Deleted))
         {
             boolean findSaveItem = false;
             for(int i = 0; i < playerInv.getSize(); i++)
