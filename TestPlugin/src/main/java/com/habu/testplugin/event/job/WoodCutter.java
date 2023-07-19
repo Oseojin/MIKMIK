@@ -5,11 +5,13 @@ import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,7 +22,9 @@ public class WoodCutter implements Listener
 {
     Random random = new Random();
 
-    List<Material> tree = new LinkedList<Material>(Arrays.asList(Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG, Material.JUNGLE_LOG
+    List<Block> placedBlocks = new LinkedList<>();
+
+    List<Material> tree = new ArrayList<>(Arrays.asList(Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG, Material.JUNGLE_LOG
             , Material.ACACIA_LOG, Material.DARK_OAK_LOG, Material.MANGROVE_LOG, Material.CRIMSON_STEM, Material.WARPED_STEM, Material.MUSHROOM_STEM));
 
     String bagId = "customitems:woodbag_";
@@ -147,6 +151,11 @@ public class WoodCutter implements Listener
         {
             if(tree.contains(event.getBlock().getType()))
             {
+                if(placedBlocks.contains(event.getBlock()))
+                {
+                    placedBlocks.remove(event.getBlock());
+                    return;
+                }
                 int randomNum = random.nextInt(10);
                 if(randomNum >= 8) // 10% 확률로 나무가방 획득
                 {
@@ -160,5 +169,14 @@ public class WoodCutter implements Listener
         }
     }
 
-    // 플레이어 한테 아이템 주는 함수
+    @EventHandler
+    public void PlaceTree(BlockPlaceEvent event)
+    {
+        Player player = event.getPlayer();
+        Block placedBlock = event.getBlockPlaced();
+        if(PlayerManager.GetJob(player).equals(JobNameManager.WoodCutterName) && tree.contains(placedBlock.getType()))
+        {
+            placedBlocks.add(placedBlock);
+        }
+    }
 }
