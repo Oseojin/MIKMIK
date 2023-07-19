@@ -88,11 +88,7 @@ public class PlayerInteractNPC implements Listener
                 RandomSpawnEgg inv = new RandomSpawnEgg();
                 inv.open(player);
             }
-        }
-        else if(entity.getType().equals(EntityType.WITCH))
-        {
-            String npcName = entity.getName();
-            if(npcName.equals(NPCNameManager.CoinShopNPCName))
+            else if(npcName.equals(NPCNameManager.CoinShopNPCName))
             {
                 CoinShop inv = new CoinShop();
                 inv.open(player);
