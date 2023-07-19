@@ -5,6 +5,7 @@ import com.habu.testplugin.command.operatorcommand.*;
 import com.habu.testplugin.command.shop.*;
 import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.event.*;
+import com.habu.testplugin.event.Battle.EnderDragonBattle;
 import com.habu.testplugin.event.job.*;
 import com.habu.testplugin.event.shop.*;
 import com.habu.testplugin.event.shop.jobshop.FarmerShopClickEvent;
@@ -72,6 +73,9 @@ public final class TestPlugin extends JavaPlugin
         getServer().getPluginManager().registerEvents(new GeneralShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new RandomSpawnEggShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new CoinShopClickEvent(), this);
+
+        // 전투
+        getServer().getPluginManager().registerEvents(new EnderDragonBattle(), this);
 
         // 운영자
         getServer().getPluginManager().registerEvents(new BlockTestEvent(), this);
