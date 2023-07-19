@@ -1,5 +1,6 @@
 package com.habu.testplugin.event.shop;
 
+import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.CoinManager;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
@@ -20,10 +21,10 @@ public class CoinShopClickEvent implements Listener
 {
     private static HashMap<Material, String> itemMap = new HashMap<Material, String>()
     {{
-        put(Material.BONE, ".pungsandog_coin");
-        put(Material.DIAMOND_SHOVEL, ".mole_coin");
-        put(Material.BEETROOT, ".beet_coin");
-        put(Material.ROTTEN_FLESH, ".kimchi_coin");
+        put(Material.BONE, "pungsandog_coin");
+        put(Material.DIAMOND_SHOVEL, "mole_coin");
+        put(Material.BEETROOT, "beet_coin");
+        put(Material.ROTTEN_FLESH, "kimchi_coin");
     }};
 
     @EventHandler
@@ -74,7 +75,7 @@ public class CoinShopClickEvent implements Listener
 
     private void PurchaseItem(Player player, Material material, UUID uuid, Integer price)
     {
-        String coinPath = itemMap.get(material);
+        String coinPath = "." + itemMap.get(material);
         String path = uuid + coinPath;
 
         if(!CoinShop.GetOpen())
@@ -88,6 +89,13 @@ public class CoinShopClickEvent implements Listener
             player.sendMessage("돈이 부족합니다.");
             return;
         }
+
+        if(CoinShop.shopConfig.getBoolean(itemMap.get(material) + ".delisting"))
+        {
+            player.sendMessage("상장폐지된 코인은 구매할 수 없습니다.");
+            return;
+        }
+
         PlayerManager.AddCoin(player, coinPath, 1);
         PlayerManager.UseGold(player, price);
 
@@ -116,7 +124,7 @@ public class CoinShopClickEvent implements Listener
 
     private void SellItem(Player player, Material material, UUID uuid, Integer price)
     {
-        String coinPath = itemMap.get(material);
+        String coinPath = "." + itemMap.get(material);
         String path = uuid + coinPath;
 
         if(!CoinShop.GetOpen())
@@ -159,7 +167,7 @@ public class CoinShopClickEvent implements Listener
 
     private void SellAllItem(Player player, Material material, UUID uuid, Integer price)
     {
-        String coinPath = itemMap.get(material);
+        String coinPath = "." + itemMap.get(material);
         String path = uuid + coinPath;
 
         if(!CoinShop.GetOpen())

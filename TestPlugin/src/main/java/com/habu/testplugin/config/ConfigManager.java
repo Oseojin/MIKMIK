@@ -126,20 +126,37 @@ public class ConfigManager
         generalshopConfig.addDefault("return_village.price", 2500);
 
         // 코인상점
+
+        coinshopConfig.addDefault("isopen.now", false);
+        coinshopConfig.addDefault("starttimer.basic", 3600);
+        coinshopConfig.addDefault("starttimer.now", 3600);
+        coinshopConfig.addDefault("opentimer.basic", 32400);
+        coinshopConfig.addDefault("opentimer.now", 32400);
+        coinshopConfig.addDefault("changetimer.basic", 600);
+        coinshopConfig.addDefault("changetimer.now", 600);
+
+
         coinshopConfig.addDefault("pungsandog_coin.delisting", false);
-        coinshopConfig.addDefault("pungsandog_coin.maxvariation", 50);
+        coinshopConfig.addDefault("pungsandog_coin.delisting_count", 3600);
+        coinshopConfig.addDefault("pungsandog_coin.maxvariation", 20);
         coinshopConfig.addDefault("pungsandog_coin.price", 100);
         coinshopConfig.addDefault("pungsandog_coin.basic_price", 100);
+
         coinshopConfig.addDefault("mole_coin.delisting", false);
-        coinshopConfig.addDefault("mole_coin.maxvariation", 500);
+        coinshopConfig.addDefault("mole_coin.delisting_count", 3600);
+        coinshopConfig.addDefault("mole_coin.maxvariation", 200);
         coinshopConfig.addDefault("mole_coin.price", 1000);
         coinshopConfig.addDefault("mole_coin.basic_price", 1000);
+
         coinshopConfig.addDefault("beet_coin.delisting", false);
-        coinshopConfig.addDefault("beet_coin.maxvariation", 1000);
+        coinshopConfig.addDefault("beet_coin.delisting_count", 3600);
+        coinshopConfig.addDefault("beet_coin.maxvariation", 500);
         coinshopConfig.addDefault("beet_coin.price", 2500);
         coinshopConfig.addDefault("beet_coin.basic_price", 2500);
+
         coinshopConfig.addDefault("kimchi_coin.delisting", false);
-        coinshopConfig.addDefault("kimchi_coin.maxvariation", 2500);
+        coinshopConfig.addDefault("kimchi_coin.delisting_count", 3600);
+        coinshopConfig.addDefault("kimchi_coin.maxvariation", 1000);
         coinshopConfig.addDefault("kimchi_coin.price", 5000);
         coinshopConfig.addDefault("kimchi_coin.basic_price", 5000);
 

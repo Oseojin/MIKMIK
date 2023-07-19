@@ -1,6 +1,7 @@
 package com.habu.testplugin.shop;
 
 import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.event.ChatEvent;
 import com.habu.testplugin.manager.CoinManager;
 import com.habu.testplugin.manager.ItemManager;
@@ -25,13 +26,11 @@ public class CoinShop implements InventoryHolder
 
     static Inventory coinInv;
     static String configName = "coinshop";
-    private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
+    public static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
     static Random random = new Random();
 
     private static boolean isOpen = false;
-
-    Timer timer = new Timer();
-    Calendar date = Calendar.getInstance();
+    public static HashMap<String, Boolean> coinDelistings = new HashMap<String, Boolean>();
 
     private static int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
@@ -64,9 +63,11 @@ public class CoinShop implements InventoryHolder
     {
         new BukkitRunnable()
         {
+            int currTime;
             @Override
             public void run()
             {
+                isOpen = shopConfig.getBoolean("isopen.now");
                 Thread coinReRoll = new Thread(
                         new Runnable()
                         {
@@ -77,44 +78,69 @@ public class CoinShop implements InventoryHolder
                             }
                         }
                 );
-                if(CoinManager.isNull())
+                if (isOpen)
                 {
-                    itemNamePare.forEach((key, value) ->
-                    {
-                        int basic_price = shopConfig.getInt(value + ".basic_price");
-                        shopConfig.set(value + ".price", basic_price);
-                    });
-                    isOpen = true;
-                    Bukkit.broadcastMessage(ChatColor.AQUA + "오늘의 코인이 시작되었습니다.");
                     coinReRoll.run();
-                    Thread coinStop = new Thread(
-                            new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    StopCoin();
-                                }
-                            }
-                    );
-                    coinStop.run();
+                    StopCoin();
+                    this.cancel();
+                }
+                else
+                {
+                    currTime = shopConfig.getInt("starttimer.now");
+                    if (currTime <= 0)
+                    {
+                        itemNamePare.forEach((key, value) ->
+                        {
+                            int basic_price = shopConfig.getInt(value + ".basic_price");
+                            shopConfig.set(value + ".price", basic_price);
+                            shopConfig.set(value + ".delisting", false);
+                            TestPlugin.getConfigManager().saveConfig(configName);
+                        });
+
+                        Bukkit.broadcastMessage(ChatColor.AQUA + "오늘의 코인이 시작되었습니다.");
+                        shopConfig.set("starttimer.now", shopConfig.get("starttimer.basic"));
+                        shopConfig.set("isopen.now", true);
+                        isOpen = shopConfig.getBoolean("isopen.now");
+                        TestPlugin.getConfigManager().saveConfig(configName);
+                        coinReRoll.run();
+                        StopCoin();
+                        this.cancel();
+                    }
+                    else
+                    {
+                        shopConfig.set("starttimer.now", --currTime);
+                        TestPlugin.getConfigManager().saveConfig(configName);
+                    }
                 }
             }
-        }.runTaskLater(TestPlugin.getPlugin(), 72000L);
+        }.runTaskTimer(TestPlugin.getPlugin(), 0, 20L);
     }
 
     public static void StopCoin()
     {
         new BukkitRunnable()
         {
+            int currTime;
             @Override
             public void run()
             {
-                CoinManager.Stop();
-                AllCoinSell();
-                isOpen = false;
+                isOpen = shopConfig.getBoolean("isopen.now");
+                if(isOpen)
+                {
+                    currTime = shopConfig.getInt("opentimer.now");
+                    shopConfig.set("opentimer.now", --currTime);
+                    if(currTime <= 0)
+                    {
+                        AllCoinSell();
+                        shopConfig.set("isopen.now", false);
+                        isOpen = shopConfig.getBoolean("isopen.now");
+                        shopConfig.set("opentimer.now", shopConfig.get("opentimer.basic"));
+                        this.cancel();
+                    }
+                    TestPlugin.getConfigManager().saveConfig(configName);
+                }
             }
-        }.runTaskLater(TestPlugin.getPlugin(), 648000L);
+        }.runTaskTimer(TestPlugin.getPlugin(), 0, 20L);
     }
 
     public CoinShop()
@@ -132,7 +158,11 @@ public class CoinShop implements InventoryHolder
                     }
                 }
         );
-        coinStar.run();
+        if(CoinManager.isNull())
+        {
+            CoinManager.getInstance();
+            coinStar.run();
+        }
     }
 
     public static void setItems()
@@ -153,10 +183,17 @@ public class CoinShop implements InventoryHolder
                     ItemMeta itemMeta = indexItem.getItemMeta();
                     int price = shopConfig.getInt(itemNamePare.get(indexItem.getType()) + ".price");
                     List<String> lore = new ArrayList<>();
-                    lore.add(ChatColor.GOLD + "현재가: " + price + " (0.0%)");
-                    lore.add(ChatColor.WHITE + "좌클릭: 1개 구매");
-                    lore.add(ChatColor.WHITE + "우클릭: 1개 판매");
-                    lore.add(ChatColor.WHITE + "Shift + 우클릭: 전부 판매");
+                    if(shopConfig.getBoolean(itemNamePare.get(indexItem.getType()) + ".delisting"))
+                    {
+                        lore.add(ChatColor.RED + "해당 코인은 사망했습니다...");
+                    }
+                    else
+                    {
+                        lore.add(ChatColor.GOLD + "현재가: " + price + " (0.0%)");
+                        lore.add(ChatColor.WHITE + "좌클릭: 1개 구매");
+                        lore.add(ChatColor.WHITE + "우클릭: 1개 판매");
+                        lore.add(ChatColor.WHITE + "Shift + 우클릭: 전부 판매");
+                    }
                     itemMeta.setLore(lore);
                     indexItem.setItemMeta(itemMeta);
                     coinInv.setItem(index, indexItem);
@@ -205,7 +242,7 @@ public class CoinShop implements InventoryHolder
 
             int variation = (int) Math.round(maxVariation * ((double)randNum / 100));
 
-            double fluctuation = Math.round(variation / (double)price * 100 * 100) / 100;
+            double fluctuation = Math.round(variation / (double)price * 100.0 * 10.0) / 10.0;
 
             randNum = random.nextInt(100) + 1;
 
@@ -217,9 +254,11 @@ public class CoinShop implements InventoryHolder
                 shopConfig.set(pricepath, 0);
                 lore.add(ChatColor.RED + "해당 코인은 사망했습니다...");
                 AllPlayerCoinZero(itemName);
+                TestPlugin.getConfigManager().saveConfig(configName);
+                return;
             }
 
-            if (fluctuation > 0)
+            else if (fluctuation > 0)
             {
                 lore.add(ChatColor.GREEN + "현재가: " + price + " (+" + fluctuation + "%)");
             }
@@ -236,6 +275,29 @@ public class CoinShop implements InventoryHolder
             lore.add(ChatColor.WHITE + "Shift + 우클릭: 전부 판매");
 
             shopConfig.set(pricepath, price);
+
+            TestPlugin.getConfigManager().saveConfig(configName);
+        }
+        else
+        {
+            lore.add(ChatColor.RED + "해당 코인은 사망했습니다...");
+
+            Thread thread = new Thread(
+                    new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            CoinManager.DelistingCoinCount(itemName);
+                        }
+                    }
+            );
+            if(!coinDelistings.containsKey(itemName))
+            {
+                coinDelistings.put(itemName, true);
+                thread.run();
+            }
+            TestPlugin.getConfigManager().saveConfig(configName);
         }
 
 
@@ -297,27 +359,33 @@ public class CoinShop implements InventoryHolder
         sumPrice.clear();
     }
 
-    private static void AllPlayerCoinZero(String coinPath)
+    private static void AllPlayerCoinZero(String coinName)
     {
-        coinPath = "." + coinPath;
+        String coinPath = "." + coinName;
+        ItemStack coin;
 
-        String coinName;
+        String coinDisplayName;
         switch (coinPath)
         {
             case ".pungsandog_coin":
-                coinName = CoinManager.PungsanDogCoinName;
+                coinDisplayName = CoinManager.PungsanDogCoinName;
+                coin = ItemManager.gui_PungsanDogCoin;
                 break;
             case ".mole_coin":
-                coinName = CoinManager.MoleCoinName;
+                coinDisplayName = CoinManager.MoleCoinName;
+                coin = ItemManager.gui_MoleCoin;
                 break;
             case ".beet_coin":
-                coinName = CoinManager.BeetCoinName;
+                coinDisplayName = CoinManager.BeetCoinName;
+                coin = ItemManager.gui_BeetCoin;
                 break;
             case ".kimchi_coin":
-                coinName = CoinManager.KimchiCoinName;
+                coinDisplayName = CoinManager.KimchiCoinName;
+                coin = ItemManager.gui_KimchiCoin;
                 break;
             default:
-                coinName = "???";
+                coinDisplayName = "???";
+                coin = null;
         }
         List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
         for(int i = 0; i < playerList.size(); i++)
@@ -326,7 +394,7 @@ public class CoinShop implements InventoryHolder
             int coinAmount = PlayerManager.GetCoin(player, coinPath);
             if(coinAmount > 0)
             {
-                player.sendMessage(coinName + ChatColor.RED + " 이 상장폐지되었습니다.");
+                player.sendMessage(coinDisplayName + ChatColor.RED + " 이 상장폐지되었습니다.");
                 PlayerManager.SetCoin(player, coinPath, 0);
             }
         }

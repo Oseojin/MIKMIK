@@ -1,9 +1,11 @@
 package com.habu.testplugin.manager;
 
 import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.shop.CoinShop;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -13,8 +15,10 @@ import java.util.TimerTask;
 
 public class CoinManager
 {
+    static String configName = "coinshop";
+    private static FileConfiguration shopConfig = TestPlugin.getConfigManager().getConfig(configName);
     private static CoinManager instance;
-    private static Timer timer;
+    private static int maxDelistingCount = 60; // 3600
 
     private CoinManager()
     {
@@ -33,11 +37,6 @@ public class CoinManager
         return instance;
     }
 
-    public static void Stop()
-    {
-        timer.cancel();
-    }
-
     public static Boolean isNull()
     {
         if(instance == null)
@@ -50,20 +49,64 @@ public class CoinManager
         }
     }
 
-    TimerTask coinReRollTask = new TimerTask()
-    {
-        @Override
-        public void run()
-        {
-            CoinShop.initItemSetting();
-            CoinShop.reloadAllItems();
-        }
-    };
-
     public static void CoinReRoll()
     {
-        timer = new Timer();
-        timer.schedule(instance.coinReRollTask, 0, 600000);
+        new BukkitRunnable()
+        {
+            int currTime;
+
+            @Override
+            public void run()
+            {
+                if(CoinShop.GetOpen())
+                {
+                    currTime = shopConfig.getInt("changetimer.now");
+                    if(currTime <= 0)
+                    {
+                        shopConfig.set("changetimer.now", shopConfig.getInt("changetimer.basic"));
+                        TestPlugin.getConfigManager().saveConfig(configName);
+                        CoinShop.initItemSetting();
+                        CoinShop.reloadAllItems();
+                    }
+                    else
+                    {
+                        shopConfig.set("changetimer.now", --currTime);
+                        TestPlugin.getConfigManager().saveConfig(configName);
+                    }
+                }
+                else
+                {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(TestPlugin.getPlugin(), 0, 20L);
+    }
+
+    public static void DelistingCoinCount(String coinName)
+    {
+        new BukkitRunnable()
+        {
+            int currTime;
+            @Override
+            public void run()
+            {
+                if(CoinShop.GetOpen())
+                {
+                    currTime = shopConfig.getInt(coinName + ".delisting_count");
+                    if(currTime <= 0)
+                    {
+                        shopConfig.set(coinName + ".delisting", false);
+                        shopConfig.set(coinName + ".delisting_count", maxDelistingCount);
+                        shopConfig.set(coinName + ".price", shopConfig.get(coinName + ".basic_price"));
+                        TestPlugin.getConfigManager().saveConfig(configName);
+                    }
+                    else
+                    {
+                        shopConfig.set(coinName + ".delisting_count", --currTime);
+                    }
+                }
+            }
+        }.runTaskTimer(TestPlugin.getPlugin(), 0, 20L);
     }
 
     public static String PungsanDogCoinName = ChatColor.GREEN + "[풍산개코인]";
