@@ -95,7 +95,7 @@ public class FisherShopClickEvent implements Listener
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
             ItemStack invItem = playerInv.getItem(i);
-            if(invItem == null)
+            if(invItem == null || !invItem.getItemMeta().hasLore())
                 continue;
             Material invItemMaterial = invItem.getType();
             if(invItemMaterial.equals(material))
@@ -116,7 +116,7 @@ public class FisherShopClickEvent implements Listener
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
             ItemStack invItem = playerInv.getItem(i);
-            if(invItem == null)
+            if(invItem == null || !invItem.getItemMeta().hasLore())
                 continue;
             Material invItemMaterial = invItem.getType();
             if(invItemMaterial.equals(material))
