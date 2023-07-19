@@ -185,7 +185,7 @@ public class ConfigManager
         minershopConfig.addDefault("lapis_lazuli.price", 15);
         minershopConfig.addDefault("redstone.price", 8);
         minershopConfig.addDefault("diamond.price", 200);
-        minershopConfig.addDefault("emerald.price", 375);
+        minershopConfig.addDefault("emerald.price", 120);
         minershopConfig.addDefault("amethyst_shard.price", 300);
         minershopConfig.addDefault("quartz.price", 30);
         minershopConfig.addDefault("netherite.price", 4000);
