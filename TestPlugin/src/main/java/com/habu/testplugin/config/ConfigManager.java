@@ -213,7 +213,7 @@ public class ConfigManager
         farmershopConfig.addDefault("pumpkin.price", 36);
         farmershopConfig.addDefault("sweet_berries.price", 2);
         farmershopConfig.addDefault("cocoa_beans.price", 8);
-        farmershopConfig.addDefault("nether_wart.price", 30);
+        farmershopConfig.addDefault("nether_wart.price", 10);
 
         farmershopConfig.addDefault("farmer_selecter.volume", 0);
         farmershopConfig.addDefault("wheat.volume", 0);
