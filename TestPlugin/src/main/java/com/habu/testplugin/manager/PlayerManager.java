@@ -193,28 +193,67 @@ public class PlayerManager
         return PlayerConfig.getInt(path);
     }
 
-    public static void AddCoin(Player player, String coin, Integer amount)
+    public static void AddCoin(Player player, String coin, Integer amount, Integer price)
     {
         UUID uuid = player.getUniqueId();
+        String totalPath = "players."+uuid+coin+"_total";
         String path = "players."+uuid+coin;
         if(PlayerConfig.getInt(path) == 0)
         {
             PlayerConfig.set(path, 0);
         }
+        if(PlayerConfig.getInt(totalPath) == 0)
+        {
+            PlayerConfig.set(totalPath, 0);
+        }
         int currCoin = PlayerConfig.getInt(path);
         currCoin += amount;
+        PlayerConfig.set(path, currCoin);
+
+        int currtotal = PlayerConfig.getInt(totalPath);
+        currtotal += price;
+        PlayerConfig.set(totalPath, currtotal);
+
+        SavePlayerConfig();
+    }
+
+    public static void SellCoin(Player player, String coin, Integer amount, Integer price)
+    {
+        UUID uuid = player.getUniqueId();
+        String totalPath = "players."+uuid+coin+"_total";
+        String path = "players."+uuid+coin;
+        int currCoin = PlayerConfig.getInt(path);
+        currCoin -= amount;
+
+        int currtotal = PlayerConfig.getInt(totalPath);
+        currtotal -= price;
+
+        PlayerConfig.set(totalPath, currtotal);
         PlayerConfig.set(path, currCoin);
         SavePlayerConfig();
     }
 
-    public static void SellCoin(Player player, String coin, Integer amount)
+    public static int GetAvgCoin(Player player, String coin)
     {
         UUID uuid = player.getUniqueId();
-        String path = "players."+uuid+coin;
-        int currCoin = PlayerConfig.getInt(path);
-        currCoin -= amount;
-        PlayerConfig.set(path, currCoin);
-        SavePlayerConfig();
+        String totalPath = "players."+uuid+coin+"_total";
+        String amountPath = "players."+uuid+coin;
+
+        if(PlayerConfig.getInt(totalPath) == 0)
+        {
+            PlayerConfig.set(totalPath, 0);
+        }
+        if(PlayerConfig.getInt(amountPath) == 0)
+        {
+            PlayerConfig.set(amountPath, 0);
+        }
+
+        int totalPrice = PlayerConfig.getInt(totalPath);
+        int amount = PlayerConfig.getInt(amountPath);
+
+        int avgPrice = (int)Math.round((double)totalPrice / (double)amount);
+
+        return avgPrice;
     }
 
     private static void SavePlayerConfig()

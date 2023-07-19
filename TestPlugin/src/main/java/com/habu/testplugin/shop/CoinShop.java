@@ -341,7 +341,7 @@ public class CoinShop implements InventoryHolder
                 if(coinAmount > 0)
                 {
                     player.sendMessage(coinName + ChatColor.WHITE + " 코인의 수입은 " + ChatColor.GOLD + coinPrice * coinAmount + " 골드 " + ChatColor.WHITE + "입니다.");
-                    PlayerManager.SellCoin(player, coinPath, coinAmount);
+                    PlayerManager.SellCoin(player, coinPath, coinAmount, coinPrice * coinAmount);
                     PlayerManager.AddGold(player, coinAmount * coinPrice);
 
                     if(!sumPrice.containsKey(player))

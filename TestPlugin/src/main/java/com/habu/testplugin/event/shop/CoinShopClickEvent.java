@@ -96,7 +96,7 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        PlayerManager.AddCoin(player, coinPath, 1);
+        PlayerManager.AddCoin(player, coinPath, 1, price);
         PlayerManager.UseGold(player, price);
 
         String coinName;
@@ -139,7 +139,7 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        PlayerManager.SellCoin(player, coinPath, 1);
+        PlayerManager.SellCoin(player, coinPath, 1, price);
         PlayerManager.AddGold(player, price);
 
         String coinName;
@@ -184,7 +184,7 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        PlayerManager.SellCoin(player, coinPath, amount);
+        PlayerManager.SellCoin(player, coinPath, amount, price * amount);
         PlayerManager.AddGold(player, price * amount);
 
         String coinName;
