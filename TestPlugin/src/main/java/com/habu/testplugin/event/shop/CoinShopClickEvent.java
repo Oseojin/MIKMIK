@@ -147,16 +147,16 @@ public class CoinShopClickEvent implements Listener
         switch (coinPath)
         {
             case ".pungsandog_coin":
-                coinName = ChatColor.GREEN + "풍산개코인";
+                coinName = CoinManager.PungsanDogCoinName;
                 break;
             case ".mole_coin":
-                coinName = ChatColor.GOLD + "두더지코인";
+                coinName = CoinManager.MoleCoinName;
                 break;
             case ".beet_coin":
-                coinName = ChatColor.RED + "비트코인";
+                coinName = CoinManager.BeetCoinName;
                 break;
             case ".kimchi_coin":
-                coinName = ChatColor.DARK_RED + "김치코인";
+                coinName = CoinManager.KimchiCoinName;
                 break;
             default:
                 coinName = "???";
@@ -192,16 +192,16 @@ public class CoinShopClickEvent implements Listener
         switch (coinPath)
         {
             case ".pungsandog_coin":
-                coinName = ChatColor.GREEN + "풍산개코인";
+                coinName = CoinManager.PungsanDogCoinName;
                 break;
             case ".mole_coin":
-                coinName = ChatColor.GOLD + "두더지코인";
+                coinName = CoinManager.MoleCoinName;
                 break;
             case ".beet_coin":
-                coinName = ChatColor.RED + "비트코인";
+                coinName = CoinManager.BeetCoinName;
                 break;
             case ".kimchi_coin":
-                coinName = ChatColor.DARK_RED + "김치코인";
+                coinName = CoinManager.KimchiCoinName;
                 break;
             default:
                 coinName = "???";
