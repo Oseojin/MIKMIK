@@ -115,6 +115,12 @@ public class OPPlayerInteract implements Listener
                 npc.setCustomNameVisible(true);
                 npc.setInvulnerable(true);
                 break;
+            case "뇌창전직":
+                npc.setSilent(true);
+                npc.setCustomName(NPCNameManager.LightningNPCName);
+                npc.setCustomNameVisible(true);
+                npc.setInvulnerable(true);
+                break;
             default:
         }
     }

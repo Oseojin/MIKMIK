@@ -28,6 +28,7 @@ public class ConfigManager
         configSet.put("farmershop", new ConfigMaker(path, "farmershop.yml"));
         configSet.put("woodcuttershop", new ConfigMaker(path, "woodcuttershop.yml"));
         configSet.put("huntershop", new ConfigMaker(path, "huntershop.yml"));
+        configSet.put("hidden", new ConfigMaker(path, "hidden.yml"));
         loadSettings();
         saveConfigs();
     }
@@ -94,6 +95,7 @@ public class ConfigManager
         FileConfiguration farmershopConfig = getConfig("farmershop");
         FileConfiguration woodcuttershopConfig = getConfig("woodcuttershop");
         FileConfiguration hunterhopConfig = getConfig("huntershop");
+        FileConfiguration hiddenConfig = getConfig("hidden");
 
 
         whitelistConfig.options().copyDefaults(true);
@@ -107,6 +109,7 @@ public class ConfigManager
         farmershopConfig.options().copyDefaults(true);
         woodcuttershopConfig.options().copyDefaults(true);
         hunterhopConfig.options().copyDefaults(true);
+        hiddenConfig.options().copyDefaults(true);
 
         messageConfig.addDefault("join-message.display-message", true);
         messageConfig.addDefault("join-message.message", "&7{playername} 님이 접속하였습니다.");
@@ -116,6 +119,12 @@ public class ConfigManager
         messageConfig.addDefault("kick-message.message", "&7{playername} 님이 {reason} 이유로 인해 퇴장당하셨습니다.");
         messageConfig.addDefault("new-player-join-message.display-message", true);
         messageConfig.addDefault("new-player-join-message.message", "&7{playername} 이(가) 걸음마를 시작했습니다.");
+
+        // 히든
+        hiddenConfig.addDefault("LightningCharger.find", false);
+        hiddenConfig.addDefault("LightningCharger.quest", false);
+        hiddenConfig.addDefault("LightningCharger.complete", false);
+
 
         // 잡화상점
         generalshopConfig.addDefault("area_protect.price", 50000);

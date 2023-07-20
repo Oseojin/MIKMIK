@@ -1,4 +1,4 @@
-package com.habu.testplugin.event.Hidden;
+package com.habu.testplugin.Hidden;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
@@ -26,14 +26,36 @@ public class LightningCharger implements Listener
     Random random = new Random();
     private static Integer charge = 0;
     private static String weaponName = ChatColor.AQUA + "[뇌창]";
-    private static Integer weaponRate = 1;
 
-    public static ItemStack weapon = ItemManager.buildWeapon(Material.TRIDENT, 1, weaponName + "_" + weaponRate + "차", 15, Enchantment.LOYALTY, 5, ChatColor.YELLOW + "1차: 삼지창을 맞은 엔티티에게 1 ~ 10회 낙뢰 (충전량 5 소모)");
+    public static ItemStack weapon = ItemManager.buildWeapon(Material.TRIDENT, 1, weaponName, 15, Enchantment.LOYALTY, 5, ChatColor.YELLOW + "1차: 삼지창을 맞은 엔티티에게 1 ~ 10회 낙뢰 (충전량 5 소모)");
     @EventHandler
     public void Interact(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         Action action = event.getAction();
+    }
+
+    @EventHandler
+    public void TheQualificationOfLightning(EntityDamageByEntityEvent event)
+    {
+        if(!event.getDamager().getType().equals(EntityType.LIGHTNING))
+        {
+            return;
+        }
+
+        if(event.getEntity() instanceof Player)
+        {
+            Player player = (Player) event.getEntity();
+            if(PlayerManager.GetHidden(player, LightningChargerManager.LightningChargerName) > 0)
+            {
+                if(!LightningChargerManager.HiddenConfig.getBoolean(LightningChargerManager.LightningChargerName + ".quest"))
+                {
+                    player.sendTitle(ChatColor.YELLOW + "히든: 뇌창 퀘스트 완료", ChatColor.WHITE + "전직 NPC에게 돌아가세요");
+                    LightningChargerManager.HiddenConfig.set(LightningChargerManager.LightningChargerName + ".quest", true);
+                    TestPlugin.getConfigManager().saveConfig("hidden");
+                }
+            }
+        }
     }
 
     @EventHandler
@@ -47,50 +69,46 @@ public class LightningCharger implements Listener
 
             if(PlayerManager.GetTitle(player).equals(TitleNameManager.LightningCharger))
             {
-                if(player.getItemInHand().isSimilar(weapon))
-                {
-                    Location targetLoc = hitEntity.getLocation();
+                Location targetLoc = hitEntity.getLocation();
 
-                    Thread SeriesLightning = new Thread(
-                            new Runnable()
+                Thread SeriesLightning = new Thread(
+                        new Runnable()
+                        {
+                            int count = random.nextInt(9) + 1;
+                            @Override
+                            public void run()
                             {
-                                int count = random.nextInt(9) + 1;
-                                @Override
-                                public void run()
+                                new BukkitRunnable()
                                 {
-                                    Bukkit.broadcastMessage(""+count);
-                                    new BukkitRunnable()
+                                    @Override
+                                    public void run()
                                     {
-                                        @Override
-                                        public void run()
+                                        if(count != -1)
                                         {
-                                            if(count != -1)
+                                            if(count <= 0)
                                             {
-                                                if(count <= 0)
-                                                {
-                                                    this.cancel();
-                                                }
-                                                else
-                                                {
-                                                    hitEntity.getWorld().spawnEntity(targetLoc, EntityType.LIGHTNING);
-                                                    count--;
-                                                }
+                                                this.cancel();
+                                            }
+                                            else
+                                            {
+                                                hitEntity.getWorld().spawnEntity(targetLoc, EntityType.LIGHTNING);
+                                                count--;
                                             }
                                         }
-                                    }.runTaskTimer(TestPlugin.getPlugin(), 10L, 10L);
-                                }
+                                    }
+                                }.runTaskTimer(TestPlugin.getPlugin(), 5L, 2L);
                             }
-                    );
-                    if(charge >= 5)
-                    {
-                        SeriesLightning.run();
-                        charge -= 5;
-                        player.sendMessage(ChatColor.YELLOW + "충전량 5 소모 | 현재 잔량: " + charge);
-                    }
-                    else
-                    {
-                        Charge(player, player.getItemInHand());
-                    }
+                        }
+                );
+                if(charge >= 5)
+                {
+                    SeriesLightning.run();
+                    charge -= 5;
+                    player.sendMessage(ChatColor.YELLOW + "충전량 5 소모 | 현재 잔량: " + charge);
+                }
+                else
+                {
+                    Charge(player);
                 }
             }
         }
@@ -101,18 +119,17 @@ public class LightningCharger implements Listener
             {
                 if(player.getItemInHand().isSimilar(weapon))
                 {
-                    Charge(player, player.getItemInHand());
+                    Charge(player);
                 }
             }
         }
     }
 
-    private void Charge(Player player, ItemStack item)
+    private void Charge(Player player)
     {
             if(PlayerManager.GetTitle(player).equals(TitleNameManager.LightningCharger))
             {
-                String strclassRate = item.getItemMeta().getDisplayName().replace(weaponName + "_", "").replace("차", "");
-                int classRate = Integer.parseInt(strclassRate);
+                int classRate = PlayerManager.GetHidden(player, LightningChargerManager.LightningChargerName);
                 switch (classRate)
                 {
                     case 1:

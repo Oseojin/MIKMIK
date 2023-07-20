@@ -1,12 +1,13 @@
 package com.habu.testplugin;
 
+import com.habu.testplugin.Hidden.LightningNPC;
 import com.habu.testplugin.command.*;
 import com.habu.testplugin.command.operatorcommand.*;
 import com.habu.testplugin.command.shop.*;
 import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.event.*;
 import com.habu.testplugin.event.Battle.EnderDragonBattle;
-import com.habu.testplugin.event.Hidden.LightningCharger;
+import com.habu.testplugin.Hidden.LightningCharger;
 import com.habu.testplugin.event.job.*;
 import com.habu.testplugin.event.shop.*;
 import com.habu.testplugin.event.shop.jobshop.FarmerShopClickEvent;
@@ -60,8 +61,9 @@ public final class TestPlugin extends JavaPlugin
         getServer().getPluginManager().registerEvents(new HunterSelectNPC(), this);;
         getServer().getPluginManager().registerEvents(new Hunter(), this);;
 
-        // 전투직업
+        // 히든
         getServer().getPluginManager().registerEvents(new LightningCharger(), this);
+        getServer().getPluginManager().registerEvents(new LightningNPC(), this);
 
 
         // 경제

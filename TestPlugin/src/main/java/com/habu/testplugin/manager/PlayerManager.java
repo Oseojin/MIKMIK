@@ -260,6 +260,25 @@ public class PlayerManager
         return avgPrice;
     }
 
+    public static void SetHidden(Player player, String hiddenName, int num)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players." + uuid + "." + hiddenName;
+        PlayerConfig.set(path, num);
+        SavePlayerConfig();
+    }
+
+    public static Integer GetHidden(Player player, String hiddenName)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players." + uuid + "." + hiddenName;
+        if(!PlayerConfig.contains(path))
+        {
+            return 0;
+        }
+        return PlayerConfig.getInt(path);
+    }
+
     private static void SavePlayerConfig()
     {
         TestPlugin.getConfigManager().saveConfig("player");

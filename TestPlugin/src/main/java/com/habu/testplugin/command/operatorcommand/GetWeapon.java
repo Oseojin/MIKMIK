@@ -1,6 +1,6 @@
 package com.habu.testplugin.command.operatorcommand;
 
-import com.habu.testplugin.event.Hidden.LightningCharger;
+import com.habu.testplugin.Hidden.LightningCharger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
