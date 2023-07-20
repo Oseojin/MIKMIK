@@ -28,7 +28,7 @@ public class PlayerManager
         return PlayerConfig.getString(path);
     }
 
-    public static void SetTitle(Player player, Integer titleNum)
+    public static void SetTitle(Player player, String titleName)
     {
         UUID uuid = player.getUniqueId();
         String title = "";
@@ -36,35 +36,39 @@ public class PlayerManager
         String path_title = "players."+uuid+".title";
         String path_prefix = "players."+uuid+".prefix";
 
-        switch (titleNum)
+        switch (titleName)
         {
-            case -1:
+            case "운영자":
                 title = TitleNameManager.Operator;
                 prefix = TitleNameManager.Operator;
                 break;
-            case 0:
+            case "무직":
                 title = TitleNameManager.JobLess;
                 prefix = TitleNameManager.JobLess;
                 break;
-            case 1:
+            case "낚시꾼":
                 title = TitleNameManager.Fisher1;
                 prefix = TitleNameManager.Fisher1;
                 break;
-            case 2:
+            case "광부":
                 title = TitleNameManager.Miner1;
                 prefix = TitleNameManager.Miner1;
                 break;
-            case 3:
+            case "농부":
                 title = TitleNameManager.Farmer1;
                 prefix = TitleNameManager.Farmer1;
                 break;
-            case 4:
+            case "나무꾼":
                 title = TitleNameManager.WoodCutter1;
                 prefix = TitleNameManager.WoodCutter1;
                 break;
-            case 5:
+            case "사냥꾼":
                 title = TitleNameManager.Hunter1;
                 prefix = TitleNameManager.Hunter1;
+                break;
+            case "뇌창":
+                title = TitleNameManager.LightningCharger;
+                prefix = TitleNameManager.LightningCharger;
                 break;
             default:
                 title = "???";
@@ -91,33 +95,33 @@ public class PlayerManager
         return PlayerConfig.getString(path);
     }
 
-    public static void SetJob(Player player, Integer jobNum)
+    public static void SetJob(Player player, String job)
     {
         UUID uuid = player.getUniqueId();
         String path = "players."+uuid+".job";
         String jobName;
 
-        switch (jobNum)
+        switch (job)
         {
-            case -1:
+            case "운영자":
                 jobName = JobNameManager.OperatorName;
                 break;
-            case 0:
+            case "무직":
                 jobName = JobNameManager.JobLessName;
                 break;
-            case 1:
+            case "낚시꾼":
                 jobName = JobNameManager.FisherName;
                 break;
-            case 2:
+            case "광부":
                 jobName = JobNameManager.MinerName;
                 break;
-            case 3:
+            case "농부":
                 jobName = JobNameManager.FarmerName;
                 break;
-            case 4:
+            case "나무꾼":
                 jobName = JobNameManager.WoodCutterName;
                 break;
-            case 5:
+            case "사냥꾼":
                 jobName = JobNameManager.HunterName;
                 break;
             default:

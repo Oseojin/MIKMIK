@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -19,6 +20,20 @@ public class ItemManager
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(displayName);
         meta.setLore(Arrays.asList(lore));
+        stack.setItemMeta(meta);
+        return stack;
+    }
+
+    // 무기 생성용
+    public static ItemStack buildWeapon(Material type, int amount, String displayName, int damage, Enchantment enchantment, int enchantLevel, String... lore)
+    {
+        ItemStack stack = new ItemStack(type, amount);
+        Damageable meta = (Damageable) stack.getItemMeta();
+        meta.setDisplayName(displayName);
+        meta.setDamage(damage);
+        meta.addEnchant(enchantment, enchantLevel, true);
+        meta.setLore(Arrays.asList(lore));
+        meta.setUnbreakable(true);
         stack.setItemMeta(meta);
         return stack;
     }

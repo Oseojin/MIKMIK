@@ -32,9 +32,9 @@ public class PlayerJoin implements Listener
             MessageManager.NewPlayerJoinMessage(event, playerName);
 
             PlayerManager.SetName(player, playerName);
-            PlayerManager.SetTitle(player, 0);
+            PlayerManager.SetTitle(player, "무직");
             PlayerManager.SetGold(player, 1000);
-            PlayerManager.SetJob(player, 0);
+            PlayerManager.SetJob(player, "무직");
         }
         else // 월드 데이터에 플레이어 정보가 있다면
         {
@@ -43,9 +43,9 @@ public class PlayerJoin implements Listener
             {
                 // 아쉽지만 초기화...
                 PlayerManager.SetName(player, playerName);
-                PlayerManager.SetTitle(player, 0);
+                PlayerManager.SetTitle(player, "무직");
                 PlayerManager.SetGold(player, 1000);
-                PlayerManager.SetJob(player, 0);
+                PlayerManager.SetJob(player, "무직");
             }
             MessageManager.PlayerJoinMessage(event, playerName);
         }

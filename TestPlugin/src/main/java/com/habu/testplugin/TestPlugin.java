@@ -6,6 +6,7 @@ import com.habu.testplugin.command.shop.*;
 import com.habu.testplugin.config.ConfigManager;
 import com.habu.testplugin.event.*;
 import com.habu.testplugin.event.Battle.EnderDragonBattle;
+import com.habu.testplugin.event.Hidden.LightningCharger;
 import com.habu.testplugin.event.job.*;
 import com.habu.testplugin.event.shop.*;
 import com.habu.testplugin.event.shop.jobshop.FarmerShopClickEvent;
@@ -59,6 +60,9 @@ public final class TestPlugin extends JavaPlugin
         getServer().getPluginManager().registerEvents(new HunterSelectNPC(), this);;
         getServer().getPluginManager().registerEvents(new Hunter(), this);;
 
+        // 전투직업
+        getServer().getPluginManager().registerEvents(new LightningCharger(), this);
+
 
         // 경제
         getServer().getPluginManager().registerEvents(new UsingCheckEvent(), this);
@@ -101,6 +105,7 @@ public final class TestPlugin extends JavaPlugin
         getCommand("jobsetplayer").setExecutor(new SetPlayerJob());
         getCommand("titlesetplayer").setExecutor(new SetPlayerTitle());
         getCommand("mycoin").setExecutor(new CheckCoin());
+        getCommand("spawnweapon").setExecutor(new GetWeapon());
     }
 
     @Override

@@ -29,7 +29,7 @@ public class SetPlayerJob implements CommandExecutor
                 if(playerList.get(i).getName().equals(args[0]))
                 {
                     Player targetPlayer = playerList.get(i);
-                    PlayerManager.SetJob(targetPlayer, Integer.parseInt(args[1]));
+                    PlayerManager.SetJob(targetPlayer, args[1]);
                     player.sendMessage( ChatColor.AQUA + "성공적으로 반영되었습니다.");
                     return false;
                 }

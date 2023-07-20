@@ -26,3 +26,5 @@ commands:
   calloperator:
     description: 운영자 호출
     aliases: 호출
+  spawnweapon:
+    description: 무기 소환
