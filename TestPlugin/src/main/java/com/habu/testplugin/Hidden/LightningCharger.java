@@ -16,6 +16,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -28,6 +30,39 @@ public class LightningCharger implements Listener
     private static String weaponName = ChatColor.AQUA + "[뇌창]";
 
     public static ItemStack weapon = ItemManager.buildWeapon(Material.TRIDENT, 1, weaponName, 15, Enchantment.LOYALTY, 5, ChatColor.YELLOW + "1차: 삼지창을 맞은 엔티티에게 1 ~ 10회 낙뢰 (충전량 5 소모)");
+
+    @EventHandler
+    public void onDeath(org.bukkit.event.entity.PlayerDeathEvent event)
+    {
+        Player player = event.getPlayer();
+        Inventory playerInv = player.getInventory();
+        if(PlayerManager.GetTitle(player).equals(TitleNameManager.LightningCharger))
+        {
+            for(int i = 0; i < playerInv.getSize(); i++)
+            {
+                ItemStack invItem = playerInv.getItem(i);
+                if(invItem == null)
+                    continue;
+                if(invItem.isSimilar(weapon))
+                {
+                    player.sendMessage("!!!");
+                    invItem.setAmount(0);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent event)
+    {
+        Player player = event.getPlayer();
+        Inventory playerInv = player.getInventory();
+        if(PlayerManager.GetTitle(player).equals(TitleNameManager.LightningCharger))
+        {
+            playerInv.addItem(weapon);
+        }
+    }
+
     @EventHandler
     public void Interact(PlayerInteractEvent event)
     {

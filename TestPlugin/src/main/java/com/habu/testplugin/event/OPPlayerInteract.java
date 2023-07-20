@@ -1,5 +1,6 @@
 package com.habu.testplugin.event;
 
+import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.NPCNameManager;
 import net.kyori.adventure.text.EntityNBTComponent;
 import org.bukkit.ChatColor;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class OPPlayerInteract implements Listener
 {
@@ -24,6 +26,8 @@ public class OPPlayerInteract implements Listener
         on = bool;
     }
 
+    private Boolean isOpen = false;
+
     public static void setShopType(String name)
     {
         shopType = name;
@@ -36,6 +40,13 @@ public class OPPlayerInteract implements Listener
         Player player = event.getPlayer();
         if(!player.isOp())
             return;
+
+        if(isOpen)
+        {
+            return;
+        }
+        isOpen = true;
+
         Entity npc = event.getRightClicked();
 
         if(!on)
@@ -123,5 +134,15 @@ public class OPPlayerInteract implements Listener
                 break;
             default:
         }
+
+        new BukkitRunnable()
+        {
+
+            @Override
+            public void run()
+            {
+                isOpen = false;
+            }
+        }.runTaskLater(TestPlugin.getPlugin(), 20L);
     }
 }

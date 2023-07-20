@@ -1,6 +1,8 @@
 package com.habu.testplugin.Hidden;
 
+import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.NPCNameManager;
+import com.habu.testplugin.manager.PlayerManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -15,6 +17,11 @@ public class LightningNPC implements Listener
     {
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
+
+        if(PlayerManager.GetJob(player).equals(JobNameManager.OperatorName))
+        {
+            return;
+        }
 
         if(entity.getType().equals(EntityType.WITCH))
         {

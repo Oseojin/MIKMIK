@@ -1,5 +1,7 @@
 package com.habu.testplugin.event;
 
+import com.habu.testplugin.Hidden.LightningCharger;
+import com.habu.testplugin.Hidden.LightningChargerManager;
 import com.habu.testplugin.command.IssuingCheckCommand;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
@@ -73,6 +75,7 @@ public class PlayerDeathEvent implements Listener
             this.armor.put(uuid, player.getInventory().getArmorContents());
             event.getDrops().clear();
         }
+
         int gold = PlayerManager.GetGold(player);
 
         Entity killer = event.getPlayer().getKiller();

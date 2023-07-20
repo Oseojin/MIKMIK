@@ -47,10 +47,8 @@ public class LightningChargerManager
         {
             if(HiddenConfig.getBoolean(LightningChargerName + ".complete"))
             {
-                player.sendMessage(HiddenConfig.getBoolean(LightningChargerName + ".complete") + "");
                 player.sendTitle(ChatColor.YELLOW + "무슨일이냐", ChatColor.WHITE + "이미 완료한 퀘스트입니다.");
                 isOpen = false;
-                return;
             }
             else if(HiddenConfig.getBoolean(LightningChargerName + ".quest"))
             {
@@ -64,6 +62,7 @@ public class LightningChargerManager
                     HiddenConfig.set(LightningChargerName + ".complete", true);
                     PlayerManager.SetTitle(player, "뇌창");
                     player.getInventory().addItem(LightningCharger.weapon);
+                    TestPlugin.getConfigManager().saveConfig("hidden");
                 }
                 new BukkitRunnable()
                 {
