@@ -82,7 +82,7 @@ public class LightningChargerManager
         else
         {
             player.sendTitle(ChatColor.YELLOW + "너는 선택받은 인간이 아니다", "");
-            player.teleport(player.getLocation().add(10, 0 ,0));
+            player.teleport(player.getLocation().add(-10, 0 ,0));
             player.getWorld().spawnEntity(player.getLocation(), EntityType.LIGHTNING);
             isOpen = false;
         }
