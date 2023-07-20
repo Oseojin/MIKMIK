@@ -23,7 +23,7 @@ public class LightningNPC implements Listener
             return;
         }
 
-        if(entity.getType().equals(EntityType.WITCH))
+        if(entity.getType().equals(EntityType.VILLAGER))
         {
             String npcName = entity.getName();
             if(npcName.equals(NPCNameManager.LightningNPCName))
