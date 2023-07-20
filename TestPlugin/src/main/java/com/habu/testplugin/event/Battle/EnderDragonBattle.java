@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class EnderDragonBattle implements Listener
 {
-    double maxHealth = 10000;
+    double maxHealth = 100000;
     boolean BattleStart = false;
     Boolean Phase1 = false;
     Boolean Phase2 = false;
