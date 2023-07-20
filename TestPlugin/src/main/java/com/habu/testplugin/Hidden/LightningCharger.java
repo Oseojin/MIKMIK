@@ -45,7 +45,6 @@ public class LightningCharger implements Listener
                     continue;
                 if(invItem.isSimilar(weapon))
                 {
-                    player.sendMessage("!!!");
                     invItem.setAmount(0);
                 }
             }
