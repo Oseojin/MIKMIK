@@ -65,11 +65,11 @@ public class CoinShopClickEvent implements Listener
                 }
                 else if(event.isRightClick() && !event.isShiftClick())
                 {
-                    SellItem(player,material, price, PlayerManager.GetCoin(player, itemMap.get(clickedItem.getType())), false);
+                    SellItem(player,material, price, PlayerManager.GetCoin(player, "." + itemMap.get(material)), false);
                 }
                 else if(event.isRightClick() && event.isShiftClick())
                 {
-                    SellItem(player, material, price, PlayerManager.GetCoin(player, itemMap.get(clickedItem.getType())), true);
+                    SellItem(player, material, price, PlayerManager.GetCoin(player, "." + itemMap.get(material)), true);
                 }
             }
         }

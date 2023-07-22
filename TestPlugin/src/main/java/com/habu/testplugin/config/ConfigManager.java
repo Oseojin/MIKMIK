@@ -175,10 +175,10 @@ public class ConfigManager
         // 낚시꾼
         fishershopConfig.addDefault("fisher_selecter.price", 1000);
         fishershopConfig.addDefault("anchovy.price", 15);
-        fishershopConfig.addDefault("salmon.price", 75);
-        fishershopConfig.addDefault("cutlassfish.price", 225);
-        fishershopConfig.addDefault("tuna.price", 350);
-        fishershopConfig.addDefault("shark.price", 4000);
+        fishershopConfig.addDefault("salmon.price", 30);
+        fishershopConfig.addDefault("cutlassfish.price", 100);
+        fishershopConfig.addDefault("tuna.price", 300);
+        fishershopConfig.addDefault("shark.price", 3000);
         fishershopConfig.addDefault("whale.price", 30000);
 
         // 광부
