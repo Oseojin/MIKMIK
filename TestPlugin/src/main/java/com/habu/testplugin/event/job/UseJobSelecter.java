@@ -27,6 +27,14 @@ public class UseJobSelecter implements Listener
             ItemManager.item_HunterSelecter
     ));
 
+    private void configJob(Player player, String jobName, ItemStack useItem)
+    {
+        PlayerManager.SetJob(player, jobName);
+        TestPlugin.getConfigManager().saveConfig("player");
+        int amount = useItem.getAmount() - 1;
+        useItem.setAmount(amount);
+    }
+
     @EventHandler
     public void UseSelecter(PlayerInteractEvent event)
     {
@@ -40,43 +48,23 @@ public class UseJobSelecter implements Listener
             {
                 if(useItem.isSimilar(ItemManager.item_FisherSelecter))
                 {
-                    PlayerManager.SetJob(player, "낚시꾼");
-                    PlayerManager.SetTitle(player, "낚시꾼");
-                    TestPlugin.getConfigManager().saveConfig("player");
-                    int amount = useItem.getAmount() - 1;
-                    useItem.setAmount(amount);
+                    configJob(player, "낚시꾼", useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_MinerSelecter))
                 {
-                    PlayerManager.SetJob(player, "광부");
-                    PlayerManager.SetTitle(player, "광부");
-                    TestPlugin.getConfigManager().saveConfig("player");
-                    int amount = useItem.getAmount() - 1;
-                    useItem.setAmount(amount);
+                    configJob(player, "광부", useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_FarmerSelecter))
                 {
-                    PlayerManager.SetJob(player, "농부");
-                    PlayerManager.SetTitle(player, "농부");
-                    TestPlugin.getConfigManager().saveConfig("player");
-                    int amount = useItem.getAmount() - 1;
-                    useItem.setAmount(amount);
+                    configJob(player, "농부", useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_WoodCutterSelecter))
                 {
-                    PlayerManager.SetJob(player, "나무꾼");
-                    PlayerManager.SetTitle(player, "나무꾼");
-                    TestPlugin.getConfigManager().saveConfig("player");
-                    int amount = useItem.getAmount() - 1;
-                    useItem.setAmount(amount);
+                    configJob(player, "나무꾼", useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_HunterSelecter))
                 {
-                    PlayerManager.SetJob(player, "사냥꾼");
-                    PlayerManager.SetTitle(player, "사냥꾼");
-                    TestPlugin.getConfigManager().saveConfig("player");
-                    int amount = useItem.getAmount() - 1;
-                    useItem.setAmount(amount);
+                    configJob(player, "사냥꾼", useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
@@ -93,11 +81,7 @@ public class UseJobSelecter implements Listener
                 }
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
-                    PlayerManager.SetJob(player, "무직");
-                    PlayerManager.SetTitle(player, "무직");
-                    TestPlugin.getConfigManager().saveConfig("player");
-                    int amount = useItem.getAmount() - 1;
-                    useItem.setAmount(amount);
+                    configJob(player, "무직", useItem);
                 }
             }
         }

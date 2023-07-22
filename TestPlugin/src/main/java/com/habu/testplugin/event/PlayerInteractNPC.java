@@ -10,6 +10,7 @@ import com.habu.testplugin.shop.jobshop.FisherShop;
 import com.habu.testplugin.shop.jobshop.MinerShop;
 import com.habu.testplugin.shop.jobshop.WoodCutterShop;
 import com.habu.testplugin.shop.randomshop.RandomSpawnEgg;
+import com.habu.testplugin.shop.selectshop.*;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -88,10 +89,50 @@ public class PlayerInteractNPC implements Listener
                 RandomSpawnEgg inv = new RandomSpawnEgg();
                 inv.open(player);
             }
-            else if(npcName.equals(NPCNameManager.CoinShopNPCName))
+        }
+        else if(entity.getType().equals(EntityType.SALMON))
+        {
+            String npcName = entity.getName();
+            if(npcName.equals(NPCNameManager.FisherSelectShopNPCName))
             {
-                CoinShop inv = new CoinShop();
-                inv.open(player);
+                FisherSelectShop fisherSelectShop = new FisherSelectShop();
+                fisherSelectShop.open(player);
+            }
+        }
+        else if(entity.getType().equals(EntityType.IRON_GOLEM))
+        {
+            String npcName = entity.getName();
+            if(npcName.equals(NPCNameManager.MinerSelectShopNPCName))
+            {
+                MinerSelectShop minerSelectShop = new MinerSelectShop();
+                minerSelectShop.open(player);
+            }
+        }
+        else if(entity.getType().equals(EntityType.COW))
+        {
+            String npcName = entity.getName();
+            if(npcName.equals(NPCNameManager.FarmerSelectShopNPCName))
+            {
+                FarmerSelectShop farmerSelectShop = new FarmerSelectShop();
+                farmerSelectShop.open(player);
+            }
+        }
+        else if(entity.getType().equals(EntityType.PANDA))
+        {
+            String npcName = entity.getName();
+            if(npcName.equals(NPCNameManager.WoodCutterSelectShopNPCName))
+            {
+                WoodCutterSelectShop woodCutterSelectShop = new WoodCutterSelectShop();
+                woodCutterSelectShop.open(player);
+            }
+        }
+        else if(entity.getType().equals(EntityType.FOX))
+        {
+            String npcName = entity.getName();
+            if(npcName.equals(NPCNameManager.HunterSelectShopNPCName))
+            {
+                HunterSelectShop hunterSelectShop = new HunterSelectShop();
+                hunterSelectShop.open(player);
             }
         }
     }

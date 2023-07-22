@@ -33,7 +33,6 @@ public class Miner implements Listener
         put(Material.QUARTZ, "customitems:quartz_");
         put(Material.GOLD_NUGGET, "customitems:gold_nugget_");
         put(Material.AMETHYST_SHARD, "customitems:amethyst_shard_");
-        put(Material.NETHERITE_SCRAP, "customitems:netherite_scrap");
     }};
 
     HashMap<Player, Boolean> breakfurnace = new HashMap<Player, Boolean>();

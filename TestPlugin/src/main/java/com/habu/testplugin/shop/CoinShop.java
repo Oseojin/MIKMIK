@@ -1,8 +1,6 @@
 package com.habu.testplugin.shop;
 
 import com.habu.testplugin.TestPlugin;
-import com.habu.testplugin.config.ConfigManager;
-import com.habu.testplugin.event.ChatEvent;
 import com.habu.testplugin.manager.CoinManager;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
@@ -11,14 +9,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockReceiveGameEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.time.LocalTime;
 import java.util.*;
 
 public class CoinShop implements InventoryHolder
@@ -131,10 +127,10 @@ public class CoinShop implements InventoryHolder
                     shopConfig.set("opentimer.now", --currTime);
                     if(currTime <= 0)
                     {
-                        AllCoinSell();
                         shopConfig.set("isopen.now", false);
                         isOpen = shopConfig.getBoolean("isopen.now");
                         shopConfig.set("opentimer.now", shopConfig.get("opentimer.basic"));
+                        AllCoinSell();
                         this.cancel();
                     }
                     TestPlugin.getConfigManager().saveConfig(configName);
@@ -242,9 +238,7 @@ public class CoinShop implements InventoryHolder
 
             int variation = (int) Math.round(maxVariation * ((double)randNum / 100));
 
-            double fluctuation = Math.round(variation / (double)price * 100.0 * 10.0) / 10.0;
-
-            randNum = random.nextInt(100) + 1;
+            double fluctuation = Math.round((double)variation / (double)price * 100.0 * 10.0) / 10.0;
 
             price = price + variation;
 
@@ -332,16 +326,36 @@ public class CoinShop implements InventoryHolder
             }
 
             List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
-
             for(int i = 0; i < playerList.size(); i++)
             {
                 Player player = playerList.get(i);
+                Bukkit.broadcastMessage(player + "");
                 int coinAmount = PlayerManager.GetCoin(player, coinPath);
                 int coinPrice = shopConfig.getInt(value + ".price");
                 if(coinAmount > 0)
                 {
                     player.sendMessage(coinName + ChatColor.WHITE + " 코인의 수입은 " + ChatColor.GOLD + coinPrice * coinAmount + " 골드 " + ChatColor.WHITE + "입니다.");
-                    PlayerManager.SellCoin(player, coinPath, coinAmount, coinPrice * coinAmount);
+                    PlayerManager.SellCoin(player, coinPath, coinAmount);
+                    PlayerManager.AddGold(player, coinAmount * coinPrice);
+
+                    if(!sumPrice.containsKey(player))
+                    {
+                        sumPrice.put(player, 0);
+                    }
+                    sumPrice.put(player, sumPrice.get(player) + coinAmount * coinPrice);
+                }
+            }
+            for(int i = 0; i < Bukkit.getServer().getOfflinePlayers().length; i++)
+            {
+                Player player = Bukkit.getServer().getOfflinePlayers()[i].getPlayer();
+                Bukkit.broadcastMessage(player + "");
+                if(player == null)
+                    return;
+                int coinAmount = PlayerManager.GetCoin(player, coinPath);
+                int coinPrice = shopConfig.getInt(value + ".price");
+                if(coinAmount > 0)
+                {
+                    PlayerManager.SellCoin(player, coinPath, coinAmount);
                     PlayerManager.AddGold(player, coinAmount * coinPrice);
 
                     if(!sumPrice.containsKey(player))
@@ -362,35 +376,44 @@ public class CoinShop implements InventoryHolder
     private static void AllPlayerCoinZero(String coinName)
     {
         String coinPath = "." + coinName;
-        ItemStack coin;
 
         String coinDisplayName;
         switch (coinPath)
         {
             case ".pungsandog_coin":
                 coinDisplayName = CoinManager.PungsanDogCoinName;
-                coin = ItemManager.gui_PungsanDogCoin;
                 break;
             case ".mole_coin":
                 coinDisplayName = CoinManager.MoleCoinName;
-                coin = ItemManager.gui_MoleCoin;
                 break;
             case ".beet_coin":
                 coinDisplayName = CoinManager.BeetCoinName;
-                coin = ItemManager.gui_BeetCoin;
                 break;
             case ".kimchi_coin":
                 coinDisplayName = CoinManager.KimchiCoinName;
-                coin = ItemManager.gui_KimchiCoin;
                 break;
             default:
                 coinDisplayName = "???";
-                coin = null;
         }
-        List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
+        List<Player> playerList = (List<Player>) Bukkit.getWorld("world").getPlayers();
         for(int i = 0; i < playerList.size(); i++)
         {
             Player player = playerList.get(i);
+            Bukkit.broadcastMessage(player + "");
+            int coinAmount = PlayerManager.GetCoin(player, coinPath);
+            if(coinAmount > 0)
+            {
+                player.sendMessage(coinDisplayName + ChatColor.RED + " 이 상장폐지되었습니다.");
+                PlayerManager.SetCoin(player, coinPath, 0);
+            }
+        }
+
+        for(int i = 0; i < Bukkit.getServer().getOfflinePlayers().length; i++)
+        {
+            Player player = Bukkit.getServer().getOfflinePlayers()[i].getPlayer();
+            Bukkit.broadcastMessage(player + "");
+            if(player == null)
+                return;
             int coinAmount = PlayerManager.GetCoin(player, coinPath);
             if(coinAmount > 0)
             {

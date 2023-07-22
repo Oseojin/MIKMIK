@@ -70,6 +70,10 @@ public class PlayerManager
                 title = TitleNameManager.LightningCharger;
                 prefix = TitleNameManager.LightningCharger;
                 break;
+            case "약탈자":
+                title = TitleNameManager.Looter;
+                prefix = TitleNameManager.Looter;
+                break;
             default:
                 title = "???";
                 prefix = "[???]";
@@ -78,7 +82,6 @@ public class PlayerManager
         PlayerConfig.set(path_prefix, prefix);
         SavePlayerConfig();
         PlayerScoreboardManager.reloadScboard(player);
-        MessageManager.PlayerTitleApplication(player, PlayerManager.GetTitlePrefix(player));
     }
 
     public static String GetTitle(Player player)
@@ -124,6 +127,9 @@ public class PlayerManager
             case "사냥꾼":
                 jobName = JobNameManager.HunterName;
                 break;
+            case "요리사":
+                jobName = JobNameManager.CookName;
+                break;
             default:
                 jobName = "???";
         }
@@ -138,6 +144,20 @@ public class PlayerManager
         UUID uuid = player.getUniqueId();
         String path = "players."+uuid+".job";
         return PlayerConfig.getString(path);
+    }
+
+    public static void SetJobLevel(Player player, Integer lv)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players."+uuid+".joblv";
+        PlayerConfig.set(path, lv);
+    }
+
+    public static Integer GetJobLevel(Player player)
+    {
+        UUID uuid = player.getUniqueId();
+        String path = "players."+uuid+".joblv";
+        return PlayerConfig.getInt(path);
     }
 
     public static void SetGold(Player player, Integer amount)
@@ -197,67 +217,29 @@ public class PlayerManager
         return PlayerConfig.getInt(path);
     }
 
-    public static void AddCoin(Player player, String coin, Integer amount, Integer price)
+    public static void AddCoin(Player player, String coin, Integer amount)
     {
         UUID uuid = player.getUniqueId();
-        String totalPath = "players."+uuid+coin+"_total";
         String path = "players."+uuid+coin;
         if(PlayerConfig.getInt(path) == 0)
         {
             PlayerConfig.set(path, 0);
         }
-        if(PlayerConfig.getInt(totalPath) == 0)
-        {
-            PlayerConfig.set(totalPath, 0);
-        }
         int currCoin = PlayerConfig.getInt(path);
         currCoin += amount;
         PlayerConfig.set(path, currCoin);
 
-        int currtotal = PlayerConfig.getInt(totalPath);
-        currtotal += price;
-        PlayerConfig.set(totalPath, currtotal);
-
         SavePlayerConfig();
     }
 
-    public static void SellCoin(Player player, String coin, Integer amount, Integer price)
+    public static void SellCoin(Player player, String coin, Integer amount)
     {
         UUID uuid = player.getUniqueId();
-        String totalPath = "players."+uuid+coin+"_total";
         String path = "players."+uuid+coin;
         int currCoin = PlayerConfig.getInt(path);
         currCoin -= amount;
-
-        int currtotal = PlayerConfig.getInt(totalPath);
-        currtotal -= price;
-
-        PlayerConfig.set(totalPath, currtotal);
         PlayerConfig.set(path, currCoin);
         SavePlayerConfig();
-    }
-
-    public static int GetAvgCoin(Player player, String coin)
-    {
-        UUID uuid = player.getUniqueId();
-        String totalPath = "players."+uuid+coin+"_total";
-        String amountPath = "players."+uuid+coin;
-
-        if(PlayerConfig.getInt(totalPath) == 0)
-        {
-            PlayerConfig.set(totalPath, 0);
-        }
-        if(PlayerConfig.getInt(amountPath) == 0)
-        {
-            PlayerConfig.set(amountPath, 0);
-        }
-
-        int totalPrice = PlayerConfig.getInt(totalPath);
-        int amount = PlayerConfig.getInt(amountPath);
-
-        int avgPrice = (int)Math.round((double)totalPrice / (double)amount);
-
-        return avgPrice;
     }
 
     public static void SetHidden(Player player, String hiddenName, int num)

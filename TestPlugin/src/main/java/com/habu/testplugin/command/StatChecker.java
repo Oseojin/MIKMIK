@@ -37,8 +37,6 @@ public class StatChecker implements CommandExecutor
             {
                 Player targetPlayer = playerList.get(i);
                 player.sendMessage("Name: " + PlayerManager.GetName(targetPlayer));
-                player.sendMessage("Title: " + PlayerManager.GetTitle(targetPlayer));
-                player.sendMessage("Prefix: " + PlayerManager.GetTitlePrefix(targetPlayer));
                 player.sendMessage("Job: " + PlayerManager.GetJob(targetPlayer));
                 player.sendMessage("Gold: " + PlayerManager.GetGold(targetPlayer));
                 return false;

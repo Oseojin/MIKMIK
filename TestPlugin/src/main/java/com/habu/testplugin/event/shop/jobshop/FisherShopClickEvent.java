@@ -12,6 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 public class FisherShopClickEvent implements Listener
@@ -44,92 +45,61 @@ public class FisherShopClickEvent implements Listener
                 return;
             if (!clickedItem.equals(ItemManager.gui_GrayGlassPane))
             {
-                Material material = clickedItem.getType();
-                int price = FisherShop.GetPrice(material);
+                ItemStack fish = clickedItem.clone();
+                fish.setLore(null);
+                int price = FisherShop.GetPrice(clickedItem);
 
-                if(playerInv.contains(material))
+                if(event.isLeftClick() && !event.isShiftClick())
                 {
-                    int stack = 0;
-                    if(event.isLeftClick() && !event.isShiftClick())
-                    {
-                        stack = SellOneItem(player, playerInv, material, uuid, price);
-                    }
-                    else if(event.isLeftClick() && event.isShiftClick())
-                    {
-                        stack = SellAllItem(player, playerInv, material, uuid, price);
-                    }
-                    FisherShop.SellItem(material, stack);
+                    SellOneItem(player, playerInv, fish, price);
+                }
+                else if(event.isLeftClick() && event.isShiftClick())
+                {
+                    SellAllItem(player, playerInv, fish, price);
                 }
             }
         }
     }
 
-    private Integer CheckSize(ItemStack fish)
-    {
-        String size = ChatColor.stripColor(fish.getLore().get(0).replace(" 크기", ""));
-        int magnification = 0;
-
-        switch (size)
-        {
-            case "거대한":
-                magnification = 500;
-                break;
-            case "큰":
-                magnification = 5;
-                break;
-            case "보통":
-                magnification = 2;
-                break;
-            case "작은":
-                magnification = 1;
-                break;
-        }
-
-        return magnification;
-    }
-
-    private Integer SellAllItem(Player player, Inventory playerInv, Material material, UUID uuid, Integer price)
+    private void SellAllItem(Player player, Inventory playerInv, ItemStack fish, Integer price)
     {
         int stack = 0;
         int allPrice = 0;
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
             ItemStack invItem = playerInv.getItem(i);
-            if(invItem == null || !invItem.getItemMeta().hasLore())
+            if(invItem == null)
                 continue;
-            Material invItemMaterial = invItem.getType();
-            if(invItemMaterial.equals(material))
+            if(invItem.isSimilar(fish))
             {
-                int mag = CheckSize(invItem);
-                allPrice += mag * price * invItem.getAmount();
+                allPrice += price * invItem.getAmount();
                 stack += invItem.getAmount();
                 playerInv.removeItem(invItem);
             }
         }
+
+        if(stack == 0)
+            return;
+
         PlayerManager.AddGold(player, allPrice);
-        player.sendMessage(material + " " + stack + " 개를 " + allPrice + " 골드에 판매하였습니다.");
-        return stack;
+        player.sendMessage(fish.getItemMeta().displayName() + " " + stack + " 마리를 " + allPrice + " 골드에 판매하였습니다.");
     }
 
-    private Integer SellOneItem(Player player, Inventory playerInv, Material material, UUID uuid, Integer price)
+    private void SellOneItem(Player player, Inventory playerInv, ItemStack fish, Integer price)
     {
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
             ItemStack invItem = playerInv.getItem(i);
-            if(invItem == null || !invItem.getItemMeta().hasLore())
+            if(invItem == null)
                 continue;
-            Material invItemMaterial = invItem.getType();
-            if(invItemMaterial.equals(material))
+            if(invItem.isSimilar(fish))
             {
-                int mag = CheckSize(invItem);
                 int amount = invItem.getAmount() - 1;
                 invItem.setAmount(amount);
-                PlayerManager.AddGold(player, price * mag);
-                String size = ChatColor.stripColor(invItem.getLore().get(0).replace("크기", ""));
-                player.sendMessage(size + material + " 1 개를 " + price * mag + " 골드에 판매하였습니다.");
+                PlayerManager.AddGold(player, price);
+                player.sendMessage(fish.getItemMeta().getDisplayName() + " 1 마리를 " + price + " 골드에 판매하였습니다.");
                 break;
             }
         }
-        return 1;
     }
 }

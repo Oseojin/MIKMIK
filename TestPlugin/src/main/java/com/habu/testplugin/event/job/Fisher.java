@@ -1,6 +1,5 @@
 package com.habu.testplugin.event.job;
 
-import com.habu.testplugin.event.ChatEvent;
 import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
@@ -18,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.swing.*;
 import java.util.*;
 
 public class Fisher implements Listener
@@ -34,8 +32,6 @@ public class Fisher implements Listener
     List<Material> trashList = new ArrayList<>(Arrays.asList(
             Material.BAMBOO, Material.BOWL, Material.FISHING_ROD, Material.LEATHER, Material.LEATHER_BOOTS, Material.ROTTEN_FLESH, Material.STICK, Material.STRING, Material.POTION, Material.BONE, Material.INK_SAC, Material.TRIPWIRE_HOOK
     ));
-
-
 
     HashMap<Enchantment, Integer> S_Rate = new HashMap<Enchantment, Integer>()
     {{
@@ -224,36 +220,39 @@ public class Fisher implements Listener
         return rank;
     }
 
-    private String RandomSize(double doubleSize)
+    private String RandomFish()
     {
-        // Huge >>> Large > Medium > Small // 등급
-        // 거대  >>> 큰    > 보통    > 작은  // 등급(한국어)
-        // *4   >>> *2    > *1     > *1/2 // 가격
-        // 5    >>> 20    > 60     > 15   // 단일 확률
-        // 95   >>> 75    > 15     > 0    // 실 구현
-        String size = "";
-
-        if(doubleSize >= 130)
+        int randNum = random.nextInt(1000);
+        String namespaceID = "";
+        if(randNum >= 999)
         {
-            size = ChatColor.RED + "거대한";
+            namespaceID = "customitems:whale";
         }
-        else if (doubleSize >= 75)
+        else if(randNum >= 984)
         {
-            size = ChatColor.GOLD + "큰";
+            namespaceID = "customitems:shark";
         }
-        else if (doubleSize >= 30)
+        else if(randNum >= 884)
         {
-            size = ChatColor.AQUA + "보통";
+            namespaceID = "customitems:tuna";
+        }
+        else if(randNum >= 684)
+        {
+            namespaceID = "customitems:cutlassfish";
+        }
+        else if(randNum >= 384)
+        {
+            namespaceID = "customitems:salmon";
         }
         else
         {
-            size = ChatColor.GREEN + "작은";
+            namespaceID = "customitems:anchovy";
         }
 
-        return size;
+        return namespaceID;
     }
 
-    private ItemStack RandomPouchItem(HashMap<Enchantment, Integer> enchantmentMap, Player player)
+    private ItemStack RandomPouchItem(HashMap<Enchantment, Integer> enchantmentMap)
     {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK, 1);
         EnchantmentStorageMeta bookMeta = (EnchantmentStorageMeta) book.getItemMeta();
@@ -288,7 +287,7 @@ public class Fisher implements Listener
                 if(pouchList.containsKey(itemId))
                 {
                     // 랜덤 아이템
-                    ItemStack randItem = RandomPouchItem(pouchList.get(itemId), player);
+                    ItemStack randItem = RandomPouchItem(pouchList.get(itemId));
                     player.getInventory().addItem(randItem);
 
                     if(itemStack.getAmount() >= 1)
@@ -333,50 +332,17 @@ public class Fisher implements Listener
             if(playerJob.equals(JobNameManager.FisherName))
             {
                 Item dropItem = (Item) event.getCaught();
-                ItemStack dropItemStack = dropItem.getItemStack();
-                if(treasureList.contains(dropItemStack.getType()))
+                String namespaceID = RandomFish();
+                CustomStack stack = CustomStack.getInstance(namespaceID);
+                ItemStack itemStack = stack.getItemStack();
+
+                dropItem.setItemStack(itemStack);
+                ItemMeta dropItemMeta = dropItem.getItemStack().getItemMeta();
+
+                player.sendMessage(dropItemMeta.getDisplayName() + " 를 잡았습니다!");
+                if(namespaceID.equals("customitems:whale"))
                 {
-                    String rate = RandomPouch();
-                    player.sendMessage("[" + rate.toUpperCase() + "]" + "등급 주머니를 낚았습니다!");
-                    CustomStack stack = CustomStack.getInstance(pouchId+rate);
-                    ItemStack itemStack = stack.getItemStack();
-                    dropItem.setItemStack(itemStack);
-                }
-                else if(trashList.contains(dropItemStack.getType()))
-                {
-                    String rate = RandomPouch();
-                    player.sendMessage("[" + rate.toUpperCase() + "]" + "등급 주머니를 낚았습니다!");
-                    CustomStack stack = CustomStack.getInstance(pouchId+rate);
-                    ItemStack itemStack = stack.getItemStack();
-                    dropItem.setItemStack(itemStack);
-                }
-                else
-                {
-                    ItemMeta dropItemMeta = dropItemStack.getItemMeta();
-                    if(dropItemStack.getType().equals(Material.COD))
-                    {
-                        dropItemMeta.setDisplayName("대구");
-                    }
-                    else if (dropItemStack.getType().equals(Material.SALMON))
-                    {
-                        dropItemMeta.setDisplayName("연어");
-                    }
-                    else if (dropItemStack.getType().equals(Material.TROPICAL_FISH))
-                    {
-                        dropItemMeta.setDisplayName("열대어");
-                    }else if (dropItemStack.getType().equals(Material.PUFFERFISH))
-                    {
-                        dropItemMeta.setDisplayName("복어");
-                    }
-                    dropItemStack.setItemMeta(dropItemMeta);
-                    double randomSize = Math.abs(Math.round((MAXIMUM_SIZE / 3 + (random.nextGaussian()) * 40) * 100) / 100.0);
-                    String size = RandomSize(randomSize);
-                    dropItemStack.setLore(Arrays.asList(size + " 크기", ChatColor.AQUA + "(" + randomSize + "cm)"));
-                    player.sendMessage(size + " 크기의 " + dropItemMeta.getDisplayName() + " (" + randomSize + "cm)" + "를 잡았습니다!");
-                    if(size.equals(ChatColor.RED + "거대한"))
-                    {
-                        Bukkit.broadcastMessage(ChatColor.GOLD + player.getName() + ChatColor.WHITE + "님이 " + size + " 크기의 " + ChatColor.AQUA + dropItemMeta.getDisplayName() + ChatColor.WHITE + "을 잡았습니다!!");
-                    }
+                    Bukkit.broadcastMessage(ChatColor.GOLD + player.getName() + ChatColor.WHITE + "님이 " + ChatColor.AQUA + "고래 " + ChatColor.WHITE + "를 잡았습니다!!");
                 }
             }
         }

@@ -104,18 +104,6 @@ public class MinerShop implements InventoryHolder
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static void SellItem(Material itemMaterial, int amount)
-    {
-        if(itemNamePare.containsKey(itemMaterial))
-        {
-            String itemName = itemNamePare.get(itemMaterial);
-            String volumepath = itemName + ".volume";
-            int volume = shopConfig.getInt(volumepath) + amount;
-            shopConfig.set(volumepath, volume);
-            TestPlugin.getConfigManager().saveConfig(configName);
-        }
-    }
-
     public static Integer GetPrice(Material itemMaterial)
     {
         if(itemNamePare.containsKey(itemMaterial))

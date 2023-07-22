@@ -31,7 +31,6 @@ public class CoinShopClickEvent implements Listener
     public void onClickShop(InventoryClickEvent event)
     {
         Player player = (Player) event.getWhoClicked();
-        UUID uuid = player.getUniqueId();
         Inventory inv = event.getClickedInventory();
         if(inv == null)
             return;
@@ -49,7 +48,6 @@ public class CoinShopClickEvent implements Listener
                 }
             }
             event.setCancelled(true);
-            Inventory playerInv = player.getInventory();
             ItemStack clickedItem = event.getCurrentItem();
             if(clickedItem == null)
                 return;
@@ -57,26 +55,29 @@ public class CoinShopClickEvent implements Listener
             {
                 Material material = clickedItem.getType();
                 int price = CoinShop.GetPrice(material);
-                if(event.isLeftClick())
+                if(event.isLeftClick() && !event.isShiftClick())
                 {
-                    PurchaseItem(player, material, uuid, price);
+                    PurchaseItem(player, material, price, false);
+                }
+                else if(event.isLeftClick() && event.isShiftClick())
+                {
+                    PurchaseItem(player, material, price, true);
                 }
                 else if(event.isRightClick() && !event.isShiftClick())
                 {
-                    SellItem(player,material, uuid, price);
+                    SellItem(player,material, price, false);
                 }
                 else if(event.isRightClick() && event.isShiftClick())
                 {
-                    SellAllItem(player, material, uuid, price);
+                    SellItem(player, material, price, true);
                 }
             }
         }
     }
 
-    private void PurchaseItem(Player player, Material material, UUID uuid, Integer price)
+    private void PurchaseItem(Player player, Material material, Integer price, Boolean purchaseTen)
     {
         String coinPath = "." + itemMap.get(material);
-        String path = uuid + coinPath;
 
         if(!CoinShop.GetOpen())
         {
@@ -84,7 +85,13 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        if(PlayerManager.GetGold(player) < price)
+        int amount = 1;
+        if(purchaseTen)
+        {
+            amount = 10;
+        }
+
+        if(PlayerManager.GetGold(player) < price * amount)
         {
             player.sendMessage("돈이 부족합니다.");
             return;
@@ -96,8 +103,8 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        PlayerManager.AddCoin(player, coinPath, 1, price);
-        PlayerManager.UseGold(player, price);
+        PlayerManager.AddCoin(player, coinPath, amount);
+        PlayerManager.UseGold(player, price * amount);
 
         String coinName;
 
@@ -118,14 +125,13 @@ public class CoinShopClickEvent implements Listener
             default:
                 coinName = "???";
         }
-        player.sendMessage( coinName + ChatColor.WHITE + "를 " + price + " 골드에 구매하였습니다.");
+        player.sendMessage( coinName + ChatColor.WHITE + " " + amount + " 개를 " + price * amount + " 골드에 구매하였습니다.");
         player.sendMessage("현재 " + coinName + ChatColor.WHITE + " 보유 개수: " + PlayerManager.GetCoin(player, coinPath));
     }
 
-    private void SellItem(Player player, Material material, UUID uuid, Integer price)
+    private void SellItem(Player player, Material material, Integer price, Boolean sellAll)
     {
         String coinPath = "." + itemMap.get(material);
-        String path = uuid + coinPath;
 
         if(!CoinShop.GetOpen())
         {
@@ -133,50 +139,12 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        if(PlayerManager.GetCoin(player, coinPath) <= 0)
+        int amount = 1;
+
+        if(sellAll)
         {
-            player.sendMessage(ChatColor.RED + "해당 코인을 보유하고있지 않습니다!");
-            return;
+            amount = PlayerManager.GetCoin(player, coinPath);
         }
-
-        PlayerManager.SellCoin(player, coinPath, 1, price);
-        PlayerManager.AddGold(player, price);
-
-        String coinName;
-
-        switch (coinPath)
-        {
-            case ".pungsandog_coin":
-                coinName = CoinManager.PungsanDogCoinName;
-                break;
-            case ".mole_coin":
-                coinName = CoinManager.MoleCoinName;
-                break;
-            case ".beet_coin":
-                coinName = CoinManager.BeetCoinName;
-                break;
-            case ".kimchi_coin":
-                coinName = CoinManager.KimchiCoinName;
-                break;
-            default:
-                coinName = "???";
-        }
-        player.sendMessage( coinName + ChatColor.WHITE + "를 " + price + " 골드에 판매하였습니다.");
-        player.sendMessage("현재 " + coinName + ChatColor.WHITE + " 보유 개수: " + PlayerManager.GetCoin(player, coinPath));
-    }
-
-    private void SellAllItem(Player player, Material material, UUID uuid, Integer price)
-    {
-        String coinPath = "." + itemMap.get(material);
-        String path = uuid + coinPath;
-
-        if(!CoinShop.GetOpen())
-        {
-            player.sendMessage(ChatColor.RED + "코인 거래 가능 시간이 아닙니다!");
-            return;
-        }
-
-        int amount = PlayerManager.GetCoin(player, coinPath);
 
         if(amount <= 0)
         {
@@ -184,7 +152,7 @@ public class CoinShopClickEvent implements Listener
             return;
         }
 
-        PlayerManager.SellCoin(player, coinPath, amount, price * amount);
+        PlayerManager.SellCoin(player, coinPath, amount);
         PlayerManager.AddGold(player, price * amount);
 
         String coinName;

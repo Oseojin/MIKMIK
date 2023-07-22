@@ -27,7 +27,6 @@ public final class TestPlugin extends JavaPlugin
     {
         // 기본
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
-        getServer().getPluginManager().registerEvents(new ChatEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerUseItemEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerTeleport(), this);
@@ -36,29 +35,24 @@ public final class TestPlugin extends JavaPlugin
         // 직업
         getServer().getPluginManager().registerEvents(new UseJobSelecter(), this);
 
-        getServer().getPluginManager().registerEvents(new FisherSelectNPC(), this);
         getServer().getPluginManager().registerEvents(new FisherSelectShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new FisherShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new Fisher(), this);
 
-        getServer().getPluginManager().registerEvents(new MinerSelectNPC(), this);
         getServer().getPluginManager().registerEvents(new MinerSelectShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new MinerShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new Miner(), this);
 
 
-        getServer().getPluginManager().registerEvents(new FarmerSelectNPC(), this);
         getServer().getPluginManager().registerEvents(new FarmerSelectShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new FarmerShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new Farmer(), this);
 
         getServer().getPluginManager().registerEvents(new WoodCutterSelectShopClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new WoodCutterSelectNPC(), this);
         getServer().getPluginManager().registerEvents(new WoodCutterShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new WoodCutter(), this);
 
         getServer().getPluginManager().registerEvents(new HunterSelectShopClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new HunterSelectNPC(), this);;
         getServer().getPluginManager().registerEvents(new Hunter(), this);;
 
         // 히든
@@ -97,6 +91,7 @@ public final class TestPlugin extends JavaPlugin
 
         // 경제
         getCommand("check").setExecutor(new IssuingCheckCommand());
+        getCommand("cointrade").setExecutor(new OpenCoinShop());
 
         // 운영자
         getCommand("statcheck").setExecutor(new StatChecker());
@@ -105,7 +100,6 @@ public final class TestPlugin extends JavaPlugin
         getCommand("goldsetplayer").setExecutor(new SetPlayerGold());
         getCommand("goldaddplayer").setExecutor(new AddPlayerGold());
         getCommand("jobsetplayer").setExecutor(new SetPlayerJob());
-        getCommand("titlesetplayer").setExecutor(new SetPlayerTitle());
         getCommand("mycoin").setExecutor(new CheckCoin());
         getCommand("spawnweapon").setExecutor(new GetWeapon());
     }

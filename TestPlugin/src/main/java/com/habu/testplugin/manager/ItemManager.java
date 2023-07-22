@@ -24,6 +24,15 @@ public class ItemManager
         return stack;
     }
 
+    public static ItemStack buildCustomItem(ItemStack itemStack, int amount, String... lore)
+    {
+        ItemStack stack = itemStack;
+        ItemMeta meta = stack.getItemMeta();
+        meta.setLore(Arrays.asList(lore));
+        stack.setItemMeta(meta);
+        return stack;
+    }
+
     // 무기 생성용
     public static ItemStack buildWeapon(Material type, int amount, String displayName, int damage, Enchantment enchantment, int enchantLevel, String... lore)
     {
@@ -93,7 +102,6 @@ public class ItemManager
     // 낚시꾼
     public static final ItemStack gui_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.", ChatColor.AQUA + "[낚시꾼]", ChatColor.WHITE + "크기 별 물고기 획득 가능", ChatColor.WHITE + "일정 확률로 낚시 주머니 획득 가능", ChatColor.WHITE + "바다 상점 이용 가능", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.");
-
     public static final ItemStack gui_FisherCod = buildItem(Material.COD, 1, ChatColor.WHITE + "대구", ChatColor.WHITE + "판매가: ");
     public static final ItemStack gui_FisherSalmon = buildItem(Material.SALMON, 1, ChatColor.WHITE + "연어", ChatColor.WHITE + "판매가: ");
     public static final ItemStack gui_FisherTropical_Fish = buildItem(Material.TROPICAL_FISH, 1, ChatColor.WHITE + "열대어", ChatColor.WHITE + "판매가: ");

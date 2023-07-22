@@ -174,16 +174,12 @@ public class ConfigManager
 
         // 낚시꾼
         fishershopConfig.addDefault("fisher_selecter.price", 1000);
-        fishershopConfig.addDefault("cod.price", 20);
-        fishershopConfig.addDefault("salmon.price", 38);
-        fishershopConfig.addDefault("pufferfish.price", 44);
-        fishershopConfig.addDefault("tropical_fish.price", 49);
-
-        fishershopConfig.addDefault("fisher_selecter.volume", 0);
-        fishershopConfig.addDefault("cod.volume", 0);
-        fishershopConfig.addDefault("salmon.volume", 0);
-        fishershopConfig.addDefault("pufferfish.volume", 0);
-        fishershopConfig.addDefault("tropical_fish.volume", 0);
+        fishershopConfig.addDefault("anchovy.price", 15);
+        fishershopConfig.addDefault("salmon.price", 75);
+        fishershopConfig.addDefault("cutlassfish.price", 225);
+        fishershopConfig.addDefault("tuna.price", 350);
+        fishershopConfig.addDefault("shark.price", 4000);
+        fishershopConfig.addDefault("whale.price", 30000);
 
         // 광부
         minershopConfig.addDefault("miner_selecter.price", 1000);
@@ -193,9 +189,9 @@ public class ConfigManager
         minershopConfig.addDefault("gold.price", 25);
         minershopConfig.addDefault("lapis_lazuli.price", 15);
         minershopConfig.addDefault("redstone.price", 8);
-        minershopConfig.addDefault("diamond.price", 200);
+        minershopConfig.addDefault("diamond.price", 300);
         minershopConfig.addDefault("emerald.price", 120);
-        minershopConfig.addDefault("amethyst_shard.price", 300);
+        minershopConfig.addDefault("amethyst_shard.price", 80);
         minershopConfig.addDefault("quartz.price", 30);
         minershopConfig.addDefault("netherite.price", 10000);
 
@@ -214,15 +210,15 @@ public class ConfigManager
 
         // 농부
         farmershopConfig.addDefault("farmer_selecter.price", 1000);
-        farmershopConfig.addDefault("wheat.price", 4);
-        farmershopConfig.addDefault("carrot.price", 2);
-        farmershopConfig.addDefault("potato.price", 2);
-        farmershopConfig.addDefault("beetroot.price", 6);
-        farmershopConfig.addDefault("melon.price", 5);
-        farmershopConfig.addDefault("pumpkin.price", 36);
-        farmershopConfig.addDefault("sweet_berries.price", 2);
-        farmershopConfig.addDefault("cocoa_beans.price", 8);
-        farmershopConfig.addDefault("nether_wart.price", 10);
+        farmershopConfig.addDefault("wheat.price", 6);
+        farmershopConfig.addDefault("carrot.price", 3);
+        farmershopConfig.addDefault("potato.price", 3);
+        farmershopConfig.addDefault("beetroot.price", 9);
+        farmershopConfig.addDefault("melon.price", 8);
+        farmershopConfig.addDefault("pumpkin.price", 40);
+        farmershopConfig.addDefault("sweet_berries.price", 3);
+        farmershopConfig.addDefault("cocoa_beans.price", 12);
+        farmershopConfig.addDefault("nether_wart.price", 15);
 
         farmershopConfig.addDefault("farmer_selecter.volume", 0);
         farmershopConfig.addDefault("wheat.volume", 0);

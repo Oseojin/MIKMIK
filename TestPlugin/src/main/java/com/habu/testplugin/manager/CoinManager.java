@@ -99,6 +99,7 @@ public class CoinManager
                         shopConfig.set(coinName + ".delisting_count", maxDelistingCount);
                         shopConfig.set(coinName + ".price", shopConfig.get(coinName + ".basic_price"));
                         TestPlugin.getConfigManager().saveConfig(configName);
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "코인 가격이 변동되었습니다.");
                     }
                     else
                     {

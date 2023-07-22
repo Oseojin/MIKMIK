@@ -49,22 +49,20 @@ public class MinerShopClickEvent implements Listener
 
                 if(playerInv.contains(material))
                 {
-                    int stack = 0;
                     if(event.isLeftClick() && !event.isShiftClick())
                     {
-                        stack = SellOneItem(player, playerInv, material, uuid, price);
+                        SellOneItem(player, playerInv, material, price);
                     }
                     else if(event.isLeftClick() && event.isShiftClick())
                     {
-                        stack = SellAllItem(player, playerInv, material, uuid, price);
+                        SellAllItem(player, playerInv, material, price);
                     }
-                    MinerShop.SellItem(material, stack);
                 }
             }
         }
     }
 
-    private Integer SellAllItem(Player player, Inventory playerInv, Material material, UUID uuid, Integer price)
+    private Integer SellAllItem(Player player, Inventory playerInv, Material material, Integer price)
     {
         int stack = 0;
         for(int i = 0; i < playerInv.getSize(); i ++)
@@ -84,7 +82,7 @@ public class MinerShopClickEvent implements Listener
         return stack;
     }
 
-    private Integer SellOneItem(Player player, Inventory playerInv, Material material, UUID uuid, Integer price)
+    private Integer SellOneItem(Player player, Inventory playerInv, Material material, Integer price)
     {
         for(int i = 0; i < playerInv.getSize(); i ++)
         {

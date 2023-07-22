@@ -14,4 +14,5 @@ public class TitleNameManager
     public static String WoodCutter1 = ChatColor.GOLD + "[장작]" + ChatColor.WHITE;
     public static String Hunter1 = ChatColor.RED + "[활]" + ChatColor.WHITE;
     public static String LightningCharger = ChatColor.AQUA + "[뇌창]" + ChatColor.WHITE;
+    public static String Looter = ChatColor.BLACK + "[약탈자]" + ChatColor.WHITE;
 }

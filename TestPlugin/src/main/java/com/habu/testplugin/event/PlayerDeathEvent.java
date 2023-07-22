@@ -5,6 +5,7 @@ import com.habu.testplugin.Hidden.LightningChargerManager;
 import com.habu.testplugin.command.IssuingCheckCommand;
 import com.habu.testplugin.manager.ItemManager;
 import com.habu.testplugin.manager.PlayerManager;
+import com.habu.testplugin.manager.TitleNameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -79,24 +80,15 @@ public class PlayerDeathEvent implements Listener
         int gold = PlayerManager.GetGold(player);
 
         Entity killer = event.getPlayer().getKiller();
+        /*player.getWorld().dropItem(player.getLocation(), IssuingCheckCommand.IssuingCheck(gold));
+        PlayerManager.SetGold(player, 0);
+        player.sendMessage(ChatColor.DARK_RED + "약탈자에게 모든 돈을 빼앗겼습니다!");*/
 
-        if(killer instanceof Player && PlayerManager.GetJob((Player)killer).equals(ChatColor.BLACK + "[약탈자]"))
+        if(gold > 0)
         {
-            if(gold > 0)
-            {
-                player.getWorld().dropItem(player.getLocation(), IssuingCheckCommand.IssuingCheck(gold));
-                PlayerManager.SetGold(player, 0);
-                player.sendMessage(ChatColor.DARK_RED + "약탈자에게 모든 돈을 빼앗겼습니다!");
-            }
-        }
-        else
-        {
-            if(gold > 0)
-            {
-                int halfGold = Math.round(PlayerManager.GetGold(player) / 2);
-                player.sendMessage(ChatColor.RED + "" + (PlayerManager.GetGold(player) - halfGold) + "골드가 사라졌습니다...");
-                PlayerManager.SetGold(player, halfGold);
-            }
+            int halfGold = Math.round(PlayerManager.GetGold(player) / 2);
+            player.sendMessage(ChatColor.RED + "" + (PlayerManager.GetGold(player) - halfGold) + "골드가 사라졌습니다...");
+            PlayerManager.SetGold(player, halfGold);
         }
     }
 

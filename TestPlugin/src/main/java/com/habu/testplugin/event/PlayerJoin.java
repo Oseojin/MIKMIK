@@ -32,24 +32,26 @@ public class PlayerJoin implements Listener
             MessageManager.NewPlayerJoinMessage(event, playerName);
 
             PlayerManager.SetName(player, playerName);
-            PlayerManager.SetTitle(player, "무직");
             PlayerManager.SetGold(player, 1000);
             PlayerManager.SetJob(player, "무직");
+            PlayerManager.SetJobLevel(player, 0);
         }
         else // 월드 데이터에 플레이어 정보가 있다면
         {
             // 근데 config 정보에는 없다면 --> config 데이터 소실
-            if(PlayerManager.GetName(player) == null || PlayerManager.GetJob(player) == null || PlayerManager.GetTitle(player) == null)
+            if(PlayerManager.GetName(player) == null)
             {
                 // 아쉽지만 초기화...
                 PlayerManager.SetName(player, playerName);
-                PlayerManager.SetTitle(player, "무직");
                 PlayerManager.SetGold(player, 1000);
+            }
+            if(PlayerManager.GetJob(player) == null)
+            {
                 PlayerManager.SetJob(player, "무직");
+                PlayerManager.SetJobLevel(player, 0);
             }
             MessageManager.PlayerJoinMessage(event, playerName);
         }
-        MessageManager.PlayerTitleApplication(player, PlayerManager.GetTitlePrefix(player));
 
         setScoreboard(player);
 

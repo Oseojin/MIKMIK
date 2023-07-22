@@ -18,8 +18,9 @@ commands:
     description: add player gold
   jobsetplayer:
     description: set player job
-  titlesetplayer:
-    description: set player title
+  cointrade:
+    description: 코인 거래소 열기
+    aliases: 코인거래소
   mycoin:
     description: 코인 개수 확인
     aliases: 코인

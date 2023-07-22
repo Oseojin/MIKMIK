@@ -49,22 +49,20 @@ public class FarmerShopClickEvent implements Listener
 
                 if(playerInv.contains(material))
                 {
-                    int stack = 0;
                     if(event.isLeftClick() && !event.isShiftClick())
                     {
-                        stack = SellOneItem(player, playerInv, material, uuid, price);
+                        SellOneItem(player, playerInv, material, price);
                     }
                     else if(event.isLeftClick() && event.isShiftClick())
                     {
-                        stack = SellAllItem(player, playerInv, material, uuid, price);
+                        SellAllItem(player, playerInv, material, price);
                     }
-                    FarmerShop.SellItem(material, stack);
                 }
             }
         }
     }
 
-    private Integer SellAllItem(Player player, Inventory playerInv, Material material, UUID uuid, Integer price)
+    private void SellAllItem(Player player, Inventory playerInv, Material material, Integer price)
     {
         int stack = 0;
         for(int i = 0; i < playerInv.getSize(); i ++)
@@ -81,10 +79,9 @@ public class FarmerShopClickEvent implements Listener
         }
         PlayerManager.AddGold(player, price * stack);
         player.sendMessage(material + " " + stack + " 개를 " + (price * stack) + " 골드에 판매하였습니다.");
-        return stack;
     }
 
-    private Integer SellOneItem(Player player, Inventory playerInv, Material material, UUID uuid, Integer price)
+    private void SellOneItem(Player player, Inventory playerInv, Material material, Integer price)
     {
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
@@ -101,6 +98,5 @@ public class FarmerShopClickEvent implements Listener
                 break;
             }
         }
-        return 1;
     }
 }
