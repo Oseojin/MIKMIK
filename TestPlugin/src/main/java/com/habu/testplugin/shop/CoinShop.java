@@ -265,6 +265,7 @@ public class CoinShop implements InventoryHolder
                 lore.add(ChatColor.GOLD + "현재가: " + price + " (" + fluctuation + "%)");
             }
             lore.add(ChatColor.WHITE + "좌클릭: 1개 구매");
+            lore.add(ChatColor.WHITE + "Shift + 좌클릭: 10개 구매");
             lore.add(ChatColor.WHITE + "우클릭: 1개 판매");
             lore.add(ChatColor.WHITE + "Shift + 우클릭: 전부 판매");
 
