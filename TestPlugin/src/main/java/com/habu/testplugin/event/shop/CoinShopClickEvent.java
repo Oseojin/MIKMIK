@@ -65,11 +65,11 @@ public class CoinShopClickEvent implements Listener
                 }
                 else if(event.isRightClick() && !event.isShiftClick())
                 {
-                    SellItem(player,material, price, false);
+                    SellItem(player,material, price, PlayerManager.GetCoin(player, itemMap.get(clickedItem.getType())), false);
                 }
                 else if(event.isRightClick() && event.isShiftClick())
                 {
-                    SellItem(player, material, price, true);
+                    SellItem(player, material, price, PlayerManager.GetCoin(player, itemMap.get(clickedItem.getType())), true);
                 }
             }
         }
@@ -129,7 +129,7 @@ public class CoinShopClickEvent implements Listener
         player.sendMessage("현재 " + coinName + ChatColor.WHITE + " 보유 개수: " + PlayerManager.GetCoin(player, coinPath));
     }
 
-    private void SellItem(Player player, Material material, Integer price, Boolean sellAll)
+    private void SellItem(Player player, Material material, Integer price, Integer playerAmount, Boolean sellAll)
     {
         String coinPath = "." + itemMap.get(material);
 
@@ -146,7 +146,7 @@ public class CoinShopClickEvent implements Listener
             amount = PlayerManager.GetCoin(player, coinPath);
         }
 
-        if(amount <= 0)
+        if(playerAmount <= 0)
         {
             player.sendMessage(ChatColor.RED + "해당 코인을 보유하고있지 않습니다!");
             return;
