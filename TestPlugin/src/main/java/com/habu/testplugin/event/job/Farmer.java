@@ -145,7 +145,7 @@ public class Farmer implements Listener
                         Location blockLoc = block.getLocation();
                         blockLoc.add(x, 0, z);
                         Block nearBlock = block.getWorld().getBlockAt(blockLoc);
-                        if(nearBlock.canPlace(block.getBlockData()))
+                        if(nearBlock.canPlace(block.getBlockData()) && !allCrop.contains(nearBlock.getType()))
                         {
                             int playerIndex = playerInv.first(playerTool.getType());
                             if(playerIndex == -1)
