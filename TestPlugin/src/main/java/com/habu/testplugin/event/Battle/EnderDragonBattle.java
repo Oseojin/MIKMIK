@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -25,7 +26,7 @@ import java.util.*;
 
 public class EnderDragonBattle implements Listener
 {
-    double maxHealth = 100000; // 100000
+    double maxHealth = 100; // 100000
     boolean BattleStart = false;
     Boolean Phase1 = false;
     Boolean Phase2 = false;
@@ -51,19 +52,7 @@ public class EnderDragonBattle implements Listener
             Material.PINK_BED
     ));
 
-    private static HashMap<Player, Double> combatParticipants = new HashMap<Player, Double>();
-    private static double totalDamage = 0;
-
-    private static List<Location> AlterEgoLocs = new ArrayList<Location>(Arrays.asList(
-            new Location(Bukkit.getWorld("world_the_end"), 30, 85, 30),
-            new Location(Bukkit.getWorld("world_the_end"), -30, 85, 30),
-            new Location(Bukkit.getWorld("world_the_end"), 30, 85, -30),
-            new Location(Bukkit.getWorld("world_the_end"), -30, 85, -30)
-    ));
-
-    private static List<LivingEntity> AlterEgos = new ArrayList<LivingEntity>();
-
-    private static int AlterEgoMaxHealth = 1000;
+    private static List<Player> combatParticipants = new LinkedList<Player>();
 
     @EventHandler
     public void EnderDragonHit(EntityDamageByEntityEvent event)
@@ -85,7 +74,6 @@ public class EnderDragonBattle implements Listener
             entityEnderDragon.setCustomNameVisible(true);
             entityEnderDragon.setMaxHealth(maxHealth);
             entityEnderDragon.setHealth(entityEnderDragon.getMaxHealth());
-            totalDamage = 0;
 
             List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
             for(int i = 0; i < playerList.size(); i++)
@@ -102,55 +90,115 @@ public class EnderDragonBattle implements Listener
         {
             Arrow arrow = (Arrow) event.getDamager();
             Player player = (Player) arrow.getShooter();
-            AddContribution(player, entityEnderDragon.getLastDamage());
 
-            Bukkit.broadcastMessage(event.getDamager() + " " + combatParticipants.get(player) + " " + totalDamage);
+            if(!combatParticipants.contains(player))
+            {
+                combatParticipants.add(player);
+            }
+        }
+        else if(event.getDamager().getType().equals(EntityType.TRIDENT))
+        {
+            Trident trident = (Trident) event.getDamager();
+            Player player = (Player) trident.getShooter();
+
+            if(!combatParticipants.contains(player))
+            {
+                combatParticipants.add(player);
+            }
         }
         else if(event.getDamager().getType().equals(EntityType.PLAYER))
         {
             Player player = (Player) event.getDamager();
-            AddContribution(player, entityEnderDragon.getLastDamage());
 
-            Bukkit.broadcastMessage(event.getDamager() + " " + combatParticipants.get(player) + " " + totalDamage);
+            if(!combatParticipants.contains(player))
+            {
+                combatParticipants.add(player);
+            }
         }
 
         BattleStart = true;
         Phase1 = true;
 
         double dragonHealth = entityEnderDragon.getHealth();
-        if(dragonHealth <= 0)
+        if(dragonHealth - entityEnderDragon.getLastDamage() <= 0)
         {
             if(!LastPhase)
             {
-                SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤이 마지막 발악을 시작합니다", ChatColor.RED + "");
+                event.setCancelled(true);
+                entityEnderDragon.setInvulnerable(true);
 
-                /*for (int i = 0; i < AlterEgos.size(); i++)
-                {
-                    AlterEgos.get(i).damage(AlterEgoMaxHealth);
-                    Bukkit.broadcastMessage(AlterEgos.get(i) + " " + AlterEgos.get(i).getHealth());
-                }*/
+                SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤이 마지막 발악을 시작합니다", ChatColor.RED + "피할 수 없을 것 같은 느낌이 듭니다");
                 LastPhase = true;
+
+                List<Entity> nearEntities = entityEnderDragon.getNearbyEntities(100, 100, 100);
+
+                List<Player> playerList = (List<Player>) Bukkit.getOnlinePlayers();
+                for(int i = 0; i < playerList.size(); i++)
+                {
+                    Player player = playerList.get(i);
+                    if(player.getWorld().equals(Bukkit.getWorld("world_the_end")))
+                    {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1));
+                    }
+                }
+
+                new BukkitRunnable()
+                {
+                    int count = 0;
+                    @Override
+                    public void run()
+                    {
+                        if(count > 4)
+                        {
+                            this.cancel();
+                        }
+                        for(int i = 0; i < combatParticipants.size(); i++)
+                        {
+                            combatParticipants.get(i).damage(10000);
+                            count += 1;
+                            Bukkit.broadcastMessage(ChatColor.RED + "플레이어가 모두 전사하여 레이드에 실패했습니다.");
+
+                            entityEnderDragon.setHealth(maxHealth);
+                            BattleStart = false;
+                            Phase1 = false;
+                            Phase2 = false;
+                            Phase3 = false;
+                            LastPhase = false;
+
+                            entityEnderDragon.setInvulnerable(false);
+
+                            combatParticipants.clear();
+                        }
+                    }
+                }.runTaskLater(TestPlugin.getPlugin(), 100L);
             }
         }
         else if(dragonHealth < maxHealth * (25f/100f))
         {
             if (!Phase3)
             {
-                SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤이 생명의 위협을 느낍니다", ChatColor.RED + "");
-
-                /*for(int i = 0; i < AlterEgoLocs.size(); i++)
-                {
-                    LivingEntity AlterDragon = (LivingEntity) entityEnderDragon.getWorld().spawnEntity(AlterEgoLocs.get(i), EntityType.ENDER_DRAGON);
-
-                    AlterDragon.setMaxHealth(maxHealth);
-                    AlterDragon.damage(maxHealth);
-
-                    Bukkit.broadcastMessage(AlterDragon.getHealth() + "");
-
-                    AlterEgos.add(AlterDragon);
-                }*/
-
                 Phase3 = true;
+                SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤이 생명의 위협을 느낍니다", ChatColor.RED + "");
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        if(LastPhase)
+                        {
+                            this.cancel();
+                        }
+                        for(int i = 0; i < combatParticipants.size(); i++)
+                        {
+                            Location playerLoc = combatParticipants.get(i).getLocation();
+                            Vector from = new Vector(playerLoc.getX(), playerLoc.getY() + 25, playerLoc.getZ());
+                            Vector to = new Vector(playerLoc.getX(), playerLoc.getY(), playerLoc.getZ());
+                            Vector vector = to.subtract(from).normalize();
+                            Fireball fireball = playerLoc.getWorld().spawn(playerLoc.add(0, 25, 0), Fireball.class);
+                            fireball.setDirection(vector);
+                        }
+                    }
+                }.runTaskTimer(TestPlugin.getPlugin(), 0L, 60L);
             }
         }
         else if(dragonHealth < maxHealth * (50f/100f))
@@ -158,6 +206,8 @@ public class EnderDragonBattle implements Listener
             if(!Phase2)
             {
                 SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤이 당신을 적수로 인정합니다", ChatColor.RED + "화염구를 주의하세요");
+
+                Phase2 = true;
 
                 entityEnderDragon.setPhase(EnderDragon.Phase.LAND_ON_PORTAL);
 
@@ -199,8 +249,6 @@ public class EnderDragonBattle implements Listener
                         this.cancel();
                     }
                 }.runTaskLater(TestPlugin.getPlugin(), 200L);
-
-                Phase2 = true;
             }
         }
     }
@@ -271,20 +319,6 @@ public class EnderDragonBattle implements Listener
         fireBlindly.run();
     }
 
-    public void AddContribution(Player player, Double damage)
-    {
-        if(combatParticipants.containsKey(player))
-        {
-            combatParticipants.put(player, combatParticipants.get(player) + damage);
-        }
-        else
-        {
-            combatParticipants.put(player, damage);
-        }
-
-        totalDamage += damage;
-    }
-
 
     @EventHandler
     public void EnderDragonDeath(EntityDeathEvent event)
@@ -294,28 +328,21 @@ public class EnderDragonBattle implements Listener
             return;
         }
 
+        Player player = event.getEntity().getKiller();
 
-        combatParticipants.forEach((key, value) -> {
-            Player player = key;
+        SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤을 처치했습니다!", ChatColor.GOLD + "1,000,000 골드가 처치자에게 주어집니다!");
 
-            double damagePer = value / totalDamage;
+        PlayerManager.AddGold(player, 1000000);
+    }
 
-            int playerAddGold = (int) Math.round(1000000 * damagePer);
-
-            PlayerManager.AddGold(player, playerAddGold);
-            player.sendMessage(ChatColor.GOLD + "" + playerAddGold + " 골드 획득!");
-        });
-
-        SendAllEndPlayer(ChatColor.LIGHT_PURPLE + "엔더드래곤을 처치했습니다!", ChatColor.GOLD + "1,000,000 골드가 기여도에 따라 분배됩니다!");
-
-        BattleStart = false;
-        Phase1 = false;
-        Phase2 = false;
-        Phase3 = false;
-        LastPhase = false;
-        totalDamage = 0;
-
-        combatParticipants.clear();
+    @EventHandler
+    public void PlayerDeath(PlayerDeathEvent event)
+    {
+        Player player = event.getPlayer();
+        if(combatParticipants.contains(player))
+        {
+            combatParticipants.remove(player);
+        }
     }
 
     @EventHandler
