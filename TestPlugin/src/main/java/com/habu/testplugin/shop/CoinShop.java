@@ -330,7 +330,6 @@ public class CoinShop implements InventoryHolder
             for(int i = 0; i < playerList.size(); i++)
             {
                 Player player = playerList.get(i);
-                Bukkit.broadcastMessage(player + "");
                 int coinAmount = PlayerManager.GetCoin(player, coinPath);
                 int coinPrice = shopConfig.getInt(value + ".price");
                 if(coinAmount > 0)
@@ -349,7 +348,6 @@ public class CoinShop implements InventoryHolder
             for(int i = 0; i < Bukkit.getServer().getOfflinePlayers().length; i++)
             {
                 Player player = Bukkit.getServer().getOfflinePlayers()[i].getPlayer();
-                Bukkit.broadcastMessage(player + "");
                 if(player == null)
                     return;
                 int coinAmount = PlayerManager.GetCoin(player, coinPath);
@@ -400,7 +398,6 @@ public class CoinShop implements InventoryHolder
         for(int i = 0; i < playerList.size(); i++)
         {
             Player player = playerList.get(i);
-            Bukkit.broadcastMessage(player + "");
             int coinAmount = PlayerManager.GetCoin(player, coinPath);
             if(coinAmount > 0)
             {
@@ -412,7 +409,6 @@ public class CoinShop implements InventoryHolder
         for(int i = 0; i < Bukkit.getServer().getOfflinePlayers().length; i++)
         {
             Player player = Bukkit.getServer().getOfflinePlayers()[i].getPlayer();
-            Bukkit.broadcastMessage(player + "");
             if(player == null)
                 return;
             int coinAmount = PlayerManager.GetCoin(player, coinPath);
