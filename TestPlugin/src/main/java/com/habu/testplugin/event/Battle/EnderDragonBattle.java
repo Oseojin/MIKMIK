@@ -26,7 +26,7 @@ import java.util.*;
 
 public class EnderDragonBattle implements Listener
 {
-    double maxHealth = 100; // 100000
+    double maxHealth = 25000; // 100000
     boolean BattleStart = false;
     Boolean Phase1 = false;
     Boolean Phase2 = false;
