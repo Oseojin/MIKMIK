@@ -138,6 +138,7 @@ public class Farmer implements Listener
         {
             if(seedList.contains(playerTool.getType()))
             {
+                playerTool.setAmount(playerTool.getAmount() - 1);
                 for(int x = -1; x < 2; x++)
                 {
                     for(int z = -1; z < 2; z++)
