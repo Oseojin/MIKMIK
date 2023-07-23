@@ -48,6 +48,11 @@ public class Farmer implements Listener
             Material.NETHER_WART
     ));
 
+    List<Material> otherSeed = new ArrayList<>(Arrays.asList(
+            Material.PUMPKIN_STEM,
+            Material.MELON_STEM
+    ));
+
     private Integer RandomCrop()
     {
         int randNum = random.nextInt(100);
@@ -146,7 +151,7 @@ public class Farmer implements Listener
                         Location blockLoc = block.getLocation();
                         blockLoc.add(x, 0, z);
                         Block nearBlock = block.getWorld().getBlockAt(blockLoc);
-                        if(nearBlock.canPlace(block.getBlockData()) && !allCrop.contains(nearBlock.getType()))
+                        if(nearBlock.canPlace(block.getBlockData()) && !allCrop.contains(nearBlock.getType()) && !otherSeed.contains(nearBlock.getType()))
                         {
                             int playerIndex = playerInv.first(playerTool.getType());
                             if(playerIndex == -1)

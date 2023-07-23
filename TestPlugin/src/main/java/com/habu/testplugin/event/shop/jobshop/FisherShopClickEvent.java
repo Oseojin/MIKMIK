@@ -82,7 +82,7 @@ public class FisherShopClickEvent implements Listener
             return;
 
         PlayerManager.AddGold(player, allPrice);
-        player.sendMessage(fish.getItemMeta().displayName() + " " + stack + " 마리를 " + allPrice + " 골드에 판매하였습니다.");
+        player.sendMessage(fish.getItemMeta().getDisplayName() + " " + stack + " 마리를 " + allPrice + " 골드에 판매하였습니다.");
     }
 
     private void SellOneItem(Player player, Inventory playerInv, ItemStack fish, Integer price)
