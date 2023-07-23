@@ -148,7 +148,6 @@ public class Farmer implements Listener
                         if(nearBlock.canPlace(block.getBlockData()))
                         {
                             int playerIndex = playerInv.first(playerTool.getType());
-                            player.sendMessage("" + playerIndex);
                             if(playerIndex == -1)
                             {
                                 return;
