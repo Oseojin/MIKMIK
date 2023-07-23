@@ -157,7 +157,7 @@ public class WoodCutter implements Listener
                     return;
                 }
                 int randomNum = random.nextInt(10);
-                if(randomNum >= 8) // 10% 확률로 나무가방 획득
+                if(randomNum >= 7) // 20% 확률로 나무가방 획득
                 {
                     String rate = RandomBag();
                     player.sendMessage("나무에서 " + "[" + rate.toUpperCase() + "]" + "등급 가방이 떨어졌습니다!");

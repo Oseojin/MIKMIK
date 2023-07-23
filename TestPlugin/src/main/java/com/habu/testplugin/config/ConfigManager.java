@@ -174,26 +174,26 @@ public class ConfigManager
 
         // 낚시꾼
         fishershopConfig.addDefault("fisher_selecter.price", 1000);
-        fishershopConfig.addDefault("anchovy.price", 15);
-        fishershopConfig.addDefault("salmon.price", 30);
-        fishershopConfig.addDefault("cutlassfish.price", 100);
-        fishershopConfig.addDefault("tuna.price", 300);
-        fishershopConfig.addDefault("shark.price", 3000);
-        fishershopConfig.addDefault("whale.price", 30000);
+        fishershopConfig.addDefault("anchovy.price", 30);
+        fishershopConfig.addDefault("salmon.price", 60);
+        fishershopConfig.addDefault("cutlassfish.price", 200);
+        fishershopConfig.addDefault("tuna.price", 500);
+        fishershopConfig.addDefault("shark.price", 5000);
+        fishershopConfig.addDefault("whale.price", 100000);
 
         // 광부
         minershopConfig.addDefault("miner_selecter.price", 1000);
-        minershopConfig.addDefault("coal.price", 3);
+        minershopConfig.addDefault("coal.price", 1);
         minershopConfig.addDefault("copper.price", 8);
         minershopConfig.addDefault("iron.price", 15);
-        minershopConfig.addDefault("gold.price", 25);
+        minershopConfig.addDefault("gold.price", 20);
         minershopConfig.addDefault("lapis_lazuli.price", 15);
         minershopConfig.addDefault("redstone.price", 8);
-        minershopConfig.addDefault("diamond.price", 300);
+        minershopConfig.addDefault("diamond.price", 500);
         minershopConfig.addDefault("emerald.price", 120);
         minershopConfig.addDefault("amethyst_shard.price", 80);
-        minershopConfig.addDefault("quartz.price", 30);
-        minershopConfig.addDefault("netherite.price", 10000);
+        minershopConfig.addDefault("quartz.price", 12);
+        minershopConfig.addDefault("netherite.price", 20000);
 
         minershopConfig.addDefault("miner_selecter.volume", 0);
         minershopConfig.addDefault("coal.volume", 0);
@@ -210,15 +210,14 @@ public class ConfigManager
 
         // 농부
         farmershopConfig.addDefault("farmer_selecter.price", 1000);
-        farmershopConfig.addDefault("wheat.price", 6);
-        farmershopConfig.addDefault("carrot.price", 3);
-        farmershopConfig.addDefault("potato.price", 3);
-        farmershopConfig.addDefault("beetroot.price", 9);
-        farmershopConfig.addDefault("melon.price", 8);
-        farmershopConfig.addDefault("pumpkin.price", 40);
-        farmershopConfig.addDefault("sweet_berries.price", 3);
-        farmershopConfig.addDefault("cocoa_beans.price", 12);
-        farmershopConfig.addDefault("nether_wart.price", 15);
+        farmershopConfig.addDefault("wheat.price", 20);
+        farmershopConfig.addDefault("carrot.price", 4);
+        farmershopConfig.addDefault("potato.price", 4);
+        farmershopConfig.addDefault("beetroot.price", 19);
+        farmershopConfig.addDefault("melon.price", 4);
+        farmershopConfig.addDefault("pumpkin.price", 21);
+        farmershopConfig.addDefault("cocoa_beans.price", 7);
+        farmershopConfig.addDefault("nether_wart.price", 6);
 
         farmershopConfig.addDefault("farmer_selecter.volume", 0);
         farmershopConfig.addDefault("wheat.volume", 0);
@@ -233,19 +232,19 @@ public class ConfigManager
 
         // 나무꾼
         woodcuttershopConfig.addDefault("woodcutter_selecter.price", 1000);
-        woodcuttershopConfig.addDefault("oak.price", 5);
-        woodcuttershopConfig.addDefault("spruce.price", 5);
-        woodcuttershopConfig.addDefault("birch.price", 5);
-        woodcuttershopConfig.addDefault("jungle.price", 5);
-        woodcuttershopConfig.addDefault("acacia.price", 5);
-        woodcuttershopConfig.addDefault("dark_oak.price", 5);
-        woodcuttershopConfig.addDefault("mangrove.price", 5);
-        woodcuttershopConfig.addDefault("crimson_stem.price", 8);
-        woodcuttershopConfig.addDefault("mushroom_stem.price", 7);
-        woodcuttershopConfig.addDefault("warped_stem.price", 10);
-        woodcuttershopConfig.addDefault("apple.price", 20);
-        woodcuttershopConfig.addDefault("golden_apple.price", 100);
-        woodcuttershopConfig.addDefault("enchanted_golden_apple.price", 500);
+        woodcuttershopConfig.addDefault("oak.price", 16);
+        woodcuttershopConfig.addDefault("spruce.price", 16);
+        woodcuttershopConfig.addDefault("birch.price", 16);
+        woodcuttershopConfig.addDefault("jungle.price", 16);
+        woodcuttershopConfig.addDefault("acacia.price", 16);
+        woodcuttershopConfig.addDefault("dark_oak.price", 16);
+        woodcuttershopConfig.addDefault("mangrove.price", 16);
+        woodcuttershopConfig.addDefault("crimson_stem.price", 24);
+        woodcuttershopConfig.addDefault("mushroom_stem.price", 21);
+        woodcuttershopConfig.addDefault("warped_stem.price", 30);
+        woodcuttershopConfig.addDefault("apple.price", 50);
+        woodcuttershopConfig.addDefault("golden_apple.price", 250);
+        woodcuttershopConfig.addDefault("enchanted_golden_apple.price", 1500);
 
         woodcuttershopConfig.addDefault("woodcutter_selecter.volume", 0);
         woodcuttershopConfig.addDefault("oak.volume", 0);

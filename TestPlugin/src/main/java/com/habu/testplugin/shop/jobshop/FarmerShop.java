@@ -23,7 +23,7 @@ public class FarmerShop implements InventoryHolder
     private int[][] invBasic =
             { {1,1,1,1,1,1,1,1,1}
             , {1,2,2,2,2,2,2,2,1}
-            , {1,2,2,0,0,0,0,0,1}
+            , {1,2,0,0,0,0,0,0,1}
             , {1,0,0,0,0,0,0,0,1}
             , {1,0,0,0,0,0,0,0,1}
             , {1,1,1,1,1,1,1,1,1} };
@@ -40,7 +40,6 @@ public class FarmerShop implements InventoryHolder
         itemNamePare.put(ItemManager.gui_FarmerBeetroot.getType(), "beetroot");
         itemNamePare.put(ItemManager.gui_FarmerMelon.getType(), "melon");
         itemNamePare.put(ItemManager.gui_FarmerPumpkin.getType(), "pumpkin");
-        itemNamePare.put(ItemManager.gui_FarmerSweet_Berries.getType(), "sweet_berries");
         itemNamePare.put(ItemManager.gui_FarmerCoCoa_Beans.getType(), "cocoa_beans");
         itemNamePare.put(ItemManager.gui_FarmerNether_Wart.getType(), "nether_wart");
 
@@ -51,7 +50,6 @@ public class FarmerShop implements InventoryHolder
         sellItem.add(ItemManager.gui_FarmerBeetroot);
         sellItem.add(ItemManager.gui_FarmerMelon);
         sellItem.add(ItemManager.gui_FarmerPumpkin);
-        sellItem.add(ItemManager.gui_FarmerSweet_Berries);
         sellItem.add(ItemManager.gui_FarmerCoCoa_Beans);
         sellItem.add(ItemManager.gui_FarmerNether_Wart);
     }
@@ -91,9 +89,22 @@ public class FarmerShop implements InventoryHolder
         String pricepath = itemName + ".price";
         int price = shopConfig.getInt(pricepath);
         List<String> lore = new ArrayList<>();
-        for(int i = 0; i < itemMeta.getLore().size() - 1; i++)
+        int loreSize = itemMeta.getLore().size();
+        if(itemStack.getType().equals(Material.NETHER_WART))
+        {
+            loreSize -= 2;
+        }
+        else
+        {
+            loreSize -= 1;
+        }
+        for(int i = 0; i < loreSize; i++)
         {
             lore.add(itemMeta.getLore().get(i));
+        }
+        if(itemStack.getType().equals(Material.NETHER_WART))
+        {
+            lore.add(ChatColor.RED + "네더 사마귀는 10개씩만 판매할 수 있습니다.");
         }
         lore.add(ChatColor.GOLD + "[판매가] " + price);
         itemMeta.setLore(lore);

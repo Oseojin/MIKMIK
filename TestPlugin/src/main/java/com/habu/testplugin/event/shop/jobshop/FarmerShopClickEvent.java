@@ -64,6 +64,7 @@ public class FarmerShopClickEvent implements Listener
 
     private void SellAllItem(Player player, Inventory playerInv, Material material, Integer price)
     {
+        String prefix = "개를";
         int stack = 0;
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
@@ -71,18 +72,34 @@ public class FarmerShopClickEvent implements Listener
             if(invItem == null)
                 continue;
             Material invItemMaterial = invItem.getType();
+
             if(invItemMaterial.equals(material))
             {
-                stack += invItem.getAmount();
-                playerInv.removeItem(invItem);
+                if(material.equals(Material.NETHER_WART))
+                {
+                    prefix = "묶음을 ";
+                    stack += invItem.getAmount() / 10;
+                    if(stack > 0)
+                    {
+                        invItem.setAmount(invItem.getAmount() - (stack * 10));
+                    }
+                }
+                else
+                {
+                    stack += invItem.getAmount();
+                    playerInv.removeItem(invItem);
+                }
             }
         }
+        if(stack == 0)
+            return;
         PlayerManager.AddGold(player, price * stack);
-        player.sendMessage(material + " " + stack + " 개를 " + (price * stack) + " 골드에 판매하였습니다.");
+        player.sendMessage(material + " " + stack + prefix + (price * stack) + " 골드에 판매하였습니다.");
     }
 
     private void SellOneItem(Player player, Inventory playerInv, Material material, Integer price)
     {
+        String prefix = "개를";
         for(int i = 0; i < playerInv.getSize(); i ++)
         {
             ItemStack invItem = playerInv.getItem(i);
@@ -92,9 +109,25 @@ public class FarmerShopClickEvent implements Listener
             if(invItemMaterial.equals(material))
             {
                 int amount = invItem.getAmount() - 1;
-                invItem.setAmount(amount);
+                if(material.equals(Material.NETHER_WART))
+                {
+                    prefix = "묶음을 ";
+                    amount = invItem.getAmount() - 10;
+                    if(amount >= 0)
+                    {
+                        invItem.setAmount(amount);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    invItem.setAmount(amount);
+                }
                 PlayerManager.AddGold(player, price);
-                player.sendMessage(material + " 1 개를 " + price + " 골드에 판매하였습니다.");
+                player.sendMessage(material + " 1 "+ prefix + price + " 골드에 판매하였습니다.");
                 break;
             }
         }
