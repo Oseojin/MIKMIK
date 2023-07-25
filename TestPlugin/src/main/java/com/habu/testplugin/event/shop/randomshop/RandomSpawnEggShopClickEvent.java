@@ -119,7 +119,7 @@ public class RandomSpawnEggShopClickEvent implements Listener
             event.setCancelled(true);
             Inventory playerInv = player.getInventory();
             ItemStack clickedItem = event.getCurrentItem();
-            if(inv == null)
+            if(clickedItem == null)
                 return;
 
             if (clickedItem.isSimilar(ItemManager.gui_SpawnEgg))
