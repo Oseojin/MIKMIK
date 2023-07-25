@@ -1,11 +1,8 @@
 package com.habu.testplugin.event;
 
-import com.habu.testplugin.Hidden.LightningCharger;
-import com.habu.testplugin.Hidden.LightningChargerManager;
-import com.habu.testplugin.command.IssuingCheckCommand;
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.manager.TitleNameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -77,7 +74,7 @@ public class PlayerDeathEvent implements Listener
             event.getDrops().clear();
         }
 
-        int gold = PlayerManager.GetGold(player);
+        int gold = TestPlugin.db_conn.GetGold(player);
 
         Entity killer = event.getPlayer().getKiller();
         /*player.getWorld().dropItem(player.getLocation(), IssuingCheckCommand.IssuingCheck(gold));
@@ -86,9 +83,9 @@ public class PlayerDeathEvent implements Listener
 
         if(gold > 0)
         {
-            int halfGold = Math.round(PlayerManager.GetGold(player) / 2);
-            player.sendMessage(ChatColor.RED + "" + (PlayerManager.GetGold(player) - halfGold) + "골드가 사라졌습니다...");
-            PlayerManager.SetGold(player, halfGold);
+            int halfGold = Math.round(TestPlugin.db_conn.GetGold(player) / 2);
+            player.sendMessage(ChatColor.RED + "" + (TestPlugin.db_conn.GetGold(player) - halfGold) + "골드가 사라졌습니다...");
+            TestPlugin.db_conn.SetGold(player, halfGold);
         }
     }
 

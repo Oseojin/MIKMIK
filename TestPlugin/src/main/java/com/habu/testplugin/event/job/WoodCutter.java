@@ -1,9 +1,9 @@
 package com.habu.testplugin.event.job;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.JobNameManager;
-import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -14,7 +14,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
@@ -118,7 +117,7 @@ public class WoodCutter implements Listener
         UUID uuid = player.getUniqueId();
         ItemStack itemStack = player.getItemInHand();
 
-        String playerJob = PlayerManager.GetJob(player);
+        String playerJob = TestPlugin.db_conn.GetJob(player);
         if(playerJob.equals(JobNameManager.WoodCutterName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
             if(player.getInventory().firstEmpty() == -1)
@@ -146,7 +145,7 @@ public class WoodCutter implements Listener
     {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-        String playerJob = PlayerManager.GetJob(player);
+        String playerJob = TestPlugin.db_conn.GetJob(player);
         if(playerJob.equals(JobNameManager.WoodCutterName))
         {
             if(tree.contains(event.getBlock().getType()))
@@ -174,7 +173,7 @@ public class WoodCutter implements Listener
     {
         Player player = event.getPlayer();
         Block placedBlock = event.getBlockPlaced();
-        if(PlayerManager.GetJob(player).equals(JobNameManager.WoodCutterName) && tree.contains(placedBlock.getType()))
+        if(TestPlugin.db_conn.GetJob(player).equals(JobNameManager.WoodCutterName) && tree.contains(placedBlock.getType()))
         {
             placedBlocks.add(placedBlock);
         }

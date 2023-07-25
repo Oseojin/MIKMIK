@@ -1,13 +1,12 @@
 package com.habu.testplugin;
 
-import com.habu.testplugin.Hidden.LightningNPC;
 import com.habu.testplugin.command.*;
 import com.habu.testplugin.command.operatorcommand.*;
 import com.habu.testplugin.command.shop.*;
 import com.habu.testplugin.config.ConfigManager;
+import com.habu.testplugin.db.player_db_connect;
+import com.habu.testplugin.domain.user;
 import com.habu.testplugin.event.*;
-import com.habu.testplugin.event.Battle.EnderDragonBattle;
-import com.habu.testplugin.Hidden.LightningCharger;
 import com.habu.testplugin.event.job.*;
 import com.habu.testplugin.event.shop.*;
 import com.habu.testplugin.event.shop.jobshop.FarmerShopClickEvent;
@@ -18,8 +17,12 @@ import com.habu.testplugin.event.shop.randomshop.RandomSpawnEggShopClickEvent;
 import com.habu.testplugin.event.shop.selectshop.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+
 public final class TestPlugin extends JavaPlugin
 {
+    public static player_db_connect db_conn = player_db_connect.getInstance();
+    public static HashMap<String, user> User_List = new HashMap<String, user>();
     private static ConfigManager configManager;
     public static int count = 5;
 
@@ -27,6 +30,7 @@ public final class TestPlugin extends JavaPlugin
     {
         // 기본
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerUseItemEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerTeleport(), this);
@@ -55,11 +59,6 @@ public final class TestPlugin extends JavaPlugin
         getServer().getPluginManager().registerEvents(new HunterSelectShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new Hunter(), this);;
 
-        // 히든
-        getServer().getPluginManager().registerEvents(new LightningCharger(), this);
-        getServer().getPluginManager().registerEvents(new LightningNPC(), this);
-
-
         // 경제
         getServer().getPluginManager().registerEvents(new UsingCheckEvent(), this);
 
@@ -72,14 +71,11 @@ public final class TestPlugin extends JavaPlugin
 
         getServer().getPluginManager().registerEvents(new GeneralShopClickEvent(), this);
         getServer().getPluginManager().registerEvents(new RandomSpawnEggShopClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new CoinShopClickEvent(), this);
-
-        // 전투
-        getServer().getPluginManager().registerEvents(new EnderDragonBattle(), this);
 
         // 운영자
         getServer().getPluginManager().registerEvents(new BlockTestEvent(), this);
         getServer().getPluginManager().registerEvents(new OPPlayerInteract(), this);
+        getServer().getPluginManager().registerEvents(new CompensationNPCInteract(), this);
     }
 
     private void SETCOMMAND()
@@ -91,7 +87,6 @@ public final class TestPlugin extends JavaPlugin
 
         // 경제
         getCommand("check").setExecutor(new IssuingCheckCommand());
-        getCommand("cointrade").setExecutor(new OpenCoinShop());
 
         // 운영자
         getCommand("statcheck").setExecutor(new StatChecker());
@@ -100,8 +95,10 @@ public final class TestPlugin extends JavaPlugin
         getCommand("goldsetplayer").setExecutor(new SetPlayerGold());
         getCommand("goldaddplayer").setExecutor(new AddPlayerGold());
         getCommand("jobsetplayer").setExecutor(new SetPlayerJob());
-        getCommand("mycoin").setExecutor(new CheckCoin());
-        getCommand("spawnweapon").setExecutor(new GetWeapon());
+        getCommand("titlesetplayer").setExecutor(new SetPlayerTitle());
+        getCommand("shutdown").setExecutor(new SHUTDOWN());
+
+        getCommand("compensationset").setExecutor(new CompensationConfigSet());
     }
 
     @Override

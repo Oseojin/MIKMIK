@@ -1,8 +1,8 @@
 package com.habu.testplugin.command;
 
-import com.habu.testplugin.manager.PlayerManager;
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -36,9 +36,9 @@ public class StatChecker implements CommandExecutor
             if(playerList.get(i).getName().equals(args[0]))
             {
                 Player targetPlayer = playerList.get(i);
-                player.sendMessage("Name: " + PlayerManager.GetName(targetPlayer));
-                player.sendMessage("Job: " + PlayerManager.GetJob(targetPlayer));
-                player.sendMessage("Gold: " + PlayerManager.GetGold(targetPlayer));
+                player.sendMessage("Name: " + TestPlugin.db_conn.GetName(targetPlayer));
+                player.sendMessage("Job: " + TestPlugin.db_conn.GetJob(targetPlayer));
+                player.sendMessage("Gold: " + TestPlugin.db_conn.GetGold(targetPlayer));
                 return false;
             }
         }

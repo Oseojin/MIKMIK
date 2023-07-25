@@ -1,7 +1,8 @@
 package com.habu.testplugin.event.shop.selectshop;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.selectshop.MinerSelectShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -67,13 +68,13 @@ public class MinerSelectShopClickEvent implements Listener
     private void PurchaseItem(Player player, Material material, UUID uuid, Integer price)
     {
         ItemStack itemStack = itemMap.get(material);
-        if(PlayerManager.GetGold(player) < price)
+        if(TestPlugin.db_conn.GetGold(player) < price)
         {
             player.sendMessage("돈이 부족합니다.");
             return;
         }
         player.getInventory().addItem(itemStack);
-        PlayerManager.UseGold(player, price);
+        TestPlugin.db_conn.UseGold(player, price);
         player.sendMessage(itemStack.getItemMeta().getDisplayName() + ChatColor.WHITE + "를 " + price + " 골드에 구매하였습니다.");
     }
 }

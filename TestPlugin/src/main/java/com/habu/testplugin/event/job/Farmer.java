@@ -1,23 +1,17 @@
 package com.habu.testplugin.event.job;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.JobNameManager;
-import com.habu.testplugin.manager.PlayerManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.Ageable;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -98,7 +92,7 @@ public class Farmer implements Listener
         ItemStack playerTool = player.getItemInHand();
         Block block = event.getBlock();
 
-        String playerJob = PlayerManager.GetJob(player);
+        String playerJob = TestPlugin.db_conn.GetJob(player);
 
         if(playerJob.equals(JobNameManager.FarmerName))
         {
@@ -137,7 +131,7 @@ public class Farmer implements Listener
         ItemStack playerTool = player.getItemInHand();
         Block block = event.getBlock();
 
-        String playerJob = PlayerManager.GetJob(player);
+        String playerJob = TestPlugin.db_conn.GetJob(player);
 
         if(playerJob.equals(JobNameManager.FarmerName))
         {

@@ -2,12 +2,10 @@ package com.habu.testplugin.shop;
 
 import com.habu.testplugin.TestPlugin;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

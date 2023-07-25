@@ -3,6 +3,7 @@ package com.habu.testplugin.config;
 import com.habu.testplugin.TestPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.HashMap;
 
@@ -19,16 +20,14 @@ public class ConfigManager
     {
         configSet.put("whitelist", new ConfigMaker(path, "whitelist.yml"));
         configSet.put("message", new ConfigMaker(path, "message.yml"));
-        configSet.put("player", new ConfigMaker(path, "player.yml"));
         configSet.put("generalshop", new ConfigMaker(path, "generalshop.yml"));
-        configSet.put("coinshop", new ConfigMaker(path, "coinshop.yml"));
         configSet.put("randomshop", new ConfigMaker(path, "randomshop.yml"));
         configSet.put("fishershop", new ConfigMaker(path, "fishershop.yml"));
         configSet.put("minershop", new ConfigMaker(path, "minershop.yml"));
         configSet.put("farmershop", new ConfigMaker(path, "farmershop.yml"));
         configSet.put("woodcuttershop", new ConfigMaker(path, "woodcuttershop.yml"));
         configSet.put("huntershop", new ConfigMaker(path, "huntershop.yml"));
-        configSet.put("hidden", new ConfigMaker(path, "hidden.yml"));
+        configSet.put("compensation", new ConfigMaker(path, "compensation.yml"));
         loadSettings();
         saveConfigs();
     }
@@ -88,28 +87,23 @@ public class ConfigManager
         FileConfiguration whitelistConfig = getConfig("whitelist");
         FileConfiguration messageConfig = getConfig("message");
         FileConfiguration generalshopConfig = getConfig("generalshop");
-        FileConfiguration coinshopConfig = getConfig("coinshop");
         FileConfiguration randomshopConfig = getConfig("randomshop");
         FileConfiguration fishershopConfig = getConfig("fishershop");
         FileConfiguration minershopConfig = getConfig("minershop");
         FileConfiguration farmershopConfig = getConfig("farmershop");
         FileConfiguration woodcuttershopConfig = getConfig("woodcuttershop");
         FileConfiguration hunterhopConfig = getConfig("huntershop");
-        FileConfiguration hiddenConfig = getConfig("hidden");
 
 
         whitelistConfig.options().copyDefaults(true);
-        getConfig("player").options().copyDefaults(true);
         messageConfig.options().copyDefaults(true);
         generalshopConfig.options().copyDefaults(true);
-        coinshopConfig.options().copyDefaults(true);
         randomshopConfig.options().copyDefaults(true);
         fishershopConfig.options().copyDefaults(true);
         minershopConfig.options().copyDefaults(true);
         farmershopConfig.options().copyDefaults(true);
         woodcuttershopConfig.options().copyDefaults(true);
         hunterhopConfig.options().copyDefaults(true);
-        hiddenConfig.options().copyDefaults(true);
 
         messageConfig.addDefault("join-message.display-message", true);
         messageConfig.addDefault("join-message.message", "&7{playername} 님이 접속하였습니다.");
@@ -120,11 +114,6 @@ public class ConfigManager
         messageConfig.addDefault("new-player-join-message.display-message", true);
         messageConfig.addDefault("new-player-join-message.message", "&7{playername} 이(가) 걸음마를 시작했습니다.");
 
-        // 히든
-        hiddenConfig.addDefault("LightningCharger.find", false);
-        hiddenConfig.addDefault("LightningCharger.quest", false);
-        hiddenConfig.addDefault("LightningCharger.complete", false);
-
 
         // 잡화상점
         generalshopConfig.addDefault("area_protect.price", 50000);
@@ -133,41 +122,6 @@ public class ConfigManager
         generalshopConfig.addDefault("whitelist_adder.price", 15000);
         generalshopConfig.addDefault("job_initialization.price", 10000);
         generalshopConfig.addDefault("return_village.price", 2500);
-
-        // 코인상점
-
-        coinshopConfig.addDefault("isopen.now", false);
-        coinshopConfig.addDefault("starttimer.basic", 3600);
-        coinshopConfig.addDefault("starttimer.now", 3600);
-        coinshopConfig.addDefault("opentimer.basic", 32400);
-        coinshopConfig.addDefault("opentimer.now", 32400);
-        coinshopConfig.addDefault("changetimer.basic", 600);
-        coinshopConfig.addDefault("changetimer.now", 600);
-
-
-        coinshopConfig.addDefault("pungsandog_coin.delisting", false);
-        coinshopConfig.addDefault("pungsandog_coin.delisting_count", 3600);
-        coinshopConfig.addDefault("pungsandog_coin.maxvariation", 20);
-        coinshopConfig.addDefault("pungsandog_coin.price", 100);
-        coinshopConfig.addDefault("pungsandog_coin.basic_price", 100);
-
-        coinshopConfig.addDefault("mole_coin.delisting", false);
-        coinshopConfig.addDefault("mole_coin.delisting_count", 3600);
-        coinshopConfig.addDefault("mole_coin.maxvariation", 200);
-        coinshopConfig.addDefault("mole_coin.price", 1000);
-        coinshopConfig.addDefault("mole_coin.basic_price", 1000);
-
-        coinshopConfig.addDefault("beet_coin.delisting", false);
-        coinshopConfig.addDefault("beet_coin.delisting_count", 3600);
-        coinshopConfig.addDefault("beet_coin.maxvariation", 500);
-        coinshopConfig.addDefault("beet_coin.price", 2500);
-        coinshopConfig.addDefault("beet_coin.basic_price", 2500);
-
-        coinshopConfig.addDefault("kimchi_coin.delisting", false);
-        coinshopConfig.addDefault("kimchi_coin.delisting_count", 3600);
-        coinshopConfig.addDefault("kimchi_coin.maxvariation", 1000);
-        coinshopConfig.addDefault("kimchi_coin.price", 5000);
-        coinshopConfig.addDefault("kimchi_coin.basic_price", 5000);
 
         // 랜덤상점
         randomshopConfig.addDefault("random_spawn.price", 25000);

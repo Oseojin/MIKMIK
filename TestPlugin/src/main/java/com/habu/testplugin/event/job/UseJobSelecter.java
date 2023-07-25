@@ -1,10 +1,10 @@
 package com.habu.testplugin.event.job;
 
 import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import com.habu.testplugin.manager.JobNameManager;
+import com.habu.testplugin.manager.TitleNameManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,10 +27,10 @@ public class UseJobSelecter implements Listener
             ItemManager.item_HunterSelecter
     ));
 
-    private void configJob(Player player, String jobName, ItemStack useItem)
+    private void configJob(Player player, String jobName, String titleName, ItemStack useItem)
     {
-        PlayerManager.SetJob(player, jobName);
-        TestPlugin.getConfigManager().saveConfig("player");
+        TestPlugin.db_conn.SetJob(player, jobName);
+        TestPlugin.db_conn.SetTitle(player, titleName);
         int amount = useItem.getAmount() - 1;
         useItem.setAmount(amount);
     }
@@ -41,30 +41,30 @@ public class UseJobSelecter implements Listener
         Player player = event.getPlayer();
         Action action = event.getAction();
         ItemStack useItem = player.getItemInHand();
-        String playerJob = ChatColor.stripColor(PlayerManager.GetJob(player));
+        String playerJob = TestPlugin.db_conn.GetJob(player);
         if((action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
-            if(playerJob.equals("[무직]"))
+            if(playerJob.equals(JobNameManager.JobLessName))
             {
                 if(useItem.isSimilar(ItemManager.item_FisherSelecter))
                 {
-                    configJob(player, "낚시꾼", useItem);
+                    configJob(player, JobNameManager.FisherName, TitleNameManager.Fisher, useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_MinerSelecter))
                 {
-                    configJob(player, "광부", useItem);
+                    configJob(player, JobNameManager.MinerName, TitleNameManager.Miner, useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_FarmerSelecter))
                 {
-                    configJob(player, "농부", useItem);
+                    configJob(player, JobNameManager.FarmerName, TitleNameManager.Farmer, useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_WoodCutterSelecter))
                 {
-                    configJob(player, "나무꾼", useItem);
+                    configJob(player, JobNameManager.WoodCutterName, TitleNameManager.WoodCutter, useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_HunterSelecter))
                 {
-                    configJob(player, "사냥꾼", useItem);
+                    configJob(player, JobNameManager.HunterName, TitleNameManager.Hunter, useItem);
                 }
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
@@ -81,7 +81,7 @@ public class UseJobSelecter implements Listener
                 }
                 else if(useItem.isSimilar(ItemManager.item_JobInitializer))
                 {
-                    configJob(player, "무직", useItem);
+                    configJob(player, JobNameManager.JobLessName, TitleNameManager.JobLess, useItem);
                 }
             }
         }

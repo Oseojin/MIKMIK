@@ -74,12 +74,6 @@ public class ItemManager
 
     public static final ItemStack gui_GrayGlassPane = buildItem(Material.GRAY_STAINED_GLASS_PANE, 1, ChatColor.GRAY + "", "");
 
-    // 코인 투자
-    public static final ItemStack gui_PungsanDogCoin = buildItem(Material.BONE, 1, CoinManager.PungsanDogCoinName);
-    public static final ItemStack gui_MoleCoin = buildItem(Material.DIAMOND_SHOVEL, 1, CoinManager.MoleCoinName);
-    public static final ItemStack gui_BeetCoin = buildItem(Material.BEETROOT, 1, CoinManager.BeetCoinName);
-    public static final ItemStack gui_KimchiCoin = buildItem(Material.ROTTEN_FLESH, 1, CoinManager.KimchiCoinName);
-
     // 스폰알 뽑기
     public static final ItemStack gui_SpawnEgg = buildGeneralItem(Material.PIG_SPAWN_EGG, ChatColor.RED + "몹 스폰 알 랜덤 뽑기", Enchantment.DURABILITY, 10, ChatColor.WHITE + "클릭하면 랜덤 뽑기를 시작합니다.", ChatColor.WHITE + "판매가: ");
 
@@ -102,13 +96,9 @@ public class ItemManager
     // 낚시꾼
     public static final ItemStack gui_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.", ChatColor.AQUA + "[낚시꾼]", ChatColor.WHITE + "크기 별 물고기 획득 가능", ChatColor.WHITE + "일정 확률로 낚시 주머니 획득 가능", ChatColor.WHITE + "바다 상점 이용 가능", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.");
-    public static final ItemStack gui_FisherCod = buildItem(Material.COD, 1, ChatColor.WHITE + "대구", ChatColor.WHITE + "판매가: ");
-    public static final ItemStack gui_FisherSalmon = buildItem(Material.SALMON, 1, ChatColor.WHITE + "연어", ChatColor.WHITE + "판매가: ");
-    public static final ItemStack gui_FisherTropical_Fish = buildItem(Material.TROPICAL_FISH, 1, ChatColor.WHITE + "열대어", ChatColor.WHITE + "판매가: ");
-    public static final ItemStack gui_FisherPufferfish = buildItem(Material.PUFFERFISH, 1, ChatColor.WHITE + "복어", ChatColor.WHITE + "판매가: ");
 
     // 광부
-    public static final ItemStack gui_MinerSelecter = buildItem(Material.PAPER, 1, ChatColor.YELLOW + "채광 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 광부의 자격을 얻을 수 있다.", ChatColor.YELLOW + "[광부]", ChatColor.WHITE + "등급 별 광물 획득 가능", ChatColor.WHITE + "광물 상점 이용 가능", ChatColor.WHITE + "판매가: ");
+    public static final ItemStack gui_MinerSelecter = buildItem(Material.PAPER, 1, ChatColor.YELLOW + "채광 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 광부의 자격을 얻을 수 있다.", ChatColor.YELLOW + "[광부]", ChatColor.WHITE + "미감정 광물 획득 가능", ChatColor.WHITE + "광물 상점 이용 가능", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_MinerSelecter = buildItem(Material.PAPER, 1, ChatColor.YELLOW + "채광 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 광부의 자격을 얻을 수 있다.");
 
     public static final ItemStack gui_MinerCoal = buildItem(Material.COAL, 1, ChatColor.WHITE + "석탄", ChatColor.WHITE + "판매가: ");
@@ -124,7 +114,7 @@ public class ItemManager
     public static final ItemStack gui_MinerNetherite = buildItem(Material.NETHERITE_INGOT, 1, ChatColor.WHITE + "네더라이트", ChatColor.WHITE + "판매가: ");
 
     // 농부
-    public static final ItemStack gui_FarmerSelecter = buildItem(Material.PAPER, 1, ChatColor.GREEN + "농사 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 농부의 자격을 얻을 수 있다.", ChatColor.GREEN + "[농부]", ChatColor.WHITE + "작물 수확시 1 ~ 7개 추가 획득", ChatColor.WHITE + "작물 상점 이용 가능", ChatColor.WHITE + "판매가: ");
+    public static final ItemStack gui_FarmerSelecter = buildItem(Material.PAPER, 1, ChatColor.GREEN + "농사 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 농부의 자격을 얻을 수 있다.", ChatColor.GREEN + "[농부]", ChatColor.WHITE + "작물을 심거나 수확할 때 9칸이 동시에 적용됩니다.", ChatColor.WHITE + "작물 상점 이용 가능", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_FarmerSelecter = buildItem(Material.PAPER, 1, ChatColor.GREEN + "농사 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 농부의 자격을 얻을 수 있다.");
     
     public static final ItemStack gui_FarmerWheat = buildItem(Material.WHEAT, 1, ChatColor.WHITE + "밀", ChatColor.WHITE + "판매가: ");
@@ -133,7 +123,6 @@ public class ItemManager
     public static final ItemStack gui_FarmerBeetroot = buildItem(Material.BEETROOT, 1, ChatColor.WHITE + "비트", ChatColor.WHITE + "판매가: ");
     public static final ItemStack gui_FarmerMelon = buildItem(Material.MELON_SLICE, 1, ChatColor.WHITE + "수박", ChatColor.WHITE + "판매가: ");
     public static final ItemStack gui_FarmerPumpkin = buildItem(Material.PUMPKIN, 1, ChatColor.WHITE + "호박", ChatColor.WHITE + "판매가: ");
-    public static final ItemStack gui_FarmerSweet_Berries = buildItem(Material.SWEET_BERRIES, 1, ChatColor.WHITE + "달콤한 열매", ChatColor.WHITE + "판매가: ");
     public static final ItemStack gui_FarmerCoCoa_Beans = buildItem(Material.COCOA_BEANS, 1, ChatColor.WHITE + "코코아 콩", ChatColor.WHITE + "판매가: ");
     public static final ItemStack gui_FarmerNether_Wart = buildItem(Material.NETHER_WART, 1, ChatColor.WHITE + "네더 사마귀", ChatColor.WHITE + "판매가: ");
 

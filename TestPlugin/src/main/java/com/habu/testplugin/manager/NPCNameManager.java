@@ -16,5 +16,5 @@ public class NPCNameManager
     public static String FarmerSelectShopNPCName = ChatColor.GREEN + "[농부]" + ChatColor.WHITE + " 인생";
     public static String WoodCutterSelectShopNPCName = ChatColor.GOLD + "[나무꾼]" + ChatColor.WHITE + " 인생";
     public static String HunterSelectShopNPCName = ChatColor.DARK_GREEN + "[사냥꾼]" + ChatColor.WHITE + " 인생";
-    public static String LightningNPCName = ChatColor.YELLOW + "번개를 다루는 자";
+    public static String CompensationNPCName = ChatColor.GREEN + "[점검 보상]";
 }

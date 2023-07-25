@@ -1,6 +1,7 @@
 package com.habu.testplugin.event;
 
-import com.habu.testplugin.manager.PlayerManager;
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,7 +36,7 @@ public class UsingCheckEvent implements Listener
                     String strAmount = itemStack.getLore().get(0);
                     strAmount = strAmount.replace("금액: ", "");
                     int amount = Integer.parseInt(strAmount);
-                    PlayerManager.AddGold(player, amount);
+                    TestPlugin.db_conn.AddGold(player, amount);
                     player.sendMessage(amount + "골드가 정상 입금되었습니다.");
                     if(itemStack.getAmount() >= 1)
                     {

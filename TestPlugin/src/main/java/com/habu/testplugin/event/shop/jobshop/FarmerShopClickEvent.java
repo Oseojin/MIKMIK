@@ -1,7 +1,8 @@
 package com.habu.testplugin.event.shop.jobshop;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.jobshop.FarmerShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -93,7 +94,7 @@ public class FarmerShopClickEvent implements Listener
         }
         if(stack == 0)
             return;
-        PlayerManager.AddGold(player, price * stack);
+        TestPlugin.db_conn.AddGold(player, price * stack);
         player.sendMessage(material + " " + stack + prefix + (price * stack) + " 골드에 판매하였습니다.");
     }
 
@@ -126,7 +127,7 @@ public class FarmerShopClickEvent implements Listener
                 {
                     invItem.setAmount(amount);
                 }
-                PlayerManager.AddGold(player, price);
+                TestPlugin.db_conn.AddGold(player, price);
                 player.sendMessage(material + " 1 "+ prefix + price + " 골드에 판매하였습니다.");
                 break;
             }

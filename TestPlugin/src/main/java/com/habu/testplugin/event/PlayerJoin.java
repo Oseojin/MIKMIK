@@ -1,17 +1,12 @@
 package com.habu.testplugin.event;
 
 import com.habu.testplugin.TestPlugin;
-import com.habu.testplugin.manager.MessageManager;
-import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.manager.PlayerScoreboardManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
-
-import java.util.UUID;
 
 public class PlayerJoin implements Listener
 {
@@ -24,38 +19,17 @@ public class PlayerJoin implements Listener
     public void onPlayerJoin(PlayerJoinEvent event)
     {
         Player player = event.getPlayer();
-        String playerName = player.getName();
-        UUID uuid = player.getUniqueId();
-
-        if(!player.hasPlayedBefore()) // 월드 데이터에 플레이어 정보가 없다면
+        if(TestPlugin.db_conn.insertMember(player) == 0)
         {
-            MessageManager.NewPlayerJoinMessage(event, playerName);
-
-            PlayerManager.SetName(player, playerName);
-            PlayerManager.SetGold(player, 1000);
-            PlayerManager.SetJob(player, "무직");
-            PlayerManager.SetJobLevel(player, 0);
+            TestPlugin.db_conn.db_PlayerInfo(player);
+            setScoreboard(player);
+            String title = TestPlugin.db_conn.GetTitle(player);
+            player.setPlayerListName(title + player.getName());
         }
-        else // 월드 데이터에 플레이어 정보가 있다면
+        else
         {
-            // 근데 config 정보에는 없다면 --> config 데이터 소실
-            if(PlayerManager.GetName(player) == null)
-            {
-                // 아쉽지만 초기화...
-                PlayerManager.SetName(player, playerName);
-                PlayerManager.SetGold(player, 1000);
-            }
-            if(PlayerManager.GetJob(player) == null)
-            {
-                PlayerManager.SetJob(player, "무직");
-                PlayerManager.SetJobLevel(player, 0);
-            }
-            MessageManager.PlayerJoinMessage(event, playerName);
+            player.kickPlayer("데이터베이스에서 정보를 로드중 오류가 발생 했습니다. " + TestPlugin.db_conn.insertMember(player));
         }
-
-        setScoreboard(player);
-
-        TestPlugin.getConfigManager().saveConfig("player");
     }
 
     @EventHandler
@@ -63,7 +37,6 @@ public class PlayerJoin implements Listener
     {
         Player player = event.getPlayer();
         String playerName = player.getName();
-        UUID uuid = player.getUniqueId();
 
         if(!TestPlugin.getConfigManager().getConfig("whitelist").contains("players."+playerName.toLowerCase()))
         {

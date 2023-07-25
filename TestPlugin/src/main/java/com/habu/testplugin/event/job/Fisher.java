@@ -1,7 +1,8 @@
 package com.habu.testplugin.event.job;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.JobNameManager;
-import com.habu.testplugin.manager.PlayerManager;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -272,7 +273,7 @@ public class Fisher implements Listener
         UUID uuid = player.getUniqueId();
         ItemStack itemStack = player.getItemInHand();
 
-        String playerJob = PlayerManager.GetJob(player);
+        String playerJob = TestPlugin.db_conn.GetJob(player);
         if(playerJob.equals(JobNameManager.FisherName) && (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)))
         {
             if(player.getInventory().firstEmpty() == -1)
@@ -311,7 +312,7 @@ public class Fisher implements Listener
         UUID uuid = player.getUniqueId();
 
         FishHook hook = event.getHook();
-        String playerJob = PlayerManager.GetJob(player);
+        String playerJob = TestPlugin.db_conn.GetJob(player);
         if(playerJob.equals(JobNameManager.FisherName))
             hook.setWaitTime(60, 300);
 

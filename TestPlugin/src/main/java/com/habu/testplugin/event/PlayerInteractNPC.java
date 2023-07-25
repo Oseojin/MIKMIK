@@ -1,9 +1,9 @@
 package com.habu.testplugin.event;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.JobNameManager;
 import com.habu.testplugin.manager.NPCNameManager;
-import com.habu.testplugin.manager.PlayerManager;
-import com.habu.testplugin.shop.CoinShop;
 import com.habu.testplugin.shop.GeneralShop;
 import com.habu.testplugin.shop.jobshop.FarmerShop;
 import com.habu.testplugin.shop.jobshop.FisherShop;
@@ -30,7 +30,7 @@ public class PlayerInteractNPC implements Listener
         if(entity.getType().equals(EntityType.VILLAGER))
         {
             String npcName = entity.getName();
-            String playerJob = PlayerManager.GetJob(player);
+            String playerJob = TestPlugin.db_conn.GetJob(player);
             if(npcName.equals(NPCNameManager.FisherShopNPCName))
             {
                 if(playerJob.equals(JobNameManager.FisherName) || playerJob.equals(JobNameManager.OperatorName))

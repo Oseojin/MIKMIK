@@ -1,10 +1,10 @@
 package com.habu.testplugin.event.shop.jobshop;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.jobshop.FisherShop;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +12,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 public class FisherShopClickEvent implements Listener
@@ -81,7 +80,7 @@ public class FisherShopClickEvent implements Listener
         if(stack == 0)
             return;
 
-        PlayerManager.AddGold(player, allPrice);
+        TestPlugin.db_conn.AddGold(player, allPrice);
         player.sendMessage(fish.getItemMeta().getDisplayName() + " " + stack + " 마리를 " + allPrice + " 골드에 판매하였습니다.");
     }
 
@@ -96,7 +95,7 @@ public class FisherShopClickEvent implements Listener
             {
                 int amount = invItem.getAmount() - 1;
                 invItem.setAmount(amount);
-                PlayerManager.AddGold(player, price);
+                TestPlugin.db_conn.AddGold(player, price);
                 player.sendMessage(fish.getItemMeta().getDisplayName() + " 1 마리를 " + price + " 골드에 판매하였습니다.");
                 break;
             }

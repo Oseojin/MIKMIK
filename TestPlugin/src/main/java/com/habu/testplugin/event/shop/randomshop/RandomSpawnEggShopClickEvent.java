@@ -1,8 +1,8 @@
 package com.habu.testplugin.event.shop.randomshop;
 
 import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import com.habu.testplugin.manager.ItemManager;
-import com.habu.testplugin.manager.PlayerManager;
 import com.habu.testplugin.shop.randomshop.RandomSpawnEgg;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -132,7 +132,7 @@ public class RandomSpawnEggShopClickEvent implements Listener
                 }
                 else
                 {
-                    if(PlayerManager.GetGold(player) < price)
+                    if(TestPlugin.db_conn.GetGold(player) < price)
                     {
                         player.sendMessage("돈이 부족합니다.");
                         return;
@@ -197,6 +197,6 @@ public class RandomSpawnEggShopClickEvent implements Listener
     {
         ItemStack itemStack = new ItemStack(material, 1);
         player.getInventory().addItem(itemStack);
-        PlayerManager.UseGold(player, price);
+        TestPlugin.db_conn.UseGold(player, price);
     }
 }

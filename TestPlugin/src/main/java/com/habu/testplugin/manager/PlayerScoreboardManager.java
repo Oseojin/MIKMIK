@@ -1,5 +1,7 @@
 package com.habu.testplugin.manager;
 
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -20,12 +22,14 @@ public class PlayerScoreboardManager
         board = sm.getNewScoreboard();
         obj = board.registerNewObjective("playerScoreboard", playerName);
         score = obj.getScore(ChatColor.DARK_GRAY + "-----------------");
+        score.setScore(5);
+        score = obj.getScore(TestPlugin.db_conn.GetName(player));
         score.setScore(4);
-        score = obj.getScore(PlayerManager.GetName(player));
+        score = obj.getScore(ChatColor.GREEN + "직업: " + TestPlugin.db_conn.GetJob(player));
         score.setScore(3);
-        score = obj.getScore(ChatColor.GREEN + "직업 : " + PlayerManager.GetJob(player));
+        score = obj.getScore(ChatColor.AQUA + "칭호: " + TestPlugin.db_conn.GetTitle(player));
         score.setScore(2);
-        score = obj.getScore(ChatColor.GOLD + "소지금 : " + PlayerManager.GetGold(player));
+        score = obj.getScore(ChatColor.GOLD + "소지금: " + TestPlugin.db_conn.GetGold(player));
         score.setScore(1);
         score = obj.getScore(ChatColor.DARK_GRAY + "=================");
         score.setScore(0);
@@ -41,12 +45,14 @@ public class PlayerScoreboardManager
         board = sm.getNewScoreboard();
         obj = board.registerNewObjective("playerScoreboard", playerName);
         score = obj.getScore(ChatColor.DARK_GRAY + "-----------------");
+        score.setScore(5);
+        score = obj.getScore(TestPlugin.db_conn.GetName(player));
         score.setScore(4);
-        score = obj.getScore(PlayerManager.GetName(player));
+        score = obj.getScore(ChatColor.GREEN + "직업: " + TestPlugin.db_conn.GetJob(player));
         score.setScore(3);
-        score = obj.getScore(ChatColor.GREEN + "직업 : " + PlayerManager.GetJob(player));
+        score = obj.getScore(ChatColor.AQUA + "칭호: " + TestPlugin.db_conn.GetTitle(player));
         score.setScore(2);
-        score = obj.getScore(ChatColor.GOLD + "소지금 : " + PlayerManager.GetGold(player));
+        score = obj.getScore(ChatColor.GOLD + "소지금: " + TestPlugin.db_conn.GetGold(player));
         score.setScore(1);
         score = obj.getScore(ChatColor.DARK_GRAY + "=================");
         score.setScore(0);

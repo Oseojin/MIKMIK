@@ -1,6 +1,7 @@
 package com.habu.testplugin.command;
 
-import com.habu.testplugin.manager.PlayerManager;
+import com.habu.testplugin.TestPlugin;
+import com.habu.testplugin.db.player_db_connect;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,7 +40,7 @@ public class IssuingCheckCommand implements CommandExecutor
 
         int amount = Integer.parseInt(args[0]);
 
-        if(PlayerManager.GetGold(player) >= amount)
+        if(TestPlugin.db_conn.GetGold(player) >= amount)
         {
             CustomStack stack = CustomStack.getInstance(checkId);
             ItemStack itemStack = stack.getItemStack();
@@ -49,7 +50,7 @@ public class IssuingCheckCommand implements CommandExecutor
             itemStack.setItemMeta(itemMeta);
 
             player.getInventory().addItem(itemStack);
-            PlayerManager.UseGold(player ,amount);
+            TestPlugin.db_conn.UseGold(player ,amount);
             player.sendMessage(amount + "골드 수표가 발행되었습니다.");
         }
         else
