@@ -24,7 +24,6 @@ public final class TestPlugin extends JavaPlugin
     public static player_db_connect db_conn = player_db_connect.getInstance();
     public static HashMap<String, user> User_List = new HashMap<String, user>();
     private static ConfigManager configManager;
-    public static int count = 5;
 
     private void REGISTEREVENT()
     {
@@ -35,7 +34,6 @@ public final class TestPlugin extends JavaPlugin
         getServer().getPluginManager().registerEvents(new PlayerUseItemEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerTeleport(), this);
         getServer().getPluginManager().registerEvents(new CraftBanEvent(), this);
-        getServer().getPluginManager().registerEvents(new PreventAutoFishing(), this);
 
         // 직업
         getServer().getPluginManager().registerEvents(new UseJobSelecter(), this);
@@ -98,6 +96,7 @@ public final class TestPlugin extends JavaPlugin
         getCommand("jobsetplayer").setExecutor(new SetPlayerJob());
         getCommand("titlesetplayer").setExecutor(new SetPlayerTitle());
         getCommand("shutdown").setExecutor(new SHUTDOWN());
+        getCommand("dbload").setExecutor(new DBLOADPLAYER());
 
         getCommand("compensationset").setExecutor(new CompensationConfigSet());
     }

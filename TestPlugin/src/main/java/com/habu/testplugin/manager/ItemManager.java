@@ -94,11 +94,11 @@ public class ItemManager
     public static final ItemStack gui_WhiteListAdder = buildItem(Material.ENCHANTED_BOOK, 1, ChatColor.AQUA + "서버 초대 쿠폰", ChatColor.WHITE + "모루를 통해 쿠폰의 이름을 초대하고자 하는 사람의 닉네임으로 바꾼 후 우클릭하면 초대할 수 있다.", ChatColor.WHITE + "판매가: ");
 
     // 낚시꾼
-    public static final ItemStack gui_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.", ChatColor.AQUA + "[낚시꾼]", ChatColor.WHITE + "크기 별 물고기 획득 가능", ChatColor.WHITE + "일정 확률로 낚시 주머니 획득 가능", ChatColor.WHITE + "바다 상점 이용 가능", ChatColor.WHITE + "판매가: ");
+    public static final ItemStack gui_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.", ChatColor.AQUA + "[낚시꾼]", ChatColor.WHITE + "6종류의 물고기 획득 가능", ChatColor.WHITE + "바다 상점 이용 가능", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_FisherSelecter = buildItem(Material.PAPER, 1, ChatColor.AQUA + "낚시 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 낚시꾼의 자격을 얻을 수 있다.");
 
     // 광부
-    public static final ItemStack gui_MinerSelecter = buildItem(Material.PAPER, 1, ChatColor.YELLOW + "채광 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 광부의 자격을 얻을 수 있다.", ChatColor.YELLOW + "[광부]", ChatColor.WHITE + "미감정 광물 획득 가능", ChatColor.WHITE + "광물 상점 이용 가능", ChatColor.WHITE + "판매가: ");
+    public static final ItemStack gui_MinerSelecter = buildItem(Material.PAPER, 1, ChatColor.YELLOW + "채광 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 광부의 자격을 얻을 수 있다.", ChatColor.YELLOW + "[광부]", ChatColor.WHITE + "등급 별 광물 획득 가능", ChatColor.WHITE + "광물 상점 이용 가능", ChatColor.WHITE + "판매가: ");
     public static final ItemStack item_MinerSelecter = buildItem(Material.PAPER, 1, ChatColor.YELLOW + "채광 자격증", ChatColor.WHITE + "손에 들고 우클릭하면 광부의 자격을 얻을 수 있다.");
 
     public static final ItemStack gui_MinerCoal = buildItem(Material.COAL, 1, ChatColor.WHITE + "석탄", ChatColor.WHITE + "판매가: ");

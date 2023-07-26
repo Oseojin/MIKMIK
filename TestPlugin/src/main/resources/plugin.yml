@@ -29,3 +29,5 @@ commands:
     description: set compensation config
   shutdown:
     description: server stop when a few second later
+  dbload:
+    description: database reload
